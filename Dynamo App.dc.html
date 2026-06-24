@@ -1,0 +1,4887 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="./support.js"></script>
+  </head>
+  <body>
+    <x-dc>
+      <helmet>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&amp;display=swap"
+          rel="stylesheet"
+        />
+        <style>
+          @keyframes fadeSlide {
+            from {
+              opacity: 0;
+              transform: translateY(10px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+          @keyframes timerIn {
+            from {
+              opacity: 0;
+              transform: translateY(24px) scale(0.94);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0) scale(1);
+            }
+          }
+          @keyframes splashBar {
+            0% {
+              transform: translateX(-100%);
+            }
+            100% {
+              transform: translateX(200%);
+            }
+          }
+          @keyframes checkPop {
+            0% {
+              transform: scale(1);
+            }
+            45% {
+              transform: scale(1.3);
+            }
+            100% {
+              transform: scale(1);
+            }
+          }
+          * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+          }
+          body {
+            background: #060606;
+            font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+          }
+          ::-webkit-scrollbar {
+            display: none;
+          }
+        </style>
+      </helmet>
+
+      <div
+        style="
+          min-height: 100vh;
+          background: #060606;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 36px 16px;
+        "
+      >
+        <!-- ═══ PHONE FRAME ═══ -->
+        <div
+          style="
+            width: 390px;
+            height: 848px;
+            background: #0d0d0d;
+            border-radius: 52px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow:
+              inset 0 0 0 1.5px rgba(255, 255, 255, 0.09),
+              0 0 0 8px #151515,
+              0 0 0 10px #2a2a2a,
+              0 60px 120px rgba(0, 0, 0, 0.9),
+              0 20px 40px rgba(0, 0, 0, 0.6);
+          "
+        >
+          <!-- Dynamic Island -->
+          <div
+            style="
+              position: absolute;
+              top: 11px;
+              left: 50%;
+              transform: translateX(-50%);
+              width: 122px;
+              height: 36px;
+              background: #000;
+              border-radius: 22px;
+              z-index: 100;
+            "
+          ></div>
+
+          <!-- Status Bar -->
+          <div
+            style="
+              height: 56px;
+              background: #0d0d0d;
+              display: flex;
+              align-items: flex-end;
+              justify-content: space-between;
+              padding: 0 30px 10px;
+              flex-shrink: 0;
+              z-index: 20;
+            "
+          >
+            <span
+              style="
+                color: #fff;
+                font-size: 15px;
+                font-weight: 700;
+                letter-spacing: -0.3px;
+              "
+              >9:41</span
+            >
+            <div style="display: flex; align-items: center; gap: 6px">
+              <svg width="17" height="11" viewBox="0 0 17 11" fill="white">
+                <rect x="0" y="7" width="3" height="4" rx="0.8"></rect>
+                <rect x="4.5" y="4.5" width="3" height="6.5" rx="0.8"></rect>
+                <rect x="9" y="2" width="3" height="9" rx="0.8"></rect>
+                <rect x="13.5" y="0" width="3" height="11" rx="0.8"></rect>
+              </svg>
+              <svg width="15" height="11" viewBox="0 0 15 11" fill="none">
+                <path d="M7.5 9.5a1 1 0 100-2 1 1 0 000 2z" fill="white"></path>
+                <path
+                  d="M4 7a5 5 0 017 0"
+                  stroke="white"
+                  stroke-width="1.4"
+                  stroke-linecap="round"
+                ></path>
+                <path
+                  d="M1 4.5a9.5 9.5 0 0113 0"
+                  stroke="white"
+                  stroke-width="1.4"
+                  stroke-linecap="round"
+                ></path>
+              </svg>
+              <svg width="25" height="12" viewBox="0 0 25 12" fill="none">
+                <rect
+                  x="0.5"
+                  y="0.5"
+                  width="21"
+                  height="11"
+                  rx="3"
+                  stroke="white"
+                  stroke-opacity="0.35"
+                ></rect>
+                <rect
+                  x="2"
+                  y="2"
+                  width="16"
+                  height="8"
+                  rx="1.5"
+                  fill="white"
+                ></rect>
+                <path
+                  d="M23 4v4a2.5 2.5 0 000-4z"
+                  fill="white"
+                  fill-opacity="0.4"
+                ></path>
+              </svg>
+            </div>
+          </div>
+
+          <!-- ══════════════ APP CONTENT ══════════════ -->
+          <div
+            style="
+              flex: 1;
+              overflow-y: auto;
+              overflow-x: hidden;
+              background: #0d0d0d;
+              position: relative;
+              scrollbar-width: none;
+              -ms-overflow-style: none;
+            "
+          >
+            <!-- ▓▓▓▓▓▓ LOGIN SCREEN ▓▓▓▓▓▓ -->
+            <sc-if value="{{ isLogin }}" hint-placeholder-val="{{ true }}">
+              <div
+                style="
+                  min-height: 100%;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  justify-content: center;
+                  padding: 40px 28px 32px;
+                  animation: fadeSlide 0.3s ease;
+                "
+              >
+                <!-- Logo block -->
+                <div
+                  style="
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    margin-bottom: 28px;
+                  "
+                >
+                  <img
+                    src="uploads/unnamed-removebg-preview.png"
+                    style="
+                      width: 280px;
+                      height: auto;
+                      margin-bottom: -30px;
+                      filter: drop-shadow(0 0 32px rgba(245, 134, 52, 0.3));
+                    "
+                  />
+                  <div
+                    style="
+                      color: #96989a;
+                      font-size: 14px;
+                      font-weight: 500;
+                      text-align: center;
+                    "
+                  >
+                    Acesse sua conta
+                  </div>
+                </div>
+
+                <!-- Form -->
+                <div
+                  style="
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 12px;
+                    margin-bottom: 14px;
+                  "
+                >
+                  <div
+                    style="
+                      background: #1c1c1e;
+                      border-radius: 14px;
+                      padding: 17px 18px;
+                      border: 1px solid #252527;
+                      display: flex;
+                      align-items: center;
+                      gap: 12px;
+                    "
+                  >
+                    <svg
+                      width="18"
+                      height="18"
+                      fill="none"
+                      stroke="#96989a"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                      ></path>
+                      <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                    <input
+                      type="email"
+                      placeholder="E-mail"
+                      style="
+                        background: transparent;
+                        border: none;
+                        outline: none;
+                        color: #fff;
+                        font-family:
+                          &quot;Plus Jakarta Sans&quot;, system-ui, sans-serif;
+                        font-size: 16px;
+                        width: 100%;
+                        caret-color: #f58634;
+                      "
+                    />
+                  </div>
+                  <div
+                    style="
+                      background: #1c1c1e;
+                      border-radius: 14px;
+                      padding: 17px 18px;
+                      border: 1px solid #252527;
+                      display: flex;
+                      align-items: center;
+                      gap: 12px;
+                    "
+                  >
+                    <svg
+                      width="18"
+                      height="18"
+                      fill="none"
+                      stroke="#96989a"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      viewBox="0 0 24 24"
+                    >
+                      <rect x="3" y="11" width="18" height="11" rx="2"></rect>
+                      <path d="M7 11V7a5 5 0 0110 0v4"></path>
+                    </svg>
+                    <input
+                      type="password"
+                      placeholder="Senha"
+                      style="
+                        background: transparent;
+                        border: none;
+                        outline: none;
+                        color: #fff;
+                        font-family:
+                          &quot;Plus Jakarta Sans&quot;, system-ui, sans-serif;
+                        font-size: 16px;
+                        width: 100%;
+                        caret-color: #f58634;
+                      "
+                    />
+                  </div>
+                </div>
+
+                <div
+                  style="text-align: right; width: 100%; margin-bottom: 28px"
+                >
+                  <span
+                    onClick="{{ onForgotPw }}"
+                    style="
+                      color: #f58634;
+                      font-size: 13px;
+                      font-weight: 700;
+                      cursor: pointer;
+                    "
+                    >Esqueci minha senha</span
+                  >
+                </div>
+
+                <div
+                  onClick="{{ onLogin }}"
+                  style="
+                    width: 100%;
+                    background: #f58634;
+                    border-radius: 14px;
+                    padding: 18px;
+                    text-align: center;
+                    color: #fff;
+                    font-weight: 800;
+                    font-size: 16px;
+                    cursor: pointer;
+                    margin-bottom: 0;
+                  "
+                >
+                  Entrar
+                </div>
+
+                <div
+                  style="
+                    color: #96989a;
+                    font-size: 12px;
+                    text-align: center;
+                    margin-top: auto;
+                    padding-top: 36px;
+                  "
+                >
+                  v1.3.0 · Dynamo Academia
+                </div>
+              </div>
+            </sc-if>
+
+            <!-- ▓▓▓▓▓▓ FORGOT PASSWORD ▓▓▓▓▓▓ -->
+            <sc-if value="{{ isForgotPw }}" hint-placeholder-val="{{ false }}">
+              <div
+                style="padding: 18px 22px 30px; animation: fadeSlide 0.3s ease"
+              >
+                <div
+                  style="
+                    display: flex;
+                    align-items: center;
+                    gap: 14px;
+                    margin-bottom: 32px;
+                  "
+                >
+                  <div
+                    onClick="{{ onBack }}"
+                    style="
+                      width: 40px;
+                      height: 40px;
+                      background: #1c1c1e;
+                      border-radius: 13px;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      cursor: pointer;
+                      border: 1px solid #272727;
+                      flex-shrink: 0;
+                    "
+                  >
+                    <svg
+                      width="16"
+                      height="16"
+                      fill="none"
+                      stroke="#bbb"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M15 18l-6-6 6-6"></path>
+                    </svg>
+                  </div>
+                  <div
+                    style="
+                      color: #fff;
+                      font-size: 22px;
+                      font-weight: 900;
+                      letter-spacing: -0.3px;
+                    "
+                  >
+                    Redefinir senha
+                  </div>
+                </div>
+                <div
+                  style="
+                    color: #96989a;
+                    font-size: 14px;
+                    line-height: 1.6;
+                    margin-bottom: 32px;
+                  "
+                >
+                  Digite seu e-mail cadastrado. Vamos enviar um link para voce
+                  criar uma nova senha.
+                </div>
+                <div
+                  style="
+                    color: #96989a;
+                    font-size: 11px;
+                    font-weight: 700;
+                    letter-spacing: 1px;
+                    text-transform: uppercase;
+                    margin-bottom: 8px;
+                  "
+                >
+                  E-mail
+                </div>
+                <div
+                  style="
+                    background: #1c1c1e;
+                    border-radius: 14px;
+                    padding: 16px 18px;
+                    border: 1px solid #252527;
+                    display: flex;
+                    align-items: center;
+                    gap: 12px;
+                    margin-bottom: 28px;
+                  "
+                >
+                  <svg
+                    width="18"
+                    height="18"
+                    fill="none"
+                    stroke="#96989a"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                    ></path>
+                    <polyline points="22,6 12,13 2,6"></polyline>
+                  </svg>
+                  <input
+                    type="email"
+                    placeholder="seu@email.com"
+                    style="
+                      background: transparent;
+                      border: none;
+                      outline: none;
+                      color: #fff;
+                      font-family:
+                        &quot;Plus Jakarta Sans&quot;, system-ui, sans-serif;
+                      font-size: 16px;
+                      width: 100%;
+                      caret-color: #f58634;
+                    "
+                  />
+                </div>
+                <div
+                  style="
+                    background: #f58634;
+                    border-radius: 14px;
+                    padding: 17px;
+                    text-align: center;
+                    color: #fff;
+                    font-weight: 800;
+                    font-size: 15px;
+                    cursor: pointer;
+                    margin-bottom: 16px;
+                  "
+                >
+                  Enviar link de redefinicao
+                </div>
+                <div
+                  onClick="{{ onBack }}"
+                  style="text-align: center; cursor: pointer"
+                >
+                  <span
+                    style="color: #96989a; font-size: 14px; font-weight: 600"
+                    >Lembrei minha senha</span
+                  >
+                </div>
+              </div>
+            </sc-if>
+
+            <!-- ▓▓▓▓▓▓ HOME SCREEN ▓▓▓▓▓▓ -->
+            <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+              <div
+                style="padding-bottom: 30px; animation: fadeSlide 0.28s ease"
+              >
+                <!-- Header -->
+                <div style="padding: 18px 22px 0">
+                  <div
+                    style="
+                      display: flex;
+                      align-items: flex-start;
+                      justify-content: space-between;
+                    "
+                  >
+                    <div>
+                      <div
+                        style="
+                          display: flex;
+                          align-items: center;
+                          margin-bottom: 14px;
+                        "
+                      >
+                        <img
+                          src="uploads/dynamo-horizontal-nobg.png"
+                          style="width: 140px; height: auto; display: block"
+                        />
+                      </div>
+                      <div
+                        style="
+                          color: #96989a;
+                          font-size: 13px;
+                          margin-bottom: 4px;
+                          font-weight: 500;
+                        "
+                      >
+                        Segunda, 23 de Junho
+                      </div>
+                      <div
+                        style="
+                          color: #fff;
+                          font-size: 26px;
+                          font-weight: 900;
+                          letter-spacing: -0.5px;
+                          line-height: 1.1;
+                        "
+                      >
+                        Bom dia, Lucas.
+                      </div>
+                    </div>
+                    <div
+                      onClick="{{ onNotices }}"
+                      style="
+                        width: 46px;
+                        height: 46px;
+                        background: #1c1c1e;
+                        border-radius: 14px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        cursor: pointer;
+                        position: relative;
+                        flex-shrink: 0;
+                        margin-top: 32px;
+                        border: 1px solid #272727;
+                      "
+                    >
+                      <svg
+                        width="20"
+                        height="20"
+                        fill="none"
+                        stroke="#bbb"
+                        stroke-width="1.8"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"
+                        ></path>
+                        <path d="M13.73 21a2 2 0 01-3.46 0"></path>
+                      </svg>
+                      <div
+                        style="
+                          position: absolute;
+                          top: 9px;
+                          right: 9px;
+                          width: 9px;
+                          height: 9px;
+                          background: #f58634;
+                          border-radius: 50%;
+                          border: 2px solid #1c1c1e;
+                        "
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Banner comunicado -->
+                <div
+                  style="
+                    margin: 20px 18px 0;
+                    background: linear-gradient(
+                      130deg,
+                      #d4701a 0%,
+                      #f58634 45%,
+                      #f7a060 100%
+                    );
+                    border-radius: 22px;
+                    padding: 16px 18px;
+                    display: flex;
+                    gap: 14px;
+                    align-items: center;
+                    cursor: pointer;
+                  "
+                  onClick="{{ onNotices }}"
+                >
+                  <div style="flex: 1">
+                    <div
+                      style="
+                        color: rgba(255, 255, 255, 0.65);
+                        font-size: 10px;
+                        font-weight: 800;
+                        letter-spacing: 2px;
+                        text-transform: uppercase;
+                        margin-bottom: 5px;
+                      "
+                    >
+                      Comunicado · Hoje
+                    </div>
+                    <div
+                      style="
+                        color: #fff;
+                        font-weight: 800;
+                        font-size: 15px;
+                        line-height: 1.25;
+                        margin-bottom: 3px;
+                      "
+                    >
+                      Horário especial no feriado
+                    </div>
+                    <div
+                      style="color: rgba(255, 255, 255, 0.65); font-size: 12px"
+                    >
+                      Academia abre 8h–14h em 24/06
+                    </div>
+                  </div>
+                  <svg
+                    width="16"
+                    height="16"
+                    fill="none"
+                    stroke="rgba(255,255,255,0.6)"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M9 18l6-6-6-6"></path>
+                  </svg>
+                </div>
+
+                <!-- Treino de hoje -->
+                <div style="margin: 22px 18px 0">
+                  <div
+                    style="
+                      color: #3a3a3a;
+                      font-size: 10px;
+                      font-weight: 800;
+                      letter-spacing: 2px;
+                      text-transform: uppercase;
+                      margin-bottom: 10px;
+                    "
+                  >
+                    Treino de Hoje
+                  </div>
+                  <div
+                    style="
+                      background: #1c1c1e;
+                      border-radius: 24px;
+                      padding: 20px;
+                      border: 1px solid #242424;
+                      position: relative;
+                      overflow: hidden;
+                    "
+                  >
+                    <div
+                      style="
+                        position: absolute;
+                        right: -18px;
+                        top: -18px;
+                        width: 110px;
+                        height: 110px;
+                        background: radial-gradient(
+                          circle,
+                          rgba(245, 134, 52, 0.1) 0%,
+                          transparent 70%
+                        );
+                        border-radius: 50%;
+                        pointer-events: none;
+                      "
+                    ></div>
+                    <div
+                      style="
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        margin-bottom: 10px;
+                      "
+                    >
+                      <div
+                        style="
+                          background: rgba(245, 134, 52, 0.14);
+                          border-radius: 8px;
+                          padding: 4px 11px;
+                        "
+                      >
+                        <span
+                          style="
+                            color: #f58634;
+                            font-size: 10px;
+                            font-weight: 800;
+                            letter-spacing: 1px;
+                          "
+                          >TREINO A</span
+                        >
+                      </div>
+                      <span
+                        style="
+                          color: #96989a;
+                          font-size: 12px;
+                          font-weight: 500;
+                        "
+                        >Hoje</span
+                      >
+                    </div>
+                    <div
+                      style="
+                        color: #fff;
+                        font-size: 24px;
+                        font-weight: 900;
+                        letter-spacing: -0.4px;
+                        margin-bottom: 8px;
+                      "
+                    >
+                      Peito &amp; Tríceps
+                    </div>
+                    <div style="display: flex; gap: 16px; margin-bottom: 20px">
+                      <div style="display: flex; align-items: center; gap: 5px">
+                        <svg
+                          width="13"
+                          height="13"
+                          fill="none"
+                          stroke="#96989a"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          viewBox="0 0 24 24"
+                        >
+                          <circle cx="12" cy="12" r="10"></circle>
+                          <path d="M12 6v6l4 2"></path></svg
+                        ><span
+                          style="
+                            color: #96989a;
+                            font-size: 13px;
+                            font-weight: 500;
+                          "
+                          >~60 min</span
+                        >
+                      </div>
+                      <div style="display: flex; align-items: center; gap: 5px">
+                        <svg
+                          width="13"
+                          height="13"
+                          fill="none"
+                          stroke="#96989a"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          viewBox="0 0 24 24"
+                        >
+                          <circle cx="12" cy="12" r="1" fill="#96989a"></circle>
+                          <circle cx="6" cy="12" r="1" fill="#96989a"></circle>
+                          <circle
+                            cx="18"
+                            cy="12"
+                            r="1"
+                            fill="#96989a"
+                          ></circle></svg
+                        ><span
+                          style="
+                            color: #96989a;
+                            font-size: 13px;
+                            font-weight: 500;
+                          "
+                          >8 exercícios</span
+                        >
+                      </div>
+                    </div>
+                    <div
+                      onClick="{{ onWorkout }}"
+                      style="
+                        background: #f58634;
+                        border-radius: 14px;
+                        padding: 16px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 9px;
+                        cursor: pointer;
+                      "
+                    >
+                      <span
+                        style="color: #fff; font-weight: 800; font-size: 15px"
+                        >Iniciar Treino</span
+                      >
+                      <svg
+                        width="17"
+                        height="17"
+                        fill="none"
+                        stroke="#fff"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M5 12h14M12 5l7 7-7 7"></path>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Acesso rápido -->
+                <div style="margin: 22px 18px 0">
+                  <div
+                    style="
+                      color: #3a3a3a;
+                      font-size: 10px;
+                      font-weight: 800;
+                      letter-spacing: 2px;
+                      text-transform: uppercase;
+                      margin-bottom: 10px;
+                    "
+                  >
+                    Acesso Rápido
+                  </div>
+                  <div style="display: flex; gap: 10px">
+                    <div
+                      onClick="{{ onWorkout }}"
+                      style="
+                        flex: 1;
+                        background: #1c1c1e;
+                        border-radius: 18px;
+                        padding: 16px 10px;
+                        cursor: pointer;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        gap: 9px;
+                        border: 1px solid #242424;
+                      "
+                    >
+                      <div
+                        style="
+                          width: 42px;
+                          height: 42px;
+                          background: rgba(245, 134, 52, 0.1);
+                          border-radius: 13px;
+                          display: flex;
+                          align-items: center;
+                          justify-content: center;
+                        "
+                      >
+                        <svg
+                          width="20"
+                          height="20"
+                          fill="none"
+                          stroke="#F58634"
+                          stroke-width="1.8"
+                          stroke-linecap="round"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+                        </svg>
+                      </div>
+                      <span
+                        style="
+                          color: #ccc;
+                          font-size: 11px;
+                          font-weight: 700;
+                          text-align: center;
+                        "
+                        >Ver Treino</span
+                      >
+                    </div>
+                    <div
+                      onClick="{{ onHistory }}"
+                      style="
+                        flex: 1;
+                        background: #1c1c1e;
+                        border-radius: 18px;
+                        padding: 16px 10px;
+                        cursor: pointer;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        gap: 9px;
+                        border: 1px solid #242424;
+                      "
+                    >
+                      <div
+                        style="
+                          width: 42px;
+                          height: 42px;
+                          background: rgba(245, 134, 52, 0.1);
+                          border-radius: 13px;
+                          display: flex;
+                          align-items: center;
+                          justify-content: center;
+                        "
+                      >
+                        <svg
+                          width="20"
+                          height="20"
+                          fill="none"
+                          stroke="#F58634"
+                          stroke-width="1.8"
+                          stroke-linecap="round"
+                          viewBox="0 0 24 24"
+                        >
+                          <rect
+                            x="3"
+                            y="4"
+                            width="18"
+                            height="18"
+                            rx="2"
+                          ></rect>
+                          <path d="M16 2v4M8 2v4M3 10h18"></path>
+                        </svg>
+                      </div>
+                      <span
+                        style="
+                          color: #ccc;
+                          font-size: 11px;
+                          font-weight: 700;
+                          text-align: center;
+                        "
+                        >Histórico</span
+                      >
+                    </div>
+                    <div
+                      onClick="{{ onPlan }}"
+                      style="
+                        flex: 1;
+                        background: #1c1c1e;
+                        border-radius: 18px;
+                        padding: 16px 10px;
+                        cursor: pointer;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        gap: 9px;
+                        border: 1px solid #242424;
+                      "
+                    >
+                      <div
+                        style="
+                          width: 42px;
+                          height: 42px;
+                          background: rgba(245, 134, 52, 0.1);
+                          border-radius: 13px;
+                          display: flex;
+                          align-items: center;
+                          justify-content: center;
+                        "
+                      >
+                        <svg
+                          width="20"
+                          height="20"
+                          fill="none"
+                          stroke="#F58634"
+                          stroke-width="1.8"
+                          stroke-linecap="round"
+                          viewBox="0 0 24 24"
+                        >
+                          <rect
+                            x="1"
+                            y="4"
+                            width="22"
+                            height="16"
+                            rx="2"
+                          ></rect>
+                          <path d="M1 10h22"></path>
+                        </svg>
+                      </div>
+                      <span
+                        style="
+                          color: #ccc;
+                          font-size: 11px;
+                          font-weight: 700;
+                          text-align: center;
+                        "
+                        >Financeiro</span
+                      >
+                    </div>
+                    <div
+                      onClick="{{ onProfile }}"
+                      style="
+                        flex: 1;
+                        background: #1c1c1e;
+                        border-radius: 18px;
+                        padding: 16px 10px;
+                        cursor: pointer;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        gap: 9px;
+                        border: 1px solid #242424;
+                      "
+                    >
+                      <div
+                        style="
+                          width: 42px;
+                          height: 42px;
+                          background: rgba(245, 134, 52, 0.1);
+                          border-radius: 13px;
+                          display: flex;
+                          align-items: center;
+                          justify-content: center;
+                        "
+                      >
+                        <svg
+                          width="20"
+                          height="20"
+                          fill="none"
+                          stroke="#F58634"
+                          stroke-width="1.8"
+                          stroke-linecap="round"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"
+                          ></path>
+                          <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                      </div>
+                      <span
+                        style="
+                          color: #ccc;
+                          font-size: 11px;
+                          font-weight: 700;
+                          text-align: center;
+                        "
+                        >Perfil</span
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Resumo mensal -->
+                <div style="margin: 22px 18px 0">
+                  <div
+                    style="
+                      color: #3a3a3a;
+                      font-size: 10px;
+                      font-weight: 800;
+                      letter-spacing: 2px;
+                      text-transform: uppercase;
+                      margin-bottom: 10px;
+                    "
+                  >
+                    Junho — Resumo
+                  </div>
+                  <div
+                    style="
+                      background: #1c1c1e;
+                      border-radius: 22px;
+                      padding: 22px;
+                      display: flex;
+                      border: 1px solid #242424;
+                    "
+                  >
+                    <div
+                      style="
+                        flex: 1;
+                        text-align: center;
+                        border-right: 1px solid #252525;
+                      "
+                    >
+                      <div
+                        style="
+                          color: #f58634;
+                          font-size: 30px;
+                          font-weight: 900;
+                          line-height: 1;
+                          letter-spacing: -1.5px;
+                        "
+                      >
+                        14
+                      </div>
+                      <div
+                        style="
+                          color: #96989a;
+                          font-size: 11px;
+                          font-weight: 700;
+                          margin-top: 5px;
+                        "
+                      >
+                        Treinos
+                      </div>
+                    </div>
+                    <div
+                      style="
+                        flex: 1;
+                        text-align: center;
+                        border-right: 1px solid #252525;
+                      "
+                    >
+                      <div
+                        style="
+                          color: #f58634;
+                          font-size: 30px;
+                          font-weight: 900;
+                          line-height: 1;
+                          letter-spacing: -1.5px;
+                        "
+                      >
+                        13h
+                      </div>
+                      <div
+                        style="
+                          color: #96989a;
+                          font-size: 11px;
+                          font-weight: 700;
+                          margin-top: 5px;
+                        "
+                      >
+                        Tempo
+                      </div>
+                    </div>
+                    <div style="flex: 1; text-align: center">
+                      <div
+                        style="
+                          color: #f58634;
+                          font-size: 30px;
+                          font-weight: 900;
+                          line-height: 1;
+                          letter-spacing: -1.5px;
+                        "
+                      >
+                        42k
+                      </div>
+                      <div
+                        style="
+                          color: #96989a;
+                          font-size: 11px;
+                          font-weight: 700;
+                          margin-top: 5px;
+                        "
+                      >
+                        Vol. kg
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </sc-if>
+
+            <!-- ▓▓▓▓▓▓ WORKOUT SCREEN ▓▓▓▓▓▓ -->
+            <sc-if value="{{ isWorkout }}" hint-placeholder-val="{{ false }}">
+              <div
+                style="padding-bottom: 30px; animation: fadeSlide 0.28s ease"
+              >
+                <!-- Header -->
+                <div
+                  style="
+                    padding: 18px 22px 0;
+                    display: flex;
+                    align-items: flex-start;
+                    justify-content: space-between;
+                  "
+                >
+                  <div>
+                    <div
+                      style="
+                        color: #96989a;
+                        font-size: 12px;
+                        font-weight: 600;
+                        letter-spacing: 0.4px;
+                        margin-bottom: 3px;
+                      "
+                    >
+                      Hoje · Treino A
+                    </div>
+                    <div
+                      style="
+                        color: #fff;
+                        font-size: 24px;
+                        font-weight: 900;
+                        letter-spacing: -0.4px;
+                        line-height: 1.1;
+                      "
+                    >
+                      Peito &amp; Triceps
+                    </div>
+                    <div
+                      onClick="{{ onMyWorkouts }}"
+                      style="
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 4px;
+                        margin-top: 5px;
+                        cursor: pointer;
+                      "
+                    >
+                      <span
+                        style="
+                          color: #f58634;
+                          font-size: 12px;
+                          font-weight: 700;
+                        "
+                        >Ver todos os treinos</span
+                      >
+                      <svg
+                        width="12"
+                        height="12"
+                        fill="none"
+                        stroke="#F58634"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M9 18l6-6-6-6"></path>
+                      </svg>
+                    </div>
+                  </div>
+                  <div style="text-align: right; padding-top: 4px">
+                    <div
+                      style="
+                        color: #f58634;
+                        font-size: 28px;
+                        font-weight: 900;
+                        line-height: 1;
+                        letter-spacing: -1.5px;
+                      "
+                    >
+                      {{ checkedCount }}/{{ totalExercises }}
+                    </div>
+                    <div
+                      style="
+                        color: #96989a;
+                        font-size: 11px;
+                        font-weight: 600;
+                        margin-top: 1px;
+                      "
+                    >
+                      exercícios
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Progress bar -->
+                <div style="padding: 14px 22px 20px">
+                  <div
+                    style="
+                      background: #1c1c1e;
+                      border-radius: 10px;
+                      height: 8px;
+                      overflow: hidden;
+                    "
+                  >
+                    <div
+                      style="height:100%; background:linear-gradient(90deg,#D4701A,#F7A060); border-radius:10px; width:{{ progressWidth }}; transition:width 0.5s cubic-bezier(0.4,0,0.2,1);"
+                    ></div>
+                  </div>
+                  <div
+                    style="
+                      display: flex;
+                      justify-content: space-between;
+                      margin-top: 7px;
+                    "
+                  >
+                    <span
+                      style="color: #96989a; font-size: 11px; font-weight: 500"
+                      >Progresso da sessão</span
+                    >
+                    <span
+                      style="color: #f58634; font-size: 11px; font-weight: 800"
+                      >{{ progressPercent }}%</span
+                    >
+                  </div>
+                </div>
+
+                <!-- Workout complete banner -->
+                <sc-if
+                  value="{{ workoutDone }}"
+                  hint-placeholder-val="{{ false }}"
+                >
+                  <div
+                    style="
+                      margin: 0 16px 18px;
+                      background: #1c1c1e;
+                      border-radius: 22px;
+                      padding: 26px;
+                      text-align: center;
+                      border: 1.5px solid rgba(245, 134, 52, 0.3);
+                      box-shadow: 0 0 30px rgba(245, 134, 52, 0.08);
+                    "
+                  >
+                    <div style="font-size: 44px; margin-bottom: 10px">🎉</div>
+                    <div
+                      style="
+                        color: #f58634;
+                        font-size: 22px;
+                        font-weight: 900;
+                        margin-bottom: 6px;
+                        letter-spacing: -0.3px;
+                      "
+                    >
+                      Sessão Completa!
+                    </div>
+                    <div
+                      style="color: #96989a; font-size: 14px; line-height: 1.5"
+                    >
+                      Você concluiu todos os exercícios.<br />Ótimo trabalho
+                      hoje!
+                    </div>
+                  </div>
+                </sc-if>
+
+                <!-- Exercise cards -->
+                <div
+                  style="
+                    padding: 0 16px;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+                  "
+                >
+                  <sc-for
+                    list="{{ exercises }}"
+                    as="ex"
+                    hint-placeholder-count="4"
+                  >
+                    <div
+                      style="background:{{ ex.cardBg }}; border-radius:20px; padding:16px; border:1px solid #242424; transition:background 0.3s ease;"
+                    >
+                      <div
+                        style="
+                          display: flex;
+                          gap: 13px;
+                          align-items: flex-start;
+                        "
+                      >
+                        <!-- Check button -->
+                        <div
+                          onClick="{{ ex.onToggle }}"
+                          style="width:34px; height:34px; border-radius:50%; background:{{ ex.checkBg }}; border:2px solid {{ ex.checkBorder }}; display:flex; align-items:center; justify-content:center; flex-shrink:0; cursor:pointer; margin-top:2px; transition:all 0.25s ease;"
+                        >
+                          <svg
+                            width="14"
+                            height="14"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="{{ ex.checkStroke }}"
+                            stroke-width="3"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          >
+                            <path d="M5 13l4 4L19 7"></path>
+                          </svg>
+                        </div>
+
+                        <!-- Info -->
+                        <div style="flex: 1; min-width: 0">
+                          <div
+                            style="color:{{ ex.nameColor }}; font-size:15px; font-weight:700; line-height:1.2; margin-bottom:5px; transition:color 0.3s ease;"
+                          >
+                            {{ ex.name }}
+                          </div>
+                          <div style="margin-bottom: 12px">
+                            <span
+                              style="
+                                background: rgba(245, 134, 52, 0.1);
+                                border-radius: 6px;
+                                padding: 3px 9px;
+                                color: #f58634;
+                                font-size: 10px;
+                                font-weight: 800;
+                                letter-spacing: 0.5px;
+                              "
+                              >{{ ex.muscle }}</span
+                            >
+                          </div>
+                          <!-- Sets × Reps × Weight -->
+                          <div
+                            style="
+                              display: flex;
+                              align-items: center;
+                              gap: 7px;
+                              margin-bottom: 11px;
+                            "
+                          >
+                            <div
+                              style="
+                                flex: 1;
+                                background: #1a1a1c;
+                                border-radius: 10px;
+                                padding: 8px 6px;
+                                text-align: center;
+                              "
+                            >
+                              <div
+                                style="
+                                  color: #96989a;
+                                  font-size: 9px;
+                                  font-weight: 700;
+                                  letter-spacing: 0.8px;
+                                  margin-bottom: 2px;
+                                "
+                              >
+                                SÉRIES
+                              </div>
+                              <div
+                                style="
+                                  color: #fff;
+                                  font-size: 17px;
+                                  font-weight: 900;
+                                  line-height: 1;
+                                "
+                              >
+                                {{ ex.sets }}
+                              </div>
+                            </div>
+                            <span
+                              style="
+                                color: #2a2a2a;
+                                font-size: 18px;
+                                font-weight: 300;
+                              "
+                              >×</span
+                            >
+                            <div
+                              style="
+                                flex: 1;
+                                background: #1a1a1c;
+                                border-radius: 10px;
+                                padding: 8px 6px;
+                                text-align: center;
+                              "
+                            >
+                              <div
+                                style="
+                                  color: #96989a;
+                                  font-size: 9px;
+                                  font-weight: 700;
+                                  letter-spacing: 0.8px;
+                                  margin-bottom: 2px;
+                                "
+                              >
+                                REPS
+                              </div>
+                              <div
+                                style="
+                                  color: #fff;
+                                  font-size: 17px;
+                                  font-weight: 900;
+                                  line-height: 1;
+                                "
+                              >
+                                {{ ex.reps }}
+                              </div>
+                            </div>
+                            <div
+                              style="
+                                flex: 1.3;
+                                background: #1a1a1c;
+                                border-radius: 10px;
+                                padding: 8px 6px;
+                                text-align: center;
+                              "
+                            >
+                              <div
+                                style="
+                                  color: #96989a;
+                                  font-size: 9px;
+                                  font-weight: 700;
+                                  letter-spacing: 0.8px;
+                                  margin-bottom: 2px;
+                                "
+                              >
+                                CARGA
+                              </div>
+                              <div
+                                style="
+                                  color: #fff;
+                                  font-size: 15px;
+                                  font-weight: 900;
+                                  line-height: 1;
+                                "
+                              >
+                                {{ ex.weight }}
+                              </div>
+                            </div>
+                          </div>
+                          <!-- Set circles -->
+                          <div
+                            style="
+                              display: flex;
+                              gap: 8px;
+                              align-items: center;
+                              margin-bottom: 11px;
+                              flex-wrap: wrap;
+                            "
+                          >
+                            <div
+                              onClick="{{ ex.s1tap }}"
+                              style="width:34px; height:34px; border-radius:50%; background:{{ ex.s1bg }}; border:1.5px solid {{ ex.s1bdr }}; display:flex; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0; transition:all 0.2s ease;"
+                            >
+                              <span
+                                style="color:{{ ex.s1txt }}; font-size:12px; font-weight:800;"
+                                >1</span
+                              >
+                            </div>
+                            <div
+                              onClick="{{ ex.s2tap }}"
+                              style="width:34px; height:34px; border-radius:50%; background:{{ ex.s2bg }}; border:1.5px solid {{ ex.s2bdr }}; display:flex; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0; transition:all 0.2s ease;"
+                            >
+                              <span
+                                style="color:{{ ex.s2txt }}; font-size:12px; font-weight:800;"
+                                >2</span
+                              >
+                            </div>
+                            <div
+                              onClick="{{ ex.s3tap }}"
+                              style="width:34px; height:34px; border-radius:50%; background:{{ ex.s3bg }}; border:1.5px solid {{ ex.s3bdr }}; display:flex; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0; transition:all 0.2s ease;"
+                            >
+                              <span
+                                style="color:{{ ex.s3txt }}; font-size:12px; font-weight:800;"
+                                >3</span
+                              >
+                            </div>
+                            <div
+                              onClick="{{ ex.s4tap }}"
+                              style="width:34px; height:34px; border-radius:50%; background:{{ ex.s4bg }}; border:1.5px solid {{ ex.s4bdr }}; display:{{ ex.s4display }}; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0; transition:all 0.2s ease;"
+                            >
+                              <span
+                                style="color:{{ ex.s4txt }}; font-size:12px; font-weight:800;"
+                                >4</span
+                              >
+                            </div>
+                          </div>
+                          <!-- Rest trigger -->
+                          <div
+                            onClick="{{ ex.onRest }}"
+                            style="
+                              border: 1px solid #272727;
+                              border-radius: 10px;
+                              padding: 8px 13px;
+                              display: flex;
+                              align-items: center;
+                              gap: 7px;
+                              cursor: pointer;
+                              background: #171719;
+                            "
+                          >
+                            <svg
+                              width="13"
+                              height="13"
+                              fill="none"
+                              stroke="#96989a"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                              viewBox="0 0 24 24"
+                            >
+                              <circle cx="12" cy="12" r="10"></circle>
+                              <path d="M12 6v6l3.5 2"></path>
+                            </svg>
+                            <span
+                              style="
+                                color: #96989a;
+                                font-size: 12px;
+                                font-weight: 700;
+                              "
+                              >{{ ex.restLabel }}</span
+                            >
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+            </sc-if>
+
+            <!-- ▓▓▓▓▓▓ HISTORY SCREEN ▓▓▓▓▓▓ -->
+            <sc-if value="{{ isHistory }}" hint-placeholder-val="{{ false }}">
+              <div
+                style="padding-bottom: 30px; animation: fadeSlide 0.28s ease"
+              >
+                <div style="padding: 18px 22px 0; margin-bottom: 20px">
+                  <div
+                    style="
+                      color: #96989a;
+                      font-size: 12px;
+                      font-weight: 600;
+                      letter-spacing: 0.4px;
+                      margin-bottom: 3px;
+                    "
+                  >
+                    Junho 2025
+                  </div>
+                  <div
+                    style="
+                      color: #fff;
+                      font-size: 24px;
+                      font-weight: 900;
+                      letter-spacing: -0.4px;
+                    "
+                  >
+                    Histórico
+                  </div>
+                </div>
+
+                <!-- Week strip -->
+                <div
+                  style="
+                    margin: 0 18px 22px;
+                    background: #1c1c1e;
+                    border-radius: 22px;
+                    padding: 18px;
+                    border: 1px solid #242424;
+                  "
+                >
+                  <div
+                    style="
+                      color: #3a3a3a;
+                      font-size: 10px;
+                      font-weight: 800;
+                      letter-spacing: 2px;
+                      text-transform: uppercase;
+                      margin-bottom: 14px;
+                    "
+                  >
+                    Últimos 7 dias
+                  </div>
+                  <div style="display: flex; justify-content: space-between">
+                    <sc-for
+                      list="{{ historyWeek }}"
+                      as="wd"
+                      hint-placeholder-count="7"
+                    >
+                      <div
+                        style="
+                          flex: 1;
+                          display: flex;
+                          flex-direction: column;
+                          align-items: center;
+                          gap: 7px;
+                        "
+                      >
+                        <div
+                          style="color:{{ wd.dayColor }}; font-size:10px; font-weight:700;"
+                        >
+                          {{ wd.day }}
+                        </div>
+                        <div
+                          style="width:33px; height:33px; border-radius:10px; background:{{ wd.dateBg }}; display:flex; align-items:center; justify-content:center;"
+                        >
+                          <span
+                            style="color:{{ wd.dateColor }}; font-size:14px; font-weight:800;"
+                            >{{ wd.date }}</span
+                          >
+                        </div>
+                        <div
+                          style="width:5px; height:5px; border-radius:50%; background:{{ wd.dotColor }}; opacity:{{ wd.dotOpacity }};"
+                        ></div>
+                      </div>
+                    </sc-for>
+                  </div>
+                </div>
+
+                <!-- Month stats -->
+                <div style="margin: 0 18px 22px; display: flex; gap: 10px">
+                  <div
+                    style="
+                      flex: 1;
+                      background: #1c1c1e;
+                      border-radius: 16px;
+                      padding: 15px 10px;
+                      text-align: center;
+                      border: 1px solid #242424;
+                    "
+                  >
+                    <div
+                      style="
+                        color: #f58634;
+                        font-size: 24px;
+                        font-weight: 900;
+                        letter-spacing: -1px;
+                        line-height: 1;
+                      "
+                    >
+                      14
+                    </div>
+                    <div
+                      style="
+                        color: #96989a;
+                        font-size: 11px;
+                        font-weight: 700;
+                        margin-top: 4px;
+                      "
+                    >
+                      Treinos
+                    </div>
+                  </div>
+                  <div
+                    style="
+                      flex: 1;
+                      background: #1c1c1e;
+                      border-radius: 16px;
+                      padding: 15px 10px;
+                      text-align: center;
+                      border: 1px solid #242424;
+                    "
+                  >
+                    <div
+                      style="
+                        color: #f58634;
+                        font-size: 24px;
+                        font-weight: 900;
+                        letter-spacing: -1px;
+                        line-height: 1;
+                      "
+                    >
+                      81%
+                    </div>
+                    <div
+                      style="
+                        color: #96989a;
+                        font-size: 11px;
+                        font-weight: 700;
+                        margin-top: 4px;
+                      "
+                    >
+                      Frequência
+                    </div>
+                  </div>
+                  <div
+                    style="
+                      flex: 1;
+                      background: #1c1c1e;
+                      border-radius: 16px;
+                      padding: 15px 10px;
+                      text-align: center;
+                      border: 1px solid #242424;
+                    "
+                  >
+                    <div
+                      style="
+                        color: #f58634;
+                        font-size: 24px;
+                        font-weight: 900;
+                        letter-spacing: -1px;
+                        line-height: 1;
+                      "
+                    >
+                      62'
+                    </div>
+                    <div
+                      style="
+                        color: #96989a;
+                        font-size: 11px;
+                        font-weight: 700;
+                        margin-top: 4px;
+                      "
+                    >
+                      Média
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Sessions -->
+                <div style="padding: 0 18px">
+                  <div
+                    style="
+                      color: #3a3a3a;
+                      font-size: 10px;
+                      font-weight: 800;
+                      letter-spacing: 2px;
+                      text-transform: uppercase;
+                      margin-bottom: 10px;
+                    "
+                  >
+                    Sessões Recentes
+                  </div>
+                  <div style="display: flex; flex-direction: column; gap: 10px">
+                    <sc-for
+                      list="{{ sessions }}"
+                      as="sess"
+                      hint-placeholder-count="4"
+                    >
+                      <div
+                        style="
+                          background: #1c1c1e;
+                          border-radius: 18px;
+                          padding: 16px;
+                          border: 1px solid #242424;
+                          cursor: pointer;
+                        "
+                      >
+                        <div
+                          style="
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
+                            margin-bottom: 10px;
+                          "
+                        >
+                          <div
+                            style="
+                              background: rgba(245, 134, 52, 0.12);
+                              border-radius: 7px;
+                              padding: 3px 10px;
+                            "
+                          >
+                            <span
+                              style="
+                                color: #f58634;
+                                font-size: 10px;
+                                font-weight: 800;
+                              "
+                              >{{ sess.date }}</span
+                            >
+                          </div>
+                          <div
+                            style="display: flex; align-items: center; gap: 5px"
+                          >
+                            <svg
+                              width="12"
+                              height="12"
+                              fill="none"
+                              stroke="#96989a"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                              viewBox="0 0 24 24"
+                            >
+                              <circle cx="12" cy="12" r="10"></circle>
+                              <path d="M12 6v6l3 1.5"></path>
+                            </svg>
+                            <span
+                              style="
+                                color: #96989a;
+                                font-size: 12px;
+                                font-weight: 600;
+                              "
+                              >{{ sess.duration }}</span
+                            >
+                          </div>
+                        </div>
+                        <div
+                          style="
+                            color: #fff;
+                            font-size: 15px;
+                            font-weight: 700;
+                            margin-bottom: 9px;
+                            line-height: 1.3;
+                          "
+                        >
+                          {{ sess.workout }}
+                        </div>
+                        <div style="display: flex; gap: 16px">
+                          <span
+                            style="
+                              color: #96989a;
+                              font-size: 12px;
+                              font-weight: 500;
+                            "
+                            >{{ sess.exercises }} exercícios</span
+                          >
+                          <span
+                            style="
+                              color: #96989a;
+                              font-size: 12px;
+                              font-weight: 500;
+                            "
+                            >{{ sess.volume }} levantados</span
+                          >
+                        </div>
+                      </div>
+                    </sc-for>
+                  </div>
+                </div>
+              </div>
+            </sc-if>
+
+            <!-- ▓▓▓▓▓▓ PLAN SCREEN ▓▓▓▓▓▓ -->
+            <sc-if value="{{ isPlan }}" hint-placeholder-val="{{ false }}">
+              <div
+                style="padding-bottom: 30px; animation: fadeSlide 0.28s ease"
+              >
+                <div style="padding: 18px 22px 0; margin-bottom: 20px">
+                  <div
+                    style="
+                      color: #96989a;
+                      font-size: 12px;
+                      font-weight: 600;
+                      letter-spacing: 0.4px;
+                      margin-bottom: 3px;
+                    "
+                  >
+                    Academia Dynamo
+                  </div>
+                  <div
+                    style="
+                      color: #fff;
+                      font-size: 24px;
+                      font-weight: 900;
+                      letter-spacing: -0.4px;
+                    "
+                  >
+                    Meu Plano
+                  </div>
+                </div>
+
+                <!-- Plan card -->
+                <div
+                  style="
+                    margin: 0 18px 22px;
+                    background: linear-gradient(
+                      130deg,
+                      #d4701a 0%,
+                      #f58634 50%,
+                      #f7a060 100%
+                    );
+                    border-radius: 26px;
+                    padding: 24px;
+                    position: relative;
+                    overflow: hidden;
+                  "
+                >
+                  <div
+                    style="
+                      position: absolute;
+                      right: -25px;
+                      top: -25px;
+                      width: 130px;
+                      height: 130px;
+                      background: rgba(255, 255, 255, 0.06);
+                      border-radius: 50%;
+                      pointer-events: none;
+                    "
+                  ></div>
+                  <div
+                    style="
+                      position: absolute;
+                      right: 30px;
+                      bottom: -35px;
+                      width: 90px;
+                      height: 90px;
+                      background: rgba(255, 255, 255, 0.05);
+                      border-radius: 50%;
+                      pointer-events: none;
+                    "
+                  ></div>
+                  <div
+                    style="
+                      color: rgba(255, 255, 255, 0.65);
+                      font-size: 10px;
+                      font-weight: 800;
+                      letter-spacing: 2.5px;
+                      text-transform: uppercase;
+                      margin-bottom: 6px;
+                    "
+                  >
+                    Plano Atual
+                  </div>
+                  <div
+                    style="
+                      color: #fff;
+                      font-size: 28px;
+                      font-weight: 900;
+                      letter-spacing: -0.6px;
+                      margin-bottom: 4px;
+                    "
+                  >
+                    Plano Mensal
+                  </div>
+                  <div
+                    style="
+                      color: rgba(255, 255, 255, 0.75);
+                      font-size: 15px;
+                      font-weight: 600;
+                      margin-bottom: 20px;
+                    "
+                  >
+                    R$ 89,90 / mês · Musculação
+                  </div>
+                  <div
+                    style="
+                      display: flex;
+                      align-items: center;
+                      justify-content: space-between;
+                    "
+                  >
+                    <div
+                      style="
+                        display: flex;
+                        align-items: center;
+                        gap: 8px;
+                        background: rgba(0, 0, 0, 0.22);
+                        border-radius: 10px;
+                        padding: 8px 13px;
+                      "
+                    >
+                      <div
+                        style="
+                          width: 8px;
+                          height: 8px;
+                          background: #7fff6b;
+                          border-radius: 50%;
+                          box-shadow: 0 0 6px rgba(127, 255, 107, 0.7);
+                        "
+                      ></div>
+                      <span
+                        style="
+                          color: #fff;
+                          font-size: 12px;
+                          font-weight: 800;
+                          letter-spacing: 0.5px;
+                        "
+                        >ATIVO</span
+                      >
+                    </div>
+                    <div style="text-align: right">
+                      <div
+                        style="
+                          color: rgba(255, 255, 255, 0.6);
+                          font-size: 11px;
+                          font-weight: 600;
+                          margin-bottom: 2px;
+                        "
+                      >
+                        Vence em
+                      </div>
+                      <div
+                        style="color: #fff; font-size: 14px; font-weight: 900"
+                      >
+                        7 dias · 30/06
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Info rows -->
+                <div
+                  style="
+                    margin: 0 18px 20px;
+                    background: #1c1c1e;
+                    border-radius: 20px;
+                    overflow: hidden;
+                    border: 1px solid #242424;
+                  "
+                >
+                  <div
+                    style="
+                      padding: 14px 18px;
+                      display: flex;
+                      align-items: center;
+                      justify-content: space-between;
+                      border-bottom: 1px solid #242424;
+                    "
+                  >
+                    <span
+                      style="color: #96989a; font-size: 13px; font-weight: 600"
+                      >Membro desde</span
+                    >
+                    <span style="color: #ccc; font-size: 13px; font-weight: 700"
+                      >Janeiro 2024</span
+                    >
+                  </div>
+                  <div
+                    style="
+                      padding: 14px 18px;
+                      display: flex;
+                      align-items: center;
+                      justify-content: space-between;
+                      border-bottom: 1px solid #242424;
+                    "
+                  >
+                    <span
+                      style="color: #96989a; font-size: 13px; font-weight: 600"
+                      >Próx. vencimento</span
+                    >
+                    <span
+                      style="color: #f58634; font-size: 13px; font-weight: 800"
+                      >30/06/2025</span
+                    >
+                  </div>
+                  <div
+                    style="
+                      padding: 14px 18px;
+                      display: flex;
+                      align-items: center;
+                      justify-content: space-between;
+                      border-bottom: 1px solid #242424;
+                    "
+                  >
+                    <span
+                      style="color: #96989a; font-size: 13px; font-weight: 600"
+                      >Modalidade</span
+                    >
+                    <span style="color: #ccc; font-size: 13px; font-weight: 700"
+                      >Musculação</span
+                    >
+                  </div>
+                  <div
+                    style="
+                      padding: 14px 18px;
+                      display: flex;
+                      align-items: center;
+                      justify-content: space-between;
+                    "
+                  >
+                    <span
+                      style="color: #96989a; font-size: 13px; font-weight: 600"
+                      >Acesso</span
+                    >
+                    <span style="color: #ccc; font-size: 13px; font-weight: 700"
+                      >Livre — 24h</span
+                    >
+                  </div>
+                </div>
+
+                <!-- Renew CTA -->
+                <div style="padding: 0 18px 22px">
+                  <div
+                    style="
+                      background: #f58634;
+                      border-radius: 16px;
+                      padding: 18px;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      gap: 10px;
+                      cursor: pointer;
+                    "
+                  >
+                    <svg
+                      width="18"
+                      height="18"
+                      fill="none"
+                      stroke="#fff"
+                      stroke-width="2.2"
+                      stroke-linecap="round"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M21 2v6h-6M3 12a9 9 0 0115-6.7L21 8M3 22v-6h6M21 12a9 9 0 01-15 6.7L3 16"
+                      ></path>
+                    </svg>
+                    <span style="color: #fff; font-weight: 900; font-size: 16px"
+                      >Renovar Plano</span
+                    >
+                  </div>
+                </div>
+
+                <!-- Invoice history -->
+                <div style="padding: 0 18px">
+                  <div
+                    style="
+                      color: #3a3a3a;
+                      font-size: 10px;
+                      font-weight: 800;
+                      letter-spacing: 2px;
+                      text-transform: uppercase;
+                      margin-bottom: 10px;
+                    "
+                  >
+                    Histórico de Pagamentos
+                  </div>
+                  <div
+                    style="
+                      background: #1c1c1e;
+                      border-radius: 20px;
+                      overflow: hidden;
+                      border: 1px solid #242424;
+                    "
+                  >
+                    <sc-for
+                      list="{{ invoices }}"
+                      as="inv"
+                      hint-placeholder-count="4"
+                    >
+                      <div
+                        style="
+                          padding: 14px 18px;
+                          display: flex;
+                          align-items: center;
+                          justify-content: space-between;
+                          border-bottom: 1px solid #1e1e1e;
+                        "
+                      >
+                        <div>
+                          <div
+                            style="
+                              color: #ccc;
+                              font-size: 13px;
+                              font-weight: 700;
+                            "
+                          >
+                            {{ inv.month }}
+                          </div>
+                          <div
+                            style="
+                              color: #3a3a3a;
+                              font-size: 11px;
+                              margin-top: 2px;
+                              font-weight: 500;
+                            "
+                          >
+                            Pago em {{ inv.date }}
+                          </div>
+                        </div>
+                        <div
+                          style="display: flex; align-items: center; gap: 10px"
+                        >
+                          <span
+                            style="
+                              color: #ddd;
+                              font-size: 13px;
+                              font-weight: 800;
+                            "
+                            >{{ inv.amount }}</span
+                          >
+                          <div
+                            style="background:{{ inv.statusBg }}; border-radius:7px; padding:3px 9px;"
+                          >
+                            <span
+                              style="color:{{ inv.statusColor }}; font-size:11px; font-weight:800;"
+                              >{{ inv.status }}</span
+                            >
+                          </div>
+                        </div>
+                      </div>
+                    </sc-for>
+                  </div>
+                </div>
+              </div>
+            </sc-if>
+
+            <!-- ▓▓▓▓▓▓ PROFILE SCREEN ▓▓▓▓▓▓ -->
+            <sc-if value="{{ isProfile }}" hint-placeholder-val="{{ false }}">
+              <div
+                style="padding-bottom: 30px; animation: fadeSlide 0.28s ease"
+              >
+                <div style="padding: 18px 22px 0; margin-bottom: 20px">
+                  <div
+                    style="
+                      color: #96989a;
+                      font-size: 12px;
+                      font-weight: 600;
+                      letter-spacing: 0.4px;
+                      margin-bottom: 3px;
+                    "
+                  >
+                    Academia Dynamo
+                  </div>
+                  <div
+                    style="
+                      color: #fff;
+                      font-size: 24px;
+                      font-weight: 900;
+                      letter-spacing: -0.4px;
+                    "
+                  >
+                    Perfil
+                  </div>
+                </div>
+
+                <!-- Avatar + Info -->
+                <div
+                  style="
+                    margin: 0 18px 22px;
+                    background: #1c1c1e;
+                    border-radius: 24px;
+                    padding: 22px;
+                    border: 1px solid #242424;
+                    display: flex;
+                    align-items: center;
+                    gap: 18px;
+                  "
+                >
+                  <div
+                    style="
+                      width: 72px;
+                      height: 72px;
+                      border-radius: 22px;
+                      background: linear-gradient(135deg, #d4701a, #f7a060);
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      flex-shrink: 0;
+                    "
+                  >
+                    <span
+                      style="
+                        color: #fff;
+                        font-size: 24px;
+                        font-weight: 900;
+                        letter-spacing: -1px;
+                      "
+                      >LC</span
+                    >
+                  </div>
+                  <div style="flex: 1; min-width: 0">
+                    <div
+                      style="
+                        color: #fff;
+                        font-size: 20px;
+                        font-weight: 800;
+                        margin-bottom: 3px;
+                        letter-spacing: -0.3px;
+                      "
+                    >
+                      Lucas Carvalho
+                    </div>
+                    <div
+                      style="
+                        color: #96989a;
+                        font-size: 13px;
+                        margin-bottom: 9px;
+                        font-weight: 500;
+                      "
+                    >
+                      lucas@email.com
+                    </div>
+                    <div
+                      style="
+                        background: rgba(245, 134, 52, 0.12);
+                        border-radius: 8px;
+                        padding: 6px 13px;
+                        display: inline-flex;
+                        align-items: center;
+                      "
+                    >
+                      <span
+                        style="
+                          color: #f58634;
+                          font-size: 13px;
+                          font-weight: 800;
+                        "
+                        >Membro desde Jan 2024</span
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Metrics -->
+                <div style="padding: 0 18px 22px">
+                  <div
+                    style="
+                      color: #3a3a3a;
+                      font-size: 10px;
+                      font-weight: 800;
+                      letter-spacing: 2px;
+                      text-transform: uppercase;
+                      margin-bottom: 10px;
+                    "
+                  >
+                    Minhas Métricas
+                  </div>
+                  <div style="display: flex; gap: 10px; margin-bottom: 10px">
+                    <div
+                      style="
+                        flex: 1;
+                        background: #1c1c1e;
+                        border-radius: 16px;
+                        padding: 15px 10px;
+                        text-align: center;
+                        border: 1px solid #242424;
+                      "
+                    >
+                      <div
+                        style="
+                          color: #f58634;
+                          font-size: 22px;
+                          font-weight: 900;
+                          line-height: 1;
+                          letter-spacing: -0.5px;
+                        "
+                      >
+                        78
+                      </div>
+                      <div
+                        style="
+                          color: #96989a;
+                          font-size: 10px;
+                          font-weight: 700;
+                          margin-top: 4px;
+                        "
+                      >
+                        kg — Peso
+                      </div>
+                    </div>
+                    <div
+                      style="
+                        flex: 1;
+                        background: #1c1c1e;
+                        border-radius: 16px;
+                        padding: 15px 10px;
+                        text-align: center;
+                        border: 1px solid #242424;
+                      "
+                    >
+                      <div
+                        style="
+                          color: #f58634;
+                          font-size: 22px;
+                          font-weight: 900;
+                          line-height: 1;
+                          letter-spacing: -0.5px;
+                        "
+                      >
+                        176
+                      </div>
+                      <div
+                        style="
+                          color: #96989a;
+                          font-size: 10px;
+                          font-weight: 700;
+                          margin-top: 4px;
+                        "
+                      >
+                        cm — Altura
+                      </div>
+                    </div>
+                    <div
+                      style="
+                        flex: 1;
+                        background: #1c1c1e;
+                        border-radius: 16px;
+                        padding: 15px 10px;
+                        text-align: center;
+                        border: 1px solid #242424;
+                      "
+                    >
+                      <div
+                        style="
+                          color: #f58634;
+                          font-size: 22px;
+                          font-weight: 900;
+                          line-height: 1;
+                          letter-spacing: -0.5px;
+                        "
+                      >
+                        25.1
+                      </div>
+                      <div
+                        style="
+                          color: #96989a;
+                          font-size: 10px;
+                          font-weight: 700;
+                          margin-top: 4px;
+                        "
+                      >
+                        IMC
+                      </div>
+                    </div>
+                  </div>
+                  <div style="display: flex; gap: 10px">
+                    <div
+                      style="
+                        flex: 1;
+                        background: #1c1c1e;
+                        border-radius: 16px;
+                        padding: 15px 10px;
+                        text-align: center;
+                        border: 1px solid #242424;
+                      "
+                    >
+                      <div
+                        style="
+                          color: #f58634;
+                          font-size: 22px;
+                          font-weight: 900;
+                          line-height: 1;
+                          letter-spacing: -0.5px;
+                        "
+                      >
+                        142
+                      </div>
+                      <div
+                        style="
+                          color: #96989a;
+                          font-size: 10px;
+                          font-weight: 700;
+                          margin-top: 4px;
+                        "
+                      >
+                        Total Treinos
+                      </div>
+                    </div>
+                    <div
+                      style="
+                        flex: 1;
+                        background: #1c1c1e;
+                        border-radius: 16px;
+                        padding: 15px 10px;
+                        text-align: center;
+                        border: 1px solid #242424;
+                      "
+                    >
+                      <div
+                        style="
+                          color: #f58634;
+                          font-size: 22px;
+                          font-weight: 900;
+                          line-height: 1;
+                          letter-spacing: -0.5px;
+                        "
+                      >
+                        81%
+                      </div>
+                      <div
+                        style="
+                          color: #96989a;
+                          font-size: 10px;
+                          font-weight: 700;
+                          margin-top: 4px;
+                        "
+                      >
+                        Frequência
+                      </div>
+                    </div>
+                    <div
+                      style="
+                        flex: 1;
+                        background: #1c1c1e;
+                        border-radius: 16px;
+                        padding: 15px 10px;
+                        text-align: center;
+                        border: 1px solid #242424;
+                      "
+                    >
+                      <div
+                        style="
+                          color: #f58634;
+                          font-size: 22px;
+                          font-weight: 900;
+                          line-height: 1;
+                          letter-spacing: -0.5px;
+                        "
+                      >
+                        −6.5
+                      </div>
+                      <div
+                        style="
+                          color: #96989a;
+                          font-size: 10px;
+                          font-weight: 700;
+                          margin-top: 4px;
+                        "
+                      >
+                        kg perdidos
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Settings list -->
+                <div style="padding: 0 18px">
+                  <div
+                    style="
+                      color: #3a3a3a;
+                      font-size: 10px;
+                      font-weight: 800;
+                      letter-spacing: 2px;
+                      text-transform: uppercase;
+                      margin-bottom: 10px;
+                    "
+                  >
+                    Configurações
+                  </div>
+                  <div
+                    style="
+                      background: #1c1c1e;
+                      border-radius: 20px;
+                      overflow: hidden;
+                      border: 1px solid #242424;
+                    "
+                  >
+                    <div
+                      onClick="{{ onEditProfile }}"
+                      style="
+                        padding: 14px 18px;
+                        display: flex;
+                        align-items: center;
+                        gap: 13px;
+                        border-bottom: 1px solid #1e1e1e;
+                        cursor: pointer;
+                      "
+                    >
+                      <div
+                        style="
+                          width: 34px;
+                          height: 34px;
+                          background: #252527;
+                          border-radius: 10px;
+                          display: flex;
+                          align-items: center;
+                          justify-content: center;
+                          flex-shrink: 0;
+                        "
+                      >
+                        <svg
+                          width="16"
+                          height="16"
+                          fill="none"
+                          stroke="#777"
+                          stroke-width="1.8"
+                          stroke-linecap="round"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"
+                          ></path>
+                          <path
+                            d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"
+                          ></path>
+                        </svg>
+                      </div>
+                      <span
+                        style="
+                          flex: 1;
+                          color: #ccc;
+                          font-size: 14px;
+                          font-weight: 600;
+                        "
+                        >Editar Perfil</span
+                      >
+                      <svg
+                        width="15"
+                        height="15"
+                        fill="none"
+                        stroke="#333"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M9 18l6-6-6-6"></path>
+                      </svg>
+                    </div>
+                    <div
+                      onClick="{{ onNotifications }}"
+                      style="
+                        padding: 14px 18px;
+                        display: flex;
+                        align-items: center;
+                        gap: 13px;
+                        border-bottom: 1px solid #1e1e1e;
+                        cursor: pointer;
+                      "
+                    >
+                      <div
+                        style="
+                          width: 34px;
+                          height: 34px;
+                          background: #252527;
+                          border-radius: 10px;
+                          display: flex;
+                          align-items: center;
+                          justify-content: center;
+                          flex-shrink: 0;
+                        "
+                      >
+                        <svg
+                          width="16"
+                          height="16"
+                          fill="none"
+                          stroke="#777"
+                          stroke-width="1.8"
+                          stroke-linecap="round"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"
+                          ></path>
+                          <path d="M13.73 21a2 2 0 01-3.46 0"></path>
+                        </svg>
+                      </div>
+                      <span
+                        style="
+                          flex: 1;
+                          color: #ccc;
+                          font-size: 14px;
+                          font-weight: 600;
+                        "
+                        >Notificacoes</span
+                      >
+                      <svg
+                        width="15"
+                        height="15"
+                        fill="none"
+                        stroke="#333"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M9 18l6-6-6-6"></path>
+                      </svg>
+                    </div>
+                    <div
+                      onClick="{{ onPrivacy }}"
+                      style="
+                        padding: 14px 18px;
+                        display: flex;
+                        align-items: center;
+                        gap: 13px;
+                        border-bottom: 1px solid #1e1e1e;
+                        cursor: pointer;
+                      "
+                    >
+                      <div
+                        style="
+                          width: 34px;
+                          height: 34px;
+                          background: #252527;
+                          border-radius: 10px;
+                          display: flex;
+                          align-items: center;
+                          justify-content: center;
+                          flex-shrink: 0;
+                        "
+                      >
+                        <svg
+                          width="16"
+                          height="16"
+                          fill="none"
+                          stroke="#777"
+                          stroke-width="1.8"
+                          stroke-linecap="round"
+                          viewBox="0 0 24 24"
+                        >
+                          <rect
+                            x="3"
+                            y="11"
+                            width="18"
+                            height="11"
+                            rx="2"
+                          ></rect>
+                          <path d="M7 11V7a5 5 0 0110 0v4"></path>
+                        </svg>
+                      </div>
+                      <span
+                        style="
+                          flex: 1;
+                          color: #ccc;
+                          font-size: 14px;
+                          font-weight: 600;
+                        "
+                        >Privacidade</span
+                      >
+                      <svg
+                        width="15"
+                        height="15"
+                        fill="none"
+                        stroke="#333"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M9 18l6-6-6-6"></path>
+                      </svg>
+                    </div>
+                    <div
+                      onClick="{{ onSupport }}"
+                      style="
+                        padding: 14px 18px;
+                        display: flex;
+                        align-items: center;
+                        gap: 13px;
+                        border-bottom: 1px solid #1e1e1e;
+                        cursor: pointer;
+                      "
+                    >
+                      <div
+                        style="
+                          width: 34px;
+                          height: 34px;
+                          background: #252527;
+                          border-radius: 10px;
+                          display: flex;
+                          align-items: center;
+                          justify-content: center;
+                          flex-shrink: 0;
+                        "
+                      >
+                        <svg
+                          width="16"
+                          height="16"
+                          fill="none"
+                          stroke="#777"
+                          stroke-width="1.8"
+                          stroke-linecap="round"
+                          viewBox="0 0 24 24"
+                        >
+                          <circle cx="12" cy="12" r="10"></circle>
+                          <path
+                            d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"
+                          ></path>
+                        </svg>
+                      </div>
+                      <span
+                        style="
+                          flex: 1;
+                          color: #ccc;
+                          font-size: 14px;
+                          font-weight: 600;
+                        "
+                        >Suporte</span
+                      >
+                      <svg
+                        width="15"
+                        height="15"
+                        fill="none"
+                        stroke="#333"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M9 18l6-6-6-6"></path>
+                      </svg>
+                    </div>
+                    <div
+                      onClick="{{ onShowSignOut }}"
+                      style="
+                        padding: 14px 18px;
+                        display: flex;
+                        align-items: center;
+                        gap: 13px;
+                        cursor: pointer;
+                      "
+                    >
+                      <div
+                        style="
+                          width: 34px;
+                          height: 34px;
+                          background: #2a1515;
+                          border-radius: 10px;
+                          display: flex;
+                          align-items: center;
+                          justify-content: center;
+                          flex-shrink: 0;
+                        "
+                      >
+                        <svg
+                          width="16"
+                          height="16"
+                          fill="none"
+                          stroke="#E05555"
+                          stroke-width="1.8"
+                          stroke-linecap="round"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"
+                          ></path>
+                        </svg>
+                      </div>
+                      <span
+                        style="
+                          flex: 1;
+                          color: #e05555;
+                          font-size: 14px;
+                          font-weight: 600;
+                        "
+                        >Sair</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </sc-if>
+
+            <!-- ▓▓▓▓▓▓ NOTICES SCREEN ▓▓▓▓▓▓ -->
+            <sc-if value="{{ isNotices }}" hint-placeholder-val="{{ false }}">
+              <div
+                style="padding-bottom: 30px; animation: fadeSlide 0.28s ease"
+              >
+                <div
+                  style="
+                    padding: 18px 22px 0;
+                    display: flex;
+                    align-items: center;
+                    gap: 14px;
+                    margin-bottom: 22px;
+                  "
+                >
+                  <div
+                    onClick="{{ onBack }}"
+                    style="
+                      width: 40px;
+                      height: 40px;
+                      background: #1c1c1e;
+                      border-radius: 13px;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      cursor: pointer;
+                      border: 1px solid #272727;
+                      flex-shrink: 0;
+                    "
+                  >
+                    <svg
+                      width="16"
+                      height="16"
+                      fill="none"
+                      stroke="#bbb"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M15 18l-6-6 6-6"></path>
+                    </svg>
+                  </div>
+                  <div>
+                    <div
+                      style="
+                        color: #96989a;
+                        font-size: 12px;
+                        font-weight: 600;
+                        letter-spacing: 0.4px;
+                        margin-bottom: 2px;
+                      "
+                    >
+                      Academia Dynamo
+                    </div>
+                    <div
+                      style="
+                        color: #fff;
+                        font-size: 22px;
+                        font-weight: 900;
+                        letter-spacing: -0.3px;
+                      "
+                    >
+                      Avisos
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  style="
+                    padding: 0 18px;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+                  "
+                >
+                  <sc-for
+                    list="{{ notices }}"
+                    as="notice"
+                    hint-placeholder-count="4"
+                  >
+                    <div
+                      style="
+                        background: #1c1c1e;
+                        border-radius: 22px;
+                        padding: 18px;
+                        border: 1px solid #242424;
+                      "
+                    >
+                      <div
+                        style="
+                          display: flex;
+                          align-items: center;
+                          gap: 8px;
+                          margin-bottom: 9px;
+                          flex-wrap: wrap;
+                        "
+                      >
+                        <div
+                          style="background:{{ notice.badgeBg }}; border-radius:6px; padding:3px 9px;"
+                        >
+                          <span
+                            style="color:{{ notice.badgeColor }}; font-size:9px; font-weight:900; letter-spacing:1.2px;"
+                            >{{ notice.badge }}</span
+                          >
+                        </div>
+                        <span
+                          style="color: #555; font-size: 11px; font-weight: 500"
+                          >{{ notice.time }}</span
+                        >
+                      </div>
+                      <div
+                        style="
+                          color: #fff;
+                          font-size: 14px;
+                          font-weight: 800;
+                          margin-bottom: 7px;
+                          line-height: 1.3;
+                        "
+                      >
+                        {{ notice.title }}
+                      </div>
+                      <div
+                        style="
+                          color: #96989a;
+                          font-size: 13px;
+                          line-height: 1.55;
+                          font-weight: 500;
+                        "
+                      >
+                        {{ notice.body }}
+                      </div>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+            </sc-if>
+
+            <!-- ▓▓▓▓▓▓ MEUS TREINOS ▓▓▓▓▓▓ -->
+            <sc-if
+              value="{{ isMyWorkouts }}"
+              hint-placeholder-val="{{ false }}"
+            >
+              <div style="padding-bottom: 30px; animation: fadeSlide 0.3s ease">
+                <div
+                  style="
+                    padding: 18px 22px 0;
+                    display: flex;
+                    align-items: center;
+                    gap: 14px;
+                    margin-bottom: 22px;
+                  "
+                >
+                  <div
+                    onClick="{{ onBack }}"
+                    style="
+                      width: 40px;
+                      height: 40px;
+                      background: #1c1c1e;
+                      border-radius: 13px;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      cursor: pointer;
+                      border: 1px solid #272727;
+                      flex-shrink: 0;
+                    "
+                  >
+                    <svg
+                      width="16"
+                      height="16"
+                      fill="none"
+                      stroke="#bbb"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M15 18l-6-6 6-6"></path>
+                    </svg>
+                  </div>
+                  <div>
+                    <div
+                      style="
+                        color: #96989a;
+                        font-size: 12px;
+                        font-weight: 600;
+                        margin-bottom: 2px;
+                      "
+                    >
+                      Semana atual
+                    </div>
+                    <div
+                      style="
+                        color: #fff;
+                        font-size: 22px;
+                        font-weight: 900;
+                        letter-spacing: -0.3px;
+                      "
+                    >
+                      Meus Treinos
+                    </div>
+                  </div>
+                </div>
+                <div
+                  style="
+                    padding: 0 18px;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 12px;
+                  "
+                >
+                  <sc-for
+                    list="{{ programs }}"
+                    as="prog"
+                    hint-placeholder-count="3"
+                  >
+                    <div
+                      style="background:#1C1C1E; border-radius:22px; padding:20px; border:{{ prog.cardBorder }};"
+                    >
+                      <div
+                        style="
+                          display: flex;
+                          align-items: flex-start;
+                          gap: 16px;
+                        "
+                      >
+                        <div
+                          style="width:48px; height:48px; background:{{ prog.letterBg }}; border-radius:14px; display:flex; align-items:center; justify-content:center; flex-shrink:0;"
+                        >
+                          <span
+                            style="
+                              color: #fff;
+                              font-size: 22px;
+                              font-weight: 900;
+                            "
+                            >{{ prog.letter }}</span
+                          >
+                        </div>
+                        <div style="flex: 1; min-width: 0">
+                          <div
+                            style="
+                              display: flex;
+                              align-items: center;
+                              justify-content: space-between;
+                              margin-bottom: 3px;
+                            "
+                          >
+                            <div
+                              style="
+                                color: #fff;
+                                font-size: 17px;
+                                font-weight: 800;
+                              "
+                            >
+                              {{ prog.name }}
+                            </div>
+                            <div
+                              style="
+                                color: #96989a;
+                                font-size: 11px;
+                                font-weight: 500;
+                              "
+                            >
+                              {{ prog.lastDone }}
+                            </div>
+                          </div>
+                          <div
+                            style="
+                              color: #f58634;
+                              font-size: 13px;
+                              font-weight: 700;
+                              margin-bottom: 10px;
+                            "
+                          >
+                            {{ prog.focus }}
+                          </div>
+                          <div
+                            style="
+                              display: flex;
+                              gap: 14px;
+                              margin-bottom: 16px;
+                            "
+                          >
+                            <div
+                              style="
+                                display: flex;
+                                align-items: center;
+                                gap: 5px;
+                              "
+                            >
+                              <svg
+                                width="12"
+                                height="12"
+                                fill="none"
+                                stroke="#96989a"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                viewBox="0 0 24 24"
+                              >
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M12 6v6l3 1.5"></path></svg
+                              ><span style="color: #96989a; font-size: 12px"
+                                >{{ prog.duration }}</span
+                              >
+                            </div>
+                            <div
+                              style="
+                                display: flex;
+                                align-items: center;
+                                gap: 5px;
+                              "
+                            >
+                              <svg
+                                width="12"
+                                height="12"
+                                fill="none"
+                                stroke="#96989a"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                viewBox="0 0 24 24"
+                              >
+                                <circle
+                                  cx="12"
+                                  cy="12"
+                                  r="1"
+                                  fill="#96989a"
+                                ></circle>
+                                <circle
+                                  cx="6"
+                                  cy="12"
+                                  r="1"
+                                  fill="#96989a"
+                                ></circle>
+                                <circle
+                                  cx="18"
+                                  cy="12"
+                                  r="1"
+                                  fill="#96989a"
+                                ></circle></svg
+                              ><span style="color: #96989a; font-size: 12px"
+                                >{{ prog.exCount }} exercicios</span
+                              >
+                            </div>
+                            <div
+                              style="
+                                display: flex;
+                                align-items: center;
+                                gap: 5px;
+                              "
+                            >
+                              <svg
+                                width="12"
+                                height="12"
+                                fill="none"
+                                stroke="#96989a"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                viewBox="0 0 24 24"
+                              >
+                                <rect
+                                  x="3"
+                                  y="4"
+                                  width="18"
+                                  height="18"
+                                  rx="2"
+                                ></rect>
+                                <path d="M16 2v4M8 2v4M3 10h18"></path></svg
+                              ><span style="color: #96989a; font-size: 12px"
+                                >{{ prog.days }}</span
+                              >
+                            </div>
+                          </div>
+                          <div
+                            onClick="{{ prog.onStart }}"
+                            style="
+                              background: #f58634;
+                              border-radius: 11px;
+                              padding: 11px 16px;
+                              text-align: center;
+                              color: #fff;
+                              font-weight: 800;
+                              font-size: 14px;
+                              cursor: pointer;
+                            "
+                          >
+                            Fazer este treino
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+            </sc-if>
+
+            <!-- ▓▓▓▓▓▓ EDITAR PERFIL ▓▓▓▓▓▓ -->
+            <sc-if
+              value="{{ isEditProfile }}"
+              hint-placeholder-val="{{ false }}"
+            >
+              <div style="padding-bottom: 30px; animation: fadeSlide 0.3s ease">
+                <div
+                  style="
+                    padding: 18px 22px 0;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    margin-bottom: 28px;
+                  "
+                >
+                  <div style="display: flex; align-items: center; gap: 14px">
+                    <div
+                      onClick="{{ onBack }}"
+                      style="
+                        width: 40px;
+                        height: 40px;
+                        background: #1c1c1e;
+                        border-radius: 13px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        cursor: pointer;
+                        border: 1px solid #272727;
+                      "
+                    >
+                      <svg
+                        width="16"
+                        height="16"
+                        fill="none"
+                        stroke="#bbb"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M15 18l-6-6 6-6"></path>
+                      </svg>
+                    </div>
+                    <div
+                      style="
+                        color: #fff;
+                        font-size: 20px;
+                        font-weight: 900;
+                        letter-spacing: -0.3px;
+                      "
+                    >
+                      Editar Perfil
+                    </div>
+                  </div>
+                  <div
+                    style="
+                      color: #f58634;
+                      font-size: 14px;
+                      font-weight: 700;
+                      cursor: pointer;
+                    "
+                  >
+                    Salvar
+                  </div>
+                </div>
+                <div
+                  style="
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    margin-bottom: 32px;
+                  "
+                >
+                  <div
+                    style="
+                      width: 80px;
+                      height: 80px;
+                      border-radius: 24px;
+                      background: linear-gradient(135deg, #d4701a, #f7a060);
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      margin-bottom: 10px;
+                    "
+                  >
+                    <span style="color: #fff; font-size: 26px; font-weight: 900"
+                      >LC</span
+                    >
+                  </div>
+                  <div
+                    style="
+                      color: #f58634;
+                      font-size: 13px;
+                      font-weight: 600;
+                      cursor: pointer;
+                    "
+                  >
+                    Alterar foto
+                  </div>
+                </div>
+                <div
+                  style="
+                    padding: 0 22px;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 16px;
+                  "
+                >
+                  <div>
+                    <div
+                      style="
+                        color: #96989a;
+                        font-size: 11px;
+                        font-weight: 700;
+                        letter-spacing: 1px;
+                        text-transform: uppercase;
+                        margin-bottom: 8px;
+                      "
+                    >
+                      Nome completo
+                    </div>
+                    <div
+                      style="
+                        background: #1c1c1e;
+                        border-radius: 14px;
+                        padding: 16px 18px;
+                        border: 1px solid #252527;
+                      "
+                    >
+                      <input
+                        type="text"
+                        defaultValue="Lucas Carvalho"
+                        style="
+                          background: transparent;
+                          border: none;
+                          outline: none;
+                          color: #fff;
+                          font-family:
+                            &quot;Plus Jakarta Sans&quot;, system-ui, sans-serif;
+                          font-size: 15px;
+                          font-weight: 600;
+                          width: 100%;
+                          caret-color: #f58634;
+                        "
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <div
+                      style="
+                        color: #96989a;
+                        font-size: 11px;
+                        font-weight: 700;
+                        letter-spacing: 1px;
+                        text-transform: uppercase;
+                        margin-bottom: 8px;
+                      "
+                    >
+                      Telefone
+                    </div>
+                    <div
+                      style="
+                        background: #1c1c1e;
+                        border-radius: 14px;
+                        padding: 16px 18px;
+                        border: 1px solid #252527;
+                      "
+                    >
+                      <input
+                        type="tel"
+                        defaultValue="(11) 98765-4321"
+                        style="
+                          background: transparent;
+                          border: none;
+                          outline: none;
+                          color: #fff;
+                          font-family:
+                            &quot;Plus Jakarta Sans&quot;, system-ui, sans-serif;
+                          font-size: 15px;
+                          font-weight: 600;
+                          width: 100%;
+                          caret-color: #f58634;
+                        "
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <div
+                      style="
+                        color: #96989a;
+                        font-size: 11px;
+                        font-weight: 700;
+                        letter-spacing: 1px;
+                        text-transform: uppercase;
+                        margin-bottom: 8px;
+                      "
+                    >
+                      Data de nascimento
+                    </div>
+                    <div
+                      style="
+                        background: #1c1c1e;
+                        border-radius: 14px;
+                        padding: 16px 18px;
+                        border: 1px solid #252527;
+                      "
+                    >
+                      <input
+                        type="text"
+                        defaultValue="14/03/1997"
+                        style="
+                          background: transparent;
+                          border: none;
+                          outline: none;
+                          color: #fff;
+                          font-family:
+                            &quot;Plus Jakarta Sans&quot;, system-ui, sans-serif;
+                          font-size: 15px;
+                          font-weight: 600;
+                          width: 100%;
+                          caret-color: #f58634;
+                        "
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <div
+                      style="
+                        color: #96989a;
+                        font-size: 11px;
+                        font-weight: 700;
+                        letter-spacing: 1px;
+                        text-transform: uppercase;
+                        margin-bottom: 8px;
+                      "
+                    >
+                      Objetivo
+                    </div>
+                    <div
+                      style="
+                        background: #1c1c1e;
+                        border-radius: 14px;
+                        padding: 16px 18px;
+                        border: 1px solid #252527;
+                      "
+                    >
+                      <input
+                        type="text"
+                        defaultValue="Hipertrofia"
+                        style="
+                          background: transparent;
+                          border: none;
+                          outline: none;
+                          color: #fff;
+                          font-family:
+                            &quot;Plus Jakarta Sans&quot;, system-ui, sans-serif;
+                          font-size: 15px;
+                          font-weight: 600;
+                          width: 100%;
+                          caret-color: #f58634;
+                        "
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </sc-if>
+
+            <!-- ▓▓▓▓▓▓ NOTIFICACOES ▓▓▓▓▓▓ -->
+            <sc-if
+              value="{{ isNotifications }}"
+              hint-placeholder-val="{{ false }}"
+            >
+              <div style="padding-bottom: 30px; animation: fadeSlide 0.3s ease">
+                <div
+                  style="
+                    padding: 18px 22px 0;
+                    display: flex;
+                    align-items: center;
+                    gap: 14px;
+                    margin-bottom: 24px;
+                  "
+                >
+                  <div
+                    onClick="{{ onBack }}"
+                    style="
+                      width: 40px;
+                      height: 40px;
+                      background: #1c1c1e;
+                      border-radius: 13px;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      cursor: pointer;
+                      border: 1px solid #272727;
+                      flex-shrink: 0;
+                    "
+                  >
+                    <svg
+                      width="16"
+                      height="16"
+                      fill="none"
+                      stroke="#bbb"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M15 18l-6-6 6-6"></path>
+                    </svg>
+                  </div>
+                  <div
+                    style="
+                      color: #fff;
+                      font-size: 20px;
+                      font-weight: 900;
+                      letter-spacing: -0.3px;
+                    "
+                  >
+                    Notificacoes
+                  </div>
+                </div>
+                <div style="padding: 0 18px">
+                  <div
+                    style="
+                      background: #1c1c1e;
+                      border-radius: 20px;
+                      overflow: hidden;
+                      border: 1px solid #242424;
+                    "
+                  >
+                    <sc-for
+                      list="{{ notifToggles }}"
+                      as="tgl"
+                      hint-placeholder-count="4"
+                    >
+                      <div
+                        style="
+                          padding: 16px 18px;
+                          display: flex;
+                          align-items: center;
+                          gap: 14px;
+                          border-bottom: 1px solid #1e1e1e;
+                        "
+                      >
+                        <div style="flex: 1; min-width: 0">
+                          <div
+                            style="
+                              color: #ddd;
+                              font-size: 14px;
+                              font-weight: 700;
+                              margin-bottom: 3px;
+                            "
+                          >
+                            {{ tgl.label }}
+                          </div>
+                          <div
+                            style="
+                              color: #96989a;
+                              font-size: 12px;
+                              font-weight: 500;
+                            "
+                          >
+                            {{ tgl.desc }}
+                          </div>
+                        </div>
+                        <div
+                          onClick="{{ tgl.onToggle }}"
+                          style="width:50px; height:28px; background:{{ tgl.bg }}; border-radius:14px; position:relative; cursor:pointer; flex-shrink:0; transition:background 0.25s ease;"
+                        >
+                          <div
+                            style="position:absolute; top:3px; left:{{ tgl.knobLeft }}; width:22px; height:22px; background:#fff; border-radius:50%; transition:left 0.25s ease;"
+                          ></div>
+                        </div>
+                      </div>
+                    </sc-for>
+                  </div>
+                </div>
+              </div>
+            </sc-if>
+
+            <!-- ▓▓▓▓▓▓ PRIVACIDADE ▓▓▓▓▓▓ -->
+            <sc-if value="{{ isPrivacy }}" hint-placeholder-val="{{ false }}">
+              <div style="padding-bottom: 30px; animation: fadeSlide 0.3s ease">
+                <div
+                  style="
+                    padding: 18px 22px 0;
+                    display: flex;
+                    align-items: center;
+                    gap: 14px;
+                    margin-bottom: 24px;
+                  "
+                >
+                  <div
+                    onClick="{{ onBack }}"
+                    style="
+                      width: 40px;
+                      height: 40px;
+                      background: #1c1c1e;
+                      border-radius: 13px;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      cursor: pointer;
+                      border: 1px solid #272727;
+                      flex-shrink: 0;
+                    "
+                  >
+                    <svg
+                      width="16"
+                      height="16"
+                      fill="none"
+                      stroke="#bbb"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M15 18l-6-6 6-6"></path>
+                    </svg>
+                  </div>
+                  <div
+                    style="
+                      color: #fff;
+                      font-size: 20px;
+                      font-weight: 900;
+                      letter-spacing: -0.3px;
+                    "
+                  >
+                    Privacidade
+                  </div>
+                </div>
+                <div
+                  style="
+                    padding: 0 18px;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 14px;
+                  "
+                >
+                  <div
+                    style="
+                      background: #1c1c1e;
+                      border-radius: 20px;
+                      overflow: hidden;
+                      border: 1px solid #242424;
+                    "
+                  >
+                    <sc-for
+                      list="{{ privacyToggles }}"
+                      as="tgl"
+                      hint-placeholder-count="2"
+                    >
+                      <div
+                        style="
+                          padding: 16px 18px;
+                          display: flex;
+                          align-items: center;
+                          gap: 14px;
+                          border-bottom: 1px solid #1e1e1e;
+                        "
+                      >
+                        <div style="flex: 1; min-width: 0">
+                          <div
+                            style="
+                              color: #ddd;
+                              font-size: 14px;
+                              font-weight: 700;
+                              margin-bottom: 3px;
+                            "
+                          >
+                            {{ tgl.label }}
+                          </div>
+                          <div
+                            style="
+                              color: #96989a;
+                              font-size: 12px;
+                              font-weight: 500;
+                            "
+                          >
+                            {{ tgl.desc }}
+                          </div>
+                        </div>
+                        <div
+                          onClick="{{ tgl.onToggle }}"
+                          style="width:50px; height:28px; background:{{ tgl.bg }}; border-radius:14px; position:relative; cursor:pointer; flex-shrink:0; transition:background 0.25s ease;"
+                        >
+                          <div
+                            style="position:absolute; top:3px; left:{{ tgl.knobLeft }}; width:22px; height:22px; background:#fff; border-radius:50%; transition:left 0.25s ease;"
+                          ></div>
+                        </div>
+                      </div>
+                    </sc-for>
+                  </div>
+                  <div
+                    style="
+                      background: #1c1c1e;
+                      border-radius: 20px;
+                      overflow: hidden;
+                      border: 1px solid #242424;
+                    "
+                  >
+                    <div
+                      style="
+                        padding: 15px 18px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        border-bottom: 1px solid #1e1e1e;
+                        cursor: pointer;
+                      "
+                    >
+                      <span
+                        style="color: #ddd; font-size: 14px; font-weight: 600"
+                        >Historico de dados</span
+                      >
+                      <svg
+                        width="15"
+                        height="15"
+                        fill="none"
+                        stroke="#444"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M9 18l6-6-6-6"></path>
+                      </svg>
+                    </div>
+                    <div
+                      style="
+                        padding: 15px 18px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        cursor: pointer;
+                      "
+                    >
+                      <span
+                        style="
+                          color: #e05555;
+                          font-size: 14px;
+                          font-weight: 600;
+                        "
+                        >Excluir conta</span
+                      >
+                      <svg
+                        width="15"
+                        height="15"
+                        fill="none"
+                        stroke="#E05555"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M9 18l6-6-6-6"></path>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </sc-if>
+
+            <!-- ▓▓▓▓▓▓ SUPORTE ▓▓▓▓▓▓ -->
+            <sc-if value="{{ isSupport }}" hint-placeholder-val="{{ false }}">
+              <div style="padding-bottom: 30px; animation: fadeSlide 0.3s ease">
+                <div
+                  style="
+                    padding: 18px 22px 0;
+                    display: flex;
+                    align-items: center;
+                    gap: 14px;
+                    margin-bottom: 24px;
+                  "
+                >
+                  <div
+                    onClick="{{ onBack }}"
+                    style="
+                      width: 40px;
+                      height: 40px;
+                      background: #1c1c1e;
+                      border-radius: 13px;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      cursor: pointer;
+                      border: 1px solid #272727;
+                      flex-shrink: 0;
+                    "
+                  >
+                    <svg
+                      width="16"
+                      height="16"
+                      fill="none"
+                      stroke="#bbb"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M15 18l-6-6 6-6"></path>
+                    </svg>
+                  </div>
+                  <div
+                    style="
+                      color: #fff;
+                      font-size: 20px;
+                      font-weight: 900;
+                      letter-spacing: -0.3px;
+                    "
+                  >
+                    Suporte
+                  </div>
+                </div>
+                <div
+                  style="
+                    padding: 0 18px;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 14px;
+                  "
+                >
+                  <div
+                    style="
+                      color: #96989a;
+                      font-size: 10px;
+                      font-weight: 700;
+                      letter-spacing: 2px;
+                      text-transform: uppercase;
+                    "
+                  >
+                    Perguntas frequentes
+                  </div>
+                  <div
+                    style="
+                      background: #1c1c1e;
+                      border-radius: 20px;
+                      overflow: hidden;
+                      border: 1px solid #242424;
+                    "
+                  >
+                    <div
+                      style="
+                        padding: 15px 18px;
+                        border-bottom: 1px solid #1e1e1e;
+                        cursor: pointer;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                      "
+                    >
+                      <span
+                        style="color: #ddd; font-size: 14px; font-weight: 600"
+                        >Como renovar meu plano?</span
+                      ><svg
+                        width="14"
+                        height="14"
+                        fill="none"
+                        stroke="#444"
+                        stroke-width="2.5"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M9 18l6-6-6-6"></path>
+                      </svg>
+                    </div>
+                    <div
+                      style="
+                        padding: 15px 18px;
+                        border-bottom: 1px solid #1e1e1e;
+                        cursor: pointer;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                      "
+                    >
+                      <span
+                        style="color: #ddd; font-size: 14px; font-weight: 600"
+                        >Como funciona o congelamento?</span
+                      ><svg
+                        width="14"
+                        height="14"
+                        fill="none"
+                        stroke="#444"
+                        stroke-width="2.5"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M9 18l6-6-6-6"></path>
+                      </svg>
+                    </div>
+                    <div
+                      style="
+                        padding: 15px 18px;
+                        cursor: pointer;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                      "
+                    >
+                      <span
+                        style="color: #ddd; font-size: 14px; font-weight: 600"
+                        >Horarios de funcionamento</span
+                      ><svg
+                        width="14"
+                        height="14"
+                        fill="none"
+                        stroke="#444"
+                        stroke-width="2.5"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M9 18l6-6-6-6"></path>
+                      </svg>
+                    </div>
+                  </div>
+                  <div
+                    style="
+                      color: #96989a;
+                      font-size: 10px;
+                      font-weight: 700;
+                      letter-spacing: 2px;
+                      text-transform: uppercase;
+                    "
+                  >
+                    Falar com a gente
+                  </div>
+                  <div
+                    style="
+                      background: #1b3a2a;
+                      border-radius: 16px;
+                      padding: 16px 18px;
+                      display: flex;
+                      align-items: center;
+                      gap: 14px;
+                      cursor: pointer;
+                      border: 1px solid rgba(37, 211, 102, 0.15);
+                    "
+                  >
+                    <div
+                      style="
+                        width: 40px;
+                        height: 40px;
+                        background: #25d366;
+                        border-radius: 12px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        flex-shrink: 0;
+                      "
+                    >
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="#fff"
+                      >
+                        <path
+                          d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"
+                        ></path>
+                        <path
+                          d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.96 9.96 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div>
+                      <div
+                        style="
+                          color: #25d366;
+                          font-size: 14px;
+                          font-weight: 700;
+                        "
+                      >
+                        WhatsApp
+                      </div>
+                      <div style="color: #96989a; font-size: 12px">
+                        (11) 3333-4444
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    style="
+                      background: #1c1c1e;
+                      border-radius: 16px;
+                      padding: 16px 18px;
+                      display: flex;
+                      align-items: center;
+                      gap: 14px;
+                      cursor: pointer;
+                      border: 1px solid #242424;
+                    "
+                  >
+                    <div
+                      style="
+                        width: 40px;
+                        height: 40px;
+                        background: #2a2a2c;
+                        border-radius: 12px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        flex-shrink: 0;
+                      "
+                    >
+                      <svg
+                        width="20"
+                        height="20"
+                        fill="none"
+                        stroke="#96989a"
+                        stroke-width="1.8"
+                        stroke-linecap="round"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                        ></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                      </svg>
+                    </div>
+                    <div>
+                      <div
+                        style="color: #ddd; font-size: 14px; font-weight: 700"
+                      >
+                        E-mail
+                      </div>
+                      <div style="color: #96989a; font-size: 12px">
+                        contato@dynamoacademia.com.br
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    style="
+                      color: #96989a;
+                      font-size: 12px;
+                      text-align: center;
+                      margin-top: 8px;
+                    "
+                  >
+                    v1.3.0 · Dynamo Academia
+                  </div>
+                </div>
+              </div>
+            </sc-if>
+          </div>
+
+          <!-- ════ SPLASH SCREEN ════ -->
+          <div
+            style="position:absolute; inset:0; z-index:999; background:#0D0D0D; display:flex; flex-direction:column; align-items:center; justify-content:center; opacity:{{ splashOpacity }}; pointer-events:{{ splashPointerEvents }}; transition:opacity 0.7s ease;"
+          >
+            <!-- Glow radial bg -->
+            <div
+              style="
+                position: absolute;
+                inset: 0;
+                background: radial-gradient(
+                  ellipse 260px 260px at 50% 44%,
+                  rgba(245, 134, 52, 0.13) 0%,
+                  transparent 70%
+                );
+                pointer-events: none;
+                left: 2px;
+                top: -100px;
+              "
+            ></div>
+
+            <!-- Logo mark -->
+            <div
+              style="
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 0;
+                position: relative;
+              "
+            >
+              <!-- Logo única -->
+              <div style="position: relative">
+                <img
+                  src="uploads/unnamed-removebg-preview.png"
+                  style="
+                    width: 260px;
+                    height: auto;
+                    display: block;
+                    filter: drop-shadow(0 0 30px rgba(245, 134, 52, 0.4));
+                  "
+                />
+                <div
+                  style="
+                    position: absolute;
+                    bottom: -10px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    width: 80px;
+                    height: 8px;
+                    background: #f58634;
+                    border-radius: 50%;
+                    filter: blur(16px);
+                    opacity: 0.45;
+                  "
+                ></div>
+              </div>
+
+              <!-- Loader bar -->
+              <div
+                style="
+                  width: 120px;
+                  height: 2px;
+                  background: #1c1c1e;
+                  border-radius: 2px;
+                  overflow: hidden;
+                  margin-top: 40px;
+                "
+              >
+                <div
+                  style="
+                    height: 100%;
+                    width: 100%;
+                    background: linear-gradient(
+                      90deg,
+                      transparent,
+                      #f58634,
+                      transparent
+                    );
+                    border-radius: 2px;
+                    animation: splashBar 1.8s ease-in-out infinite;
+                  "
+                ></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ════ REST TIMER FULL ════ -->
+          <sc-if value="{{ timerFull }}" hint-placeholder-val="{{ false }}">
+            <div
+              style="
+                position: absolute;
+                bottom: 106px;
+                left: 14px;
+                right: 14px;
+                background: #18181a;
+                border-radius: 28px;
+                padding: 22px 24px;
+                z-index: 300;
+                border: 1.5px solid rgba(245, 134, 52, 0.22);
+                box-shadow: 0 -10px 50px rgba(0, 0, 0, 0.8);
+                animation: timerIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+              "
+            >
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;
+                  margin-bottom: 8px;
+                "
+              >
+                <div
+                  style="
+                    color: #3a3a3a;
+                    font-size: 10px;
+                    font-weight: 800;
+                    letter-spacing: 2.5px;
+                    text-transform: uppercase;
+                  "
+                >
+                  Descanso
+                </div>
+                <div
+                  onClick="{{ onMinimizeTimer }}"
+                  style="
+                    background: #252527;
+                    border-radius: 8px;
+                    padding: 5px 10px;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    gap: 5px;
+                  "
+                >
+                  <svg
+                    width="12"
+                    height="12"
+                    fill="none"
+                    stroke="#96989a"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M5 12h14" />
+                  </svg>
+                  <span
+                    style="color: #96989a; font-size: 11px; font-weight: 700"
+                    >Minimizar</span
+                  >
+                </div>
+              </div>
+              <div
+                style="
+                  color: #f58634;
+                  font-size: 60px;
+                  font-weight: 900;
+                  line-height: 1;
+                  letter-spacing: -4px;
+                  margin-bottom: 14px;
+                  font-variant-numeric: tabular-nums;
+                "
+              >
+                {{ restDisplay }}
+              </div>
+              <div
+                style="
+                  background: #252527;
+                  border-radius: 8px;
+                  height: 5px;
+                  overflow: hidden;
+                  margin-bottom: 16px;
+                "
+              >
+                <div
+                  style="height:100%; background:linear-gradient(90deg,#D4701A,#F7A060); border-radius:8px; width:{{ restProgressWidth }}; transition:width 1s linear;"
+                ></div>
+              </div>
+              <div
+                onClick="{{ onStopRest }}"
+                style="
+                  background: #242426;
+                  border-radius: 14px;
+                  padding: 13px;
+                  color: #96989a;
+                  font-weight: 700;
+                  font-size: 14px;
+                  cursor: pointer;
+                  text-align: center;
+                "
+              >
+                Pular
+              </div>
+            </div>
+          </sc-if>
+
+          <!-- ════ REST TIMER MINI ════ -->
+          <sc-if value="{{ timerMini }}" hint-placeholder-val="{{ false }}">
+            <div
+              style="
+                position: absolute;
+                bottom: 82px;
+                left: 14px;
+                right: 14px;
+                height: 54px;
+                background: #1c1c1e;
+                border-radius: 16px;
+                display: flex;
+                align-items: center;
+                padding: 0 16px;
+                gap: 12px;
+                z-index: 300;
+                border: 1px solid rgba(245, 134, 52, 0.2);
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+                cursor: pointer;
+              "
+              onClick="{{ onExpandTimer }}"
+            >
+              <svg
+                width="16"
+                height="16"
+                fill="none"
+                stroke="#F58634"
+                stroke-width="2"
+                stroke-linecap="round"
+                viewBox="0 0 24 24"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 6v6l3.5 2" />
+              </svg>
+              <span
+                style="
+                  color: #f58634;
+                  font-size: 20px;
+                  font-weight: 900;
+                  letter-spacing: -1px;
+                  font-variant-numeric: tabular-nums;
+                "
+                >{{ restDisplay }}</span
+              >
+              <span
+                style="
+                  color: #96989a;
+                  font-size: 13px;
+                  font-weight: 600;
+                  flex: 1;
+                "
+                >Descanso em andamento</span
+              >
+              <div
+                onClick="{{ onStopRest }}"
+                style="
+                  background: #252527;
+                  border-radius: 8px;
+                  padding: 6px 12px;
+                "
+              >
+                <span style="color: #96989a; font-size: 12px; font-weight: 700"
+                  >Pular</span
+                >
+              </div>
+            </div>
+          </sc-if>
+
+          <!-- ════ SIGN OUT MODAL ════ -->
+          <sc-if
+            value="{{ showSignOutModal }}"
+            hint-placeholder-val="{{ false }}"
+          >
+            <div
+              style="
+                position: absolute;
+                inset: 0;
+                background: rgba(0, 0, 0, 0.75);
+                z-index: 400;
+                display: flex;
+                align-items: flex-end;
+              "
+            >
+              <div
+                style="
+                  background: #1c1c1e;
+                  border-radius: 28px 28px 0 0;
+                  padding: 32px 24px 28px;
+                  width: 100%;
+                  border-top: 1px solid #2a2a2a;
+                "
+              >
+                <div
+                  style="
+                    width: 36px;
+                    height: 4px;
+                    background: #333;
+                    border-radius: 2px;
+                    margin: 0 auto 24px;
+                  "
+                ></div>
+                <div
+                  style="
+                    color: #fff;
+                    font-size: 22px;
+                    font-weight: 900;
+                    text-align: center;
+                    letter-spacing: -0.3px;
+                    margin-bottom: 8px;
+                  "
+                >
+                  Sair da conta?
+                </div>
+                <div
+                  style="
+                    color: #96989a;
+                    font-size: 14px;
+                    text-align: center;
+                    margin-bottom: 28px;
+                    line-height: 1.5;
+                  "
+                >
+                  Voce precisara fazer login novamente para acessar o app.
+                </div>
+                <div
+                  onClick="{{ onConfirmSignOut }}"
+                  style="
+                    background: #e05555;
+                    border-radius: 14px;
+                    padding: 17px;
+                    text-align: center;
+                    color: #fff;
+                    font-weight: 800;
+                    font-size: 15px;
+                    cursor: pointer;
+                    margin-bottom: 12px;
+                  "
+                >
+                  Sair
+                </div>
+                <div
+                  onClick="{{ onCancelSignOut }}"
+                  style="
+                    background: #252527;
+                    border-radius: 14px;
+                    padding: 17px;
+                    text-align: center;
+                    color: #96989a;
+                    font-weight: 700;
+                    font-size: 15px;
+                    cursor: pointer;
+                  "
+                >
+                  Cancelar
+                </div>
+              </div>
+            </div>
+          </sc-if>
+
+          <!-- ════ BOTTOM NAV ════ -->
+          <sc-if value="{{ showBottomNav }}" hint-placeholder-val="{{ false }}">
+            <div
+              style="
+                height: 76px;
+                background: #111113;
+                border-top: 1px solid #1c1c1e;
+                display: flex;
+                align-items: center;
+                flex-shrink: 0;
+                padding: 0 6px;
+              "
+            >
+              <div
+                onClick="{{ onHome }}"
+                style="
+                  flex: 1;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  gap: 4px;
+                  cursor: pointer;
+                  padding: 10px 4px;
+                "
+              >
+                <svg
+                  width="23"
+                  height="23"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="{{ navHomeColor }}"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path>
+                  <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+                <span
+                  style="color:{{ navHomeColor }}; font-size:10px; font-weight:700; letter-spacing:0.2px;"
+                  >Home</span
+                >
+              </div>
+
+              <div
+                onClick="{{ onWorkout }}"
+                style="
+                  flex: 1;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  gap: 4px;
+                  cursor: pointer;
+                  padding: 10px 4px;
+                "
+              >
+                <svg
+                  width="23"
+                  height="23"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="{{ navWorkoutColor }}"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+                </svg>
+                <span
+                  style="color:{{ navWorkoutColor }}; font-size:10px; font-weight:700; letter-spacing:0.2px;"
+                  >Treino</span
+                >
+              </div>
+
+              <div
+                onClick="{{ onHistory }}"
+                style="
+                  flex: 1;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  gap: 4px;
+                  cursor: pointer;
+                  padding: 10px 4px;
+                "
+              >
+                <svg
+                  width="23"
+                  height="23"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="{{ navHistoryColor }}"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="3" y="4" width="18" height="18" rx="2"></rect>
+                  <line x1="16" y1="2" x2="16" y2="6"></line>
+                  <line x1="8" y1="2" x2="8" y2="6"></line>
+                  <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+                <span
+                  style="color:{{ navHistoryColor }}; font-size:10px; font-weight:700; letter-spacing:0.2px;"
+                  >Histórico</span
+                >
+              </div>
+
+              <div
+                onClick="{{ onPlan }}"
+                style="
+                  flex: 1;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  gap: 4px;
+                  cursor: pointer;
+                  padding: 10px 4px;
+                "
+              >
+                <svg
+                  width="23"
+                  height="23"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="{{ navPlanColor }}"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="1" y="4" width="22" height="16" rx="2"></rect>
+                  <line x1="1" y1="10" x2="23" y2="10"></line>
+                </svg>
+                <span
+                  style="color:{{ navPlanColor }}; font-size:10px; font-weight:700; letter-spacing:0.2px;"
+                  >Plano</span
+                >
+              </div>
+
+              <div
+                onClick="{{ onProfile }}"
+                style="
+                  flex: 1;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  gap: 4px;
+                  cursor: pointer;
+                  padding: 10px 4px;
+                "
+              >
+                <svg
+                  width="23"
+                  height="23"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="{{ navProfileColor }}"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                <span
+                  style="color:{{ navProfileColor }}; font-size:10px; font-weight:700; letter-spacing:0.2px;"
+                  >Perfil</span
+                >
+              </div>
+            </div>
+          </sc-if>
+        </div>
+
+        <!-- Home indicator -->
+      </div>
+    </x-dc>
+    <script type="text/x-dc" data-dc-script>
+      class Component extends DCLogic {
+        state = {
+          activeTab: 'login',
+          setProgress: {},
+          restSeconds: 0, restInitialSeconds: 90, timerActive: false, timerMinimized: false,
+          showSplash: true, showSignOutModal: false,
+          toggles: { treinoLembrete:true, avisos:true, vencimento:true, promocoes:false, perfil:true, biometria:true },
+        };
+
+        componentDidMount() { setTimeout(() => this.setState({ showSplash: false }), 2400); }
+
+        setTab(t) { this.setState({ activeTab: t, showSignOutModal: false }); }
+
+        goBack() {
+          const m = { forgotPassword:'login', myWorkouts:'workout', editProfile:'profile', notifications:'profile', privacy:'profile', support:'profile', notices:'home' };
+          this.setTab(m[this.state.activeTab] || 'home');
+        }
+
+        toggleSet(exId, setIdx, total, restTime) {
+          const cur = this.state.setProgress[exId] || 0;
+          const next = Math.max(0, setIdx <= cur ? setIdx - 1 : setIdx);
+          this.setState({ setProgress: { ...this.state.setProgress, [exId]: next } });
+          if (next > cur && restTime) { this.startRest(restTime); this.setState({ timerMinimized: false }); }
+        }
+
+        minimizeTimer() { this.setState({ timerMinimized: true }); }
+        expandTimer()   { this.setState({ timerMinimized: false }); }
+
+        toggleAllSets(exId, total) {
+          this.setState(prev => {
+            const cur = prev.setProgress[exId] || 0;
+            return { setProgress: { ...prev.setProgress, [exId]: cur >= total ? 0 : total } };
+          });
+        }
+
+        startRest(sec) {
+          if (this._rt) clearInterval(this._rt);
+          this.setState({ restSeconds: sec, restInitialSeconds: sec, timerActive: true });
+          this._rt = setInterval(() => {
+            this.setState(p => {
+              if (p.restSeconds <= 1) { clearInterval(this._rt); this._rt = null; return { restSeconds:0, timerActive:false }; }
+              return { restSeconds: p.restSeconds - 1 };
+            });
+          }, 1000);
+        }
+
+        stopRest() { if (this._rt) { clearInterval(this._rt); this._rt = null; } this.setState({ restSeconds:0, timerActive:false }); }
+        toggleSwitch(k) { this.setState(p => ({ toggles: { ...p.toggles, [k]: !p.toggles[k] } })); }
+        componentWillUnmount() { if (this._rt) clearInterval(this._rt); }
+
+        renderVals() {
+          const { activeTab, setProgress, restSeconds, restInitialSeconds, timerActive } = this.state;
+
+          // ── Exercises
+          const rawEx = [
+            { id:1, name:'Supino Reto com Barra', muscle:'Peito',    sets:'4', reps:'12', weight:'60 kg', restTime:90 },
+            { id:2, name:'Supino Inclinado',       muscle:'Peito',    sets:'3', reps:'10', weight:'50 kg', restTime:90 },
+            { id:3, name:'Crucifixo c/ Halteres',  muscle:'Peito',    sets:'3', reps:'15', weight:'16 kg', restTime:60 },
+            { id:4, name:'Tríceps Pulley',          muscle:'Tríceps',  sets:'4', reps:'12', weight:'35 kg', restTime:60 },
+            { id:5, name:'Tríceps Testa',           muscle:'Tríceps',  sets:'3', reps:'12', weight:'25 kg', restTime:60 },
+            { id:6, name:'Desenvolvimento',         muscle:'Ombro',    sets:'4', reps:'10', weight:'20 kg', restTime:75 },
+            { id:7, name:'Elevação Lateral',        muscle:'Ombro',    sets:'3', reps:'15', weight:'10 kg', restTime:45 },
+            { id:8, name:'Encolhimento',            muscle:'Trapézio', sets:'3', reps:'20', weight:'24 kg', restTime:45 },
+          ];
+
+          const exercises = rawEx.map(ex => {
+            const total = parseInt(ex.sets);
+            const done  = setProgress[ex.id] || 0;
+            const checked = done >= total;
+            const sBg  = i => i < done ? '#F58634' : '#1A1A1C';
+            const sTxt = i => i < done ? '#fff'    : '#96989a';
+            const sBdr = i => i < done ? '#F58634' : '#2C2C2E';
+            return {
+              ...ex,
+              cardBg:      checked ? '#141416' : '#1C1C1E',
+              nameColor:   checked ? '#383838' : '#FFFFFF',
+              checkBg:     checked ? '#F58634' : 'transparent',
+              checkBorder: checked ? '#F58634' : '#333337',
+              checkStroke: checked ? '#ffffff' : 'transparent',
+              restLabel:   'Descanso ' + ex.restTime + 's',
+              onToggle:    () => this.toggleAllSets(ex.id, total),
+              onRest:      () => this.startRest(ex.restTime),
+              s1bg: sBg(0), s1txt: sTxt(0), s1bdr: sBdr(0), s1tap: () => this.toggleSet(ex.id, 1, total, ex.restTime),
+              s2bg: sBg(1), s2txt: sTxt(1), s2bdr: sBdr(1), s2tap: () => this.toggleSet(ex.id, 2, total, ex.restTime),
+              s3bg: sBg(2), s3txt: sTxt(2), s3bdr: sBdr(2), s3tap: () => this.toggleSet(ex.id, 3, total, ex.restTime),
+              s4bg: sBg(3), s4txt: sTxt(3), s4bdr: sBdr(3), s4tap: () => this.toggleSet(ex.id, 4, total, ex.restTime),
+              s4display: total >= 4 ? 'flex' : 'none',
+            };
+          });
+
+          const checkedCount    = rawEx.filter(ex => (setProgress[ex.id] || 0) >= parseInt(ex.sets)).length;
+          const totalExercises  = rawEx.length;
+          const progressPercent = Math.round((checkedCount / totalExercises) * 100);
+          const progressWidth   = progressPercent + '%';
+          const workoutDone     = checkedCount === totalExercises;
+
+          // ── Timer
+          const rMin = Math.floor(restSeconds / 60);
+          const rSec = String(restSeconds % 60).padStart(2, '0');
+          const restDisplay       = rMin + ':' + rSec;
+          const restProgressWidth = restInitialSeconds > 0
+            ? Math.round((restSeconds / restInitialSeconds) * 100) + '%'
+            : '0%';
+
+          // ── History week (rolling 7 days ending today Jun 23)
+          const rawWeek = [
+            { day:'Ter', date:'17', w:true,  today:false },
+            { day:'Qua', date:'18', w:false, today:false },
+            { day:'Qui', date:'19', w:true,  today:false },
+            { day:'Sex', date:'20', w:false, today:false },
+            { day:'Sáb', date:'21', w:true,  today:false },
+            { day:'Dom', date:'22', w:false, today:false },
+            { day:'Seg', date:'23', w:true,  today:true  },
+          ];
+          const historyWeek = rawWeek.map(d => ({
+            day:         d.day,
+            date:        d.date,
+            dayColor:    d.today ? '#F58634' : '#96989a',
+            dateBg:      d.today ? '#F58634' : (d.w ? 'rgba(245,134,52,0.14)' : 'transparent'),
+            dateColor:   d.today ? '#ffffff' : (d.w ? '#F58634' : '#96989a'),
+            dotColor:    (d.w && !d.today) ? '#F58634' : '#1E1E1E',
+            dotOpacity:  (d.w && !d.today) ? '1' : '0',
+          }));
+
+          // ── Sessions
+          const sessions = [
+            { id:1, workout:'Treino A — Peito & Tríceps',   date:'Hoje',        duration:'58 min', exercises:8, volume:'2.840 kg' },
+            { id:2, workout:'Treino C — Perna',              date:'Sáb, 21 Jun', duration:'72 min', exercises:9, volume:'4.120 kg' },
+            { id:3, workout:'Treino B — Costas & Bíceps',   date:'Qui, 19 Jun', duration:'65 min', exercises:8, volume:'3.280 kg' },
+            { id:4, workout:'Treino A — Peito & Tríceps',   date:'Ter, 17 Jun', duration:'54 min', exercises:8, volume:'2.720 kg' },
+            { id:5, workout:'Treino C — Perna',              date:'Dom, 15 Jun', duration:'68 min', exercises:9, volume:'3.950 kg' },
+          ];
+
+          // ── Invoices
+          const invoices = [
+            { id:1, month:'Junho 2025',  amount:'R$ 89,90', status:'Pago', statusBg:'rgba(48,209,88,0.1)',  statusColor:'#30D158', date:'05/06/25' },
+            { id:2, month:'Maio 2025',   amount:'R$ 89,90', status:'Pago', statusBg:'rgba(48,209,88,0.1)',  statusColor:'#30D158', date:'05/05/25' },
+            { id:3, month:'Abril 2025',  amount:'R$ 89,90', status:'Pago', statusBg:'rgba(48,209,88,0.1)',  statusColor:'#30D158', date:'05/04/25' },
+            { id:4, month:'Março 2025',  amount:'R$ 89,90', status:'Pago', statusBg:'rgba(48,209,88,0.1)',  statusColor:'#30D158', date:'05/03/25' },
+          ];
+
+          // ── Notices
+          const notices = [
+            { id:1, badge:'PROMOÇÃO', badgeBg:'rgba(245,134,52,0.12)',   badgeColor:'#F58634', title:'Indique um Amigo — 30 dias grátis!', body:'Traga um amigo à Dynamo e ganhe 30 dias grátis no próximo mês. Válido até 30/06.', time:'Agora', icon:'🎁' },
+            { id:2, badge:'FERIADO',  badgeBg:'rgba(100,210,255,0.12)', badgeColor:'#64D2FF', title:'Horário especial — 24 de Junho',     body:'No feriado de amanhã, a academia funcionará das 8h às 14h. Planeje seu treino!',                          time:'2h',   icon:'🗓' },
+            { id:3, badge:'AVISO',    badgeBg:'rgba(245,158,11,0.12)',  badgeColor:'#F59E0B', title:'Manutenção — Área de Musculação',    body:'Na quarta-feira (25/06), das 8h às 12h, a musculação estará fechada para manutenção preventiva.',            time:'Ontem', icon:'🔧' },
+            { id:4, badge:'NOVIDADE', badgeBg:'rgba(48,209,88,0.12)',   badgeColor:'#30D158', title:'Novo Leg Press 45° disponível!',     body:'Adquirimos um novo Leg Press 45°. Venha experimentar — disponível na área de pernas.',                       time:'3 dias', icon:'⭐' },
+          ];
+
+          const nav = t => activeTab === t ? '#F58634' : '#96989a';
+          const { showSplash } = this.state;
+
+          return {
+            showSplash,
+            splashOpacity:       showSplash ? '1' : '0',
+            splashPointerEvents: showSplash ? 'all' : 'none',
+            // screens
+            isHome:    activeTab === 'home',
+            isWorkout:       activeTab === 'workout',
+            isMyWorkouts:    activeTab === 'myWorkouts',
+            isHistory:       activeTab === 'history',
+            isPlan:          activeTab === 'plan',
+            isProfile:       activeTab === 'profile',
+            isEditProfile:   activeTab === 'editProfile',
+            isNotifications: activeTab === 'notifications',
+            isPrivacy:       activeTab === 'privacy',
+            isSupport:       activeTab === 'support',
+            isNotices:       activeTab === 'notices',
+            isLogin:         activeTab === 'login',
+            isForgotPw:      activeTab === 'forgotPassword',
+            showBottomNav: ['home','workout','history','plan','profile'].includes(activeTab),
+            showSignOutModal: this.state.showSignOutModal,
+            exercises, checkedCount, totalExercises, progressPercent, progressWidth, workoutDone,
+            timerActive, restDisplay, restProgressWidth,
+            timerFull: timerActive && !this.state.timerMinimized,
+            timerMini: timerActive && this.state.timerMinimized,
+            historyWeek, sessions, invoices, notices,
+            programs: [
+              { id:'A', letter:'A', name:'Treino A', focus:'Peito & Triceps', days:'Seg e Qui', exCount:8, duration:'~55 min', lastDone:'Hoje',  isCurrent:true,  cardBorder:'1px solid rgba(245,134,52,0.35)', letterBg:'#F58634', onStart: () => this.setTab('workout') },
+              { id:'B', letter:'B', name:'Treino B', focus:'Costas & Biceps', days:'Ter e Sex', exCount:7, duration:'~60 min', lastDone:'19 Jun', isCurrent:false, cardBorder:'1px solid #242424',               letterBg:'#252527', onStart: () => this.setTab('workout') },
+              { id:'C', letter:'C', name:'Treino C', focus:'Perna & Gluteo',  days:'Qua e Sab', exCount:9, duration:'~70 min', lastDone:'21 Jun', isCurrent:false, cardBorder:'1px solid #242424',               letterBg:'#252527', onStart: () => this.setTab('workout') },
+            ],
+            notifToggles: (() => {
+              const mk = (k,l,d) => { const on=this.state.toggles[k]; return { key:k, label:l, desc:d, bg:on?'#F58634':'#2C2C2E', knobLeft:on?'24px':'3px', onToggle:()=>this.toggleSwitch(k) }; };
+              return [mk('treinoLembrete','Lembretes de treino','30 min antes do horario marcado'), mk('avisos','Avisos da academia','Comunicados e informes gerais'), mk('vencimento','Vencimento do plano','Aviso 7 dias antes do vencimento'), mk('promocoes','Promocoes e ofertas','Novidades e descontos especiais')];
+            })(),
+            privacyToggles: (() => {
+              const mk = (k,l,d) => { const on=this.state.toggles[k]; return { key:k, label:l, desc:d, bg:on?'#F58634':'#2C2C2E', knobLeft:on?'24px':'3px', onToggle:()=>this.toggleSwitch(k) }; };
+              return [mk('perfil','Perfil publico','Outros alunos podem ver seu progresso'), mk('biometria','Login biometrico','Usar digital ou reconhecimento facial')];
+            })(),
+            navHomeColor:    nav('home'),
+            navWorkoutColor: nav('workout'),
+            navHistoryColor: nav('history'),
+            navPlanColor:    nav('plan'),
+            navProfileColor: nav('profile'),
+            onLogin:          () => this.setTab('home'),
+            onForgotPw:       () => this.setTab('forgotPassword'),
+            onBack:           () => this.goBack(),
+            onHome:           () => this.setTab('home'),
+            onWorkout:        () => this.setTab('workout'),
+            onMyWorkouts:     () => this.setTab('myWorkouts'),
+            onHistory:        () => this.setTab('history'),
+            onPlan:           () => this.setTab('plan'),
+            onProfile:        () => this.setTab('profile'),
+            onEditProfile:    () => this.setTab('editProfile'),
+            onNotifications:  () => this.setTab('notifications'),
+            onPrivacy:        () => this.setTab('privacy'),
+            onSupport:        () => this.setTab('support'),
+            onNotices:        () => this.setTab('notices'),
+            onShowSignOut:    () => this.setState({ showSignOutModal: true }),
+            onCancelSignOut:  () => this.setState({ showSignOutModal: false }),
+            onConfirmSignOut: () => this.setState({ showSignOutModal: false, activeTab: 'login' }),
+            onStopRest:       () => this.stopRest(),
+            onMinimizeTimer:  () => this.minimizeTimer(),
+            onExpandTimer:    () => this.expandTimer(),
+          };
+        }
+      }
+    </script>
+  </body>
+</html>
