@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --or: #F58634;
+      --or-dim: rgba(245,134,52,0.12);
+      --or-glow: rgba(245,134,52,0.06);
+      --bg: #0C0C0C;
+      --bg2: #111111;
+      --card: #161616;
+      --card2: #1E1E1E;
+      --bdr: rgba(255,255,255,0.07);
+      --bdr-or: rgba(245,134,52,0.25);
+      --tx: #FFFFFF;
+      --tx2: #999999;
+      --tx3: #555555;
+      --green: #22C55E;
+      --red: #F04444;
+      --red-dim: rgba(240,68,68,0.1);
+      --green-dim: rgba(34,197,94,0.1);
+      --tt: 66px;
+      --h2: 46px;
+      --su: 34px;
+      --bd: 28px;
+      --sm: 24px;
+      --xs: 24px;
+      --px: 110px;
+      --py: 80px;
+      --r: 16px;
+      --gap: 28px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; background: var(--bg); }
+  </style>
+</helmet>
+
+<x-import component-from-global-scope="deck-stage" from="./deck-stage.js" width="1920" height="1080" hint-size="100%,100%" no-rail>
+
+  <!-- ═══════════════ SLIDE 1 — CAPA ═══════════════ -->
+  <section data-label="01 · Capa" data-screen-label="Capa">
+    <div style="width:100%;height:100%;display:flex;align-items:stretch;overflow:hidden;position:relative;background:var(--bg);">
+      <!-- Radial glow bg -->
+      <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:1200px;height:1000px;background:radial-gradient(ellipse,rgba(245,134,52,0.08) 0%,transparent 60%);pointer-events:none;"></div>
+
+      <div style="flex:1;padding:var(--py) var(--px);display:flex;flex-direction:column;justify-content:space-between;position:relative;z-index:1;">
+        <!-- Logo -->
+        <div>
+          <img src="./uploads/dynamo-horizontal-nobg.png" style="height:44px;filter:brightness(1.05);">
+        </div>
+        <!-- Main headline -->
+        <div style="display:flex;flex-direction:column;gap:24px;max-width:1400px;">
+          <div style="font-size:84px;font-weight:800;color:var(--tx);line-height:1.02;letter-spacing:-3px;">Uma plataforma feita para a<br>Dynamo crescer com dados</div>
+          <div style="font-size:var(--su);color:var(--tx2);font-weight:400;line-height:1.4;">Proposta de Sistema de Gestão</div>
+        </div>
+        <!-- Date -->
+        <div style="font-size:var(--xs);color:var(--tx3);font-weight:600;letter-spacing:2px;text-transform:uppercase;">Junho 2026</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ SLIDE 2 — JORNADA / CONTEXTO ═══════════════ -->
+  <section data-label="02 · Por que você está aqui" data-screen-label="Por que você está aqui">
+    <div style="width:100%;height:100%;background:var(--bg);display:flex;flex-direction:column;padding:var(--py) var(--px);gap:28px;overflow:hidden;">
+      <div style="flex-shrink:0;">
+        <div style="font-size:var(--tt);font-weight:800;color:var(--tx);letter-spacing:-1.5px;line-height:1;">O caminho que te trouxe até aqui</div>
+        <div style="font-size:var(--su);color:var(--tx2);font-weight:400;margin-top:14px;">Entender o histórico é entender o problema real</div>
+      </div>
+      <div style="flex:1;display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;min-height:0;">
+        <!-- Col 1: Technofit -->
+        <div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:36px 40px;display:flex;flex-direction:column;gap:16px;">
+          <div style="display:inline-flex;"><div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:var(--tx3);font-size:var(--xs);font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:8px 18px;border-radius:6px;">ANTES</div></div>
+          <div style="font-size:var(--h2);font-weight:800;color:var(--tx);line-height:1.05;">Technofit</div>
+          <div style="display:flex;flex-direction:column;gap:12px;flex:1;">
+            <div style="display:flex;align-items:flex-start;gap:10px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" style="flex-shrink:0;margin-top:3px;"><polyline points="20 6 9 17 4 12"></polyline></svg><div style="font-size:var(--sm);color:var(--tx2);line-height:1.5;">Sistema estável, sem bugs</div></div>
+            <div style="display:flex;align-items:flex-start;gap:10px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" style="flex-shrink:0;margin-top:3px;"><polyline points="20 6 9 17 4 12"></polyline></svg><div style="font-size:var(--sm);color:var(--tx2);line-height:1.5;">Operação confiável</div></div>
+            <div style="height:1px;background:var(--bdr);margin:4px 0;"></div>
+            <div style="display:flex;align-items:flex-start;gap:10px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.5" stroke-linecap="round" style="flex-shrink:0;margin-top:3px;"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg><div style="font-size:var(--sm);color:var(--tx2);line-height:1.5;">Faltavam dados gerenciais por unidade</div></div>
+            <div style="display:flex;align-items:flex-start;gap:10px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.5" stroke-linecap="round" style="flex-shrink:0;margin-top:3px;"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg><div style="font-size:var(--sm);color:var(--tx2);line-height:1.5;">Sem dashboards analíticos</div></div>
+          </div>
+        </div>
+        <!-- Col 2: EVO -->
+        <div style="background:var(--card);border:1px solid rgba(245,134,52,0.2);border-radius:var(--r);padding:36px 40px;display:flex;flex-direction:column;gap:16px;">
+          <div style="display:inline-flex;"><div style="background:var(--or-dim);border:1px solid var(--bdr-or);color:var(--or);font-size:var(--xs);font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:8px 18px;border-radius:6px;">A TENTATIVA</div></div>
+          <div style="font-size:var(--h2);font-weight:800;color:var(--tx);line-height:1.05;">EVO</div>
+          <div style="font-size:var(--sm);color:var(--tx3);font-style:italic;line-height:1.4;">"Mais dados, mais recursos..."</div>
+          <div style="display:flex;flex-direction:column;gap:12px;flex:1;">
+            <div style="display:flex;align-items:flex-start;gap:10px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.5" stroke-linecap="round" style="flex-shrink:0;margin-top:3px;"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg><div style="font-size:var(--sm);color:var(--tx2);line-height:1.5;">Bugs recorrentes nas operações</div></div>
+            <div style="display:flex;align-items:flex-start;gap:10px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.5" stroke-linecap="round" style="flex-shrink:0;margin-top:3px;"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg><div style="font-size:var(--sm);color:var(--tx2);line-height:1.5;">Relatórios com dados incorretos</div></div>
+            <div style="display:flex;align-items:flex-start;gap:10px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.5" stroke-linecap="round" style="flex-shrink:0;margin-top:3px;"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg><div style="font-size:var(--sm);color:var(--tx2);line-height:1.5;">R$2.100+ por unidade por mês</div></div>
+            <div style="display:flex;align-items:flex-start;gap:10px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.5" stroke-linecap="round" style="flex-shrink:0;margin-top:3px;"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg><div style="font-size:var(--sm);color:var(--tx2);line-height:1.5;">Churn rate distorcido por bug</div></div>
+          </div>
+        </div>
+        <!-- Col 3: Today -->
+        <div style="background:var(--card2);border:1px solid var(--bdr);border-radius:var(--r);padding:36px 40px;display:flex;flex-direction:column;gap:16px;">
+          <div style="display:inline-flex;"><div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:var(--tx2);font-size:var(--xs);font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:8px 18px;border-radius:6px;">HOJE</div></div>
+          <div style="font-size:var(--h2);font-weight:800;color:var(--tx);line-height:1.05;">Voltar pro Technofit?</div>
+          <div style="display:flex;flex-direction:column;gap:14px;flex:1;justify-content:center;">
+            <div style="background:var(--green-dim);border:1px solid rgba(34,197,94,0.2);border-radius:10px;padding:18px 22px;display:flex;align-items:flex-start;gap:10px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" style="flex-shrink:0;margin-top:2px;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <div style="font-size:var(--sm);color:var(--green);line-height:1.5;font-weight:600;">Resolve: os bugs somem</div>
+            </div>
+            <div style="background:var(--red-dim);border:1px solid rgba(240,68,68,0.2);border-radius:10px;padding:18px 22px;display:flex;align-items:flex-start;gap:10px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.5" stroke-linecap="round" style="flex-shrink:0;margin-top:2px;"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+              <div style="font-size:var(--sm);color:var(--red);line-height:1.5;font-weight:600;">Não resolve: o problema dos dados continua exatamente o mesmo</div>
+            </div>
+            <div style="background:rgba(255,200,0,0.07);border:1px solid rgba(255,200,0,0.2);border-radius:10px;padding:18px 22px;display:flex;align-items:flex-start;gap:10px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F5C842" stroke-width="2.5" stroke-linecap="round" style="flex-shrink:0;margin-top:2px;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+              <div style="font-size:var(--sm);color:#F5C842;line-height:1.5;font-weight:600;">E ainda: mais uma migração de sistema</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Bottom insight -->
+      <div style="flex-shrink:0;background:var(--or-dim);border:1px solid var(--bdr-or);border-radius:var(--r);padding:22px 44px;display:flex;align-items:center;gap:20px;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F58634" stroke-width="2" stroke-linecap="round" style="flex-shrink:0;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+        <div style="font-size:var(--bd);color:var(--tx);line-height:1.5;">O Technofit não tinha o dado que você precisava. O EVO distorceu o dado. Voltar pro Technofit é mais uma migração — sem garantia de resolver o problema original. <span style="color:var(--or);font-weight:700;">A questão nunca foi o sistema. Foi a falta de dado confiável.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ SLIDE 3 — CENÁRIO ATUAL ═══════════════ -->
+  <section data-label="03 · Cenário Atual" data-screen-label="Cenário Atual">
+    <div style="width:100%;height:100%;background:var(--bg);display:flex;flex-direction:column;padding:var(--py) var(--px);gap:32px;overflow:hidden;">
+      <div style="flex-shrink:0;">
+        <div style="font-size:var(--tt);font-weight:800;color:var(--tx);letter-spacing:-1.5px;line-height:1;">O que a Dynamo enfrenta hoje</div>
+        <div style="font-size:var(--su);color:var(--tx2);font-weight:400;margin-top:14px;">Quatro problemas reais que afetam operações e decisões diárias</div>
+      </div>
+      <div style="flex:1;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:20px;min-height:0;">
+        <!-- Card 1 -->
+        <div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:44px 48px;display:flex;flex-direction:column;gap:18px;">
+          <div style="width:48px;height:48px;background:var(--or-dim);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F58634" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+          </div>
+          <div style="font-size:var(--h2);font-weight:700;color:var(--tx);line-height:1.1;">Bugs recorrentes no EVO</div>
+          <div style="font-size:var(--bd);color:var(--tx2);line-height:1.55;">Falhas que afetam operações diárias da academia sem previsão de correção.</div>
+        </div>
+        <!-- Card 2 -->
+        <div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:44px 48px;display:flex;flex-direction:column;gap:18px;">
+          <div style="width:48px;height:48px;background:var(--or-dim);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F58634" stroke-width="2" stroke-linecap="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line><line x1="2" y1="20" x2="22" y2="20"></line></svg>
+          </div>
+          <div style="font-size:var(--h2);font-weight:700;color:var(--tx);line-height:1.1;">Relatórios com dados incorretos</div>
+          <div style="font-size:var(--bd);color:var(--tx2);line-height:1.55;">Decisões gerenciais tomadas com informações erradas comprometem o negócio.</div>
+        </div>
+        <!-- Card 3 -->
+        <div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:44px 48px;display:flex;flex-direction:column;gap:18px;">
+          <div style="width:48px;height:48px;background:var(--or-dim);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F58634" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+          </div>
+          <div style="font-size:var(--h2);font-weight:700;color:var(--tx);line-height:1.1;">Dashboard de IA alimentado na mão</div>
+          <div style="font-size:var(--bd);color:var(--tx2);line-height:1.55;">Você já usa IA pra montar o board — mas todo mês precisa criar a planilha manualmente e alimentar o sistema. O processo que deveria ser automático ainda é manual.</div>
+        </div>
+        <!-- Card 4 -->
+        <div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:44px 48px;display:flex;flex-direction:column;gap:18px;">
+          <div style="width:48px;height:48px;background:var(--or-dim);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F58634" stroke-width="2" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+          </div>
+          <div style="font-size:var(--h2);font-weight:700;color:var(--tx);line-height:1.1;">Custo alto sem retorno proporcional</div>
+          <div style="font-size:var(--bd);color:var(--tx2);line-height:1.55;">R$2.100+ por unidade por mês em uma ferramenta cheia de problemas.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ SLIDE 3 — CUSTO DO EVO ═══════════════ -->
+  <section data-label="04 · Custo do EVO" data-screen-label="Custo do EVO">
+    <div style="width:100%;height:100%;background:var(--bg);display:flex;align-items:stretch;overflow:hidden;">
+      <!-- Left: table -->
+      <div style="flex:1;padding:var(--py) var(--px);display:flex;flex-direction:column;justify-content:center;gap:40px;">
+        <div>
+          <div style="font-size:var(--tt);font-weight:800;color:var(--tx);letter-spacing:-1.5px;line-height:1.05;">O que a Dynamo paga<br>pelo EVO hoje</div>
+        </div>
+        <div style="border-radius:var(--r);overflow:hidden;border:1px solid var(--bdr);">
+          <!-- header -->
+          <div style="display:flex;background:#1A1A1A;padding:20px 32px;border-bottom:1px solid var(--bdr);">
+            <div style="flex:1;font-size:var(--xs);color:var(--tx3);font-weight:700;text-transform:uppercase;letter-spacing:1.5px;">Item</div>
+            <div style="font-size:var(--xs);color:var(--tx3);font-weight:700;text-transform:uppercase;letter-spacing:1.5px;">Valor</div>
+          </div>
+          <div style="display:flex;background:var(--card);padding:26px 32px;border-bottom:1px solid var(--bdr);">
+            <div style="flex:1;font-size:var(--bd);color:var(--tx2);">EVO — licença</div>
+            <div style="font-size:var(--bd);color:var(--tx);font-weight:700;">R$1.500/mês por unidade</div>
+          </div>
+          <div style="display:flex;background:var(--card);padding:26px 32px;border-bottom:1px solid var(--bdr);">
+            <div style="flex:1;font-size:var(--bd);color:var(--tx2);">Taxas NF + recorrência</div>
+            <div style="font-size:var(--bd);color:var(--tx);font-weight:700;">~R$600/mês por unidade</div>
+          </div>
+          <div style="display:flex;background:var(--card);padding:26px 32px;border-bottom:1px solid var(--bdr);">
+            <div style="flex:1;font-size:var(--bd);color:var(--tx2);">WeHelp (NPS)</div>
+            <div style="font-size:var(--bd);color:var(--tx);font-weight:700;">US$68/mês</div>
+          </div>
+          <div style="display:flex;background:var(--card);padding:26px 32px;border-bottom:1px solid var(--bdr);">
+            <div style="flex:1;font-size:var(--bd);color:var(--tx2);">Nextfit — 1 unidade adicional</div>
+            <div style="font-size:var(--bd);color:var(--tx3);font-weight:600;">Custo separado</div>
+          </div>
+          <div style="display:flex;background:rgba(245,134,52,0.07);padding:30px 32px;border-top:1px solid var(--bdr-or);">
+            <div style="flex:1;font-size:var(--bd);color:var(--or);font-weight:700;">Total EVO (4 unidades)</div>
+            <div style="font-size:var(--bd);color:var(--or);font-weight:800;">R$8.400/mês</div>
+          </div>
+        </div>
+      </div>
+      <!-- Right: big number -->
+      <div style="width:500px;background:var(--card);border-left:1px solid var(--bdr);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:64px 60px;gap:28px;text-align:center;flex-shrink:0;position:relative;overflow:hidden;">
+        <div style="position:absolute;bottom:-80px;left:50%;transform:translateX(-50%);width:500px;height:500px;background:radial-gradient(circle,rgba(245,134,52,0.08) 0%,transparent 65%);pointer-events:none;"></div>
+        <div style="display:flex;flex-direction:column;gap:10px;position:relative;z-index:1;">
+          <div style="font-size:84px;font-weight:900;color:var(--or);line-height:1;letter-spacing:-3px;">R$100.800</div>
+          <div style="font-size:var(--sm);color:var(--tx2);font-weight:500;">por ano, pelas 4 unidades</div>
+        </div>
+        <div style="width:80px;height:1px;background:var(--bdr);position:relative;z-index:1;"></div>
+        <div style="font-size:var(--sm);color:var(--tx3);text-align:center;line-height:1.65;position:relative;z-index:1;">Com bugs, relatórios errados e dados que você não pode confiar — mais uma 5ª unidade rodando um sistema separado.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ SLIDE 4 — BUG DO CHURN ═══════════════ -->
+  <section data-label="05 · Bug do Churn" data-screen-label="Bug do Churn">
+    <div style="width:100%;height:100%;background:var(--bg);display:flex;flex-direction:column;padding:var(--py) var(--px);gap:40px;overflow:hidden;">
+      <!-- header -->
+      <div style="flex-shrink:0;display:flex;flex-direction:column;gap:14px;">
+        <div style="display:inline-flex;">
+          <div style="background:var(--red-dim);border:1px solid rgba(240,68,68,0.3);color:var(--red);font-size:var(--xs);font-weight:700;letter-spacing:2.5px;text-transform:uppercase;padding:9px 20px;border-radius:6px;">BUG CRÍTICO</div>
+        </div>
+        <div style="font-size:var(--tt);font-weight:800;color:var(--tx);letter-spacing:-1.5px;line-height:1.05;">O bug que distorce suas métricas</div>
+      </div>
+      <!-- Flow diagram -->
+      <div style="flex:1;display:flex;align-items:center;gap:0;min-height:0;">
+        <div style="flex:1;background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:44px 44px;display:flex;flex-direction:column;gap:16px;height:240px;justify-content:center;">
+          <div style="font-size:var(--xs);color:var(--tx3);font-weight:700;text-transform:uppercase;letter-spacing:1.5px;">Evento</div>
+          <div style="font-size:var(--h2);font-weight:700;color:var(--tx);line-height:1.1;">Aluno troca de plano</div>
+          <div style="font-size:var(--bd);color:var(--tx2);">Migração de plano mensal → semestral</div>
+        </div>
+        <div style="width:80px;flex-shrink:0;display:flex;align-items:center;justify-content:center;">
+          <svg width="48" height="20" viewBox="0 0 52 20" fill="none"><path d="M2 10h44" stroke="#3A3A3A" stroke-width="2.5" stroke-linecap="round"></path><path d="M38 3l10 7-10 7" stroke="#3A3A3A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </div>
+        <div style="flex:1;background:var(--red-dim);border:1px solid rgba(240,68,68,0.28);border-radius:var(--r);padding:44px 44px;display:flex;flex-direction:column;gap:16px;height:240px;justify-content:center;">
+          <div style="font-size:var(--xs);color:var(--red);font-weight:700;text-transform:uppercase;letter-spacing:1.5px;">O que o EVO faz</div>
+          <div style="font-size:var(--h2);font-weight:700;color:var(--red);line-height:1.1;">Registra como CANCELAMENTO</div>
+          <div style="font-size:var(--bd);color:rgba(255,255,255,0.45);">O sistema não distingue troca de plano de cancelamento</div>
+        </div>
+        <div style="width:80px;flex-shrink:0;display:flex;align-items:center;justify-content:center;">
+          <svg width="48" height="20" viewBox="0 0 52 20" fill="none"><path d="M2 10h44" stroke="#3A3A3A" stroke-width="2.5" stroke-linecap="round"></path><path d="M38 3l10 7-10 7" stroke="#3A3A3A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </div>
+        <div style="flex:1;background:var(--red-dim);border:1px solid rgba(240,68,68,0.28);border-radius:var(--r);padding:44px 44px;display:flex;flex-direction:column;gap:16px;height:240px;justify-content:center;">
+          <div style="font-size:var(--xs);color:var(--red);font-weight:700;text-transform:uppercase;letter-spacing:1.5px;">Resultado</div>
+          <div style="font-size:var(--h2);font-weight:700;color:var(--red);line-height:1.1;">Churn Rate inflado</div>
+          <div style="font-size:var(--bd);color:rgba(255,255,255,0.45);">Você acha que está perdendo mais alunos do que realmente</div>
+        </div>
+      </div>
+      <!-- consequence + solution -->
+      <div style="flex-shrink:0;display:flex;flex-direction:column;gap:12px;">
+        <div style="background:rgba(240,68,68,0.08);border:1px solid rgba(240,68,68,0.18);border-radius:10px;padding:22px 32px;font-size:var(--bd);color:rgba(255,120,120,0.9);line-height:1.5;">
+          Suas decisões estratégicas são tomadas com base em métricas distorcidas pelo sistema.
+        </div>
+        <div style="background:var(--green-dim);border:1px solid rgba(34,197,94,0.25);border-radius:10px;padding:22px 32px;font-size:var(--bd);color:var(--green);line-height:1.5;display:flex;align-items:center;gap:16px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          A nova plataforma distingue claramente: cancelamento real vs. migração de plano. Churn sempre correto.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ SLIDE 5 — APRESENTANDO A PLATAFORMA ═══════════════ -->
+  <section data-label="06 · Plataforma Dynamo" data-screen-label="Plataforma Dynamo">
+    <div style="width:100%;height:100%;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:var(--py) var(--px);gap:52px;overflow:hidden;position:relative;">
+      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:1100px;height:700px;background:radial-gradient(ellipse,rgba(245,134,52,0.07) 0%,transparent 65%);pointer-events:none;"></div>
+      <div style="font-size:var(--sm);color:var(--or);font-weight:700;letter-spacing:3px;text-transform:uppercase;position:relative;z-index:1;">Apresentando</div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:18px;position:relative;z-index:1;">
+        <img src="./uploads/dynamo-horizontal-nobg.png" style="height:72px;filter:brightness(1.05);">
+        <div style="font-size:var(--su);color:var(--tx2);font-weight:400;">Sistema próprio de gestão para redes de academia</div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,auto);gap:18px;position:relative;z-index:1;">
+        <div style="background:var(--card);border:1px solid var(--bdr);border-radius:100px;padding:18px 40px;font-size:var(--bd);color:var(--tx);font-weight:600;">Dashboards em tempo real</div>
+        <div style="background:var(--card);border:1px solid var(--bdr);border-radius:100px;padding:18px 40px;font-size:var(--bd);color:var(--tx);font-weight:600;">Churn correto</div>
+        <div style="background:var(--card);border:1px solid var(--bdr);border-radius:100px;padding:18px 40px;font-size:var(--bd);color:var(--tx);font-weight:600;">Multi-unidade nativo</div>
+        <div style="background:var(--or-dim);border:1px solid var(--bdr-or);border-radius:100px;padding:18px 40px;font-size:var(--bd);color:var(--or);font-weight:600;">App mobile incluso</div>
+        <div style="background:var(--or-dim);border:1px solid var(--bdr-or);border-radius:100px;padding:18px 40px;font-size:var(--bd);color:var(--or);font-weight:600;">Suas integrações preservadas</div>
+        <div style="background:var(--or-dim);border:1px solid var(--bdr-or);border-radius:100px;padding:18px 40px;font-size:var(--bd);color:var(--or);font-weight:600;">Prescrição de treino com IA</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ SLIDE 6 — JÁ ESTÁ SENDO CONSTRUÍDO ═══════════════ -->
+  <section data-label="07 · Protótipo" data-screen-label="Protótipo">
+    <div style="width:100%;height:100%;background:var(--bg);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;">
+      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:1000px;height:700px;background:radial-gradient(ellipse,rgba(245,134,52,0.07) 0%,transparent 65%);pointer-events:none;"></div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:28px;text-align:center;max-width:860px;position:relative;z-index:1;">
+        <div style="font-size:var(--xs);color:var(--or);font-weight:700;letter-spacing:2.5px;text-transform:uppercase;">Em desenvolvimento</div>
+        <div style="font-size:var(--tt);font-weight:800;color:var(--tx);letter-spacing:-1.5px;line-height:1.05;">Não é ideia. Já está sendo construído.</div>
+        <div style="font-size:var(--su);color:var(--or);font-weight:600;line-height:1.4;">Protótipo funcional · Admin Web + App Mobile</div>
+        <div style="font-size:var(--bd);color:var(--tx2);line-height:1.65;max-width:680px;">O sistema já está rodando. Cada tela é funcional e pode ser demonstrada ao vivo.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ SLIDE 7 — MÓDULOS ═══════════════ -->
+  <section data-label="08 · Módulos" data-screen-label="Módulos">
+    <div style="width:100%;height:100%;background:var(--bg);display:flex;flex-direction:column;padding:var(--py) var(--px);gap:30px;overflow:hidden;">
+      <div style="flex-shrink:0;">
+        <div style="font-size:var(--tt);font-weight:800;color:var(--tx);letter-spacing:-1.5px;line-height:1;">Tudo que você precisa, num só lugar</div>
+        <div style="font-size:var(--su);color:var(--tx2);font-weight:400;margin-top:14px;">Módulos integrados para operações, finanças e experiência do aluno</div>
+      </div>
+      <div style="flex:1;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:18px;min-height:0;">
+        <div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:34px 38px;display:flex;flex-direction:column;gap:14px;">
+          <div style="width:44px;height:44px;background:var(--or-dim);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F58634" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+          </div>
+          <div style="font-size:var(--su);font-weight:700;color:var(--tx);line-height:1.1;">Dashboard Gerencial</div>
+          <div style="font-size:var(--sm);color:var(--tx2);line-height:1.55;">Receita, NPS, churn e fluxo de pessoas em tempo real por unidade</div>
+        </div>
+        <div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:34px 38px;display:flex;flex-direction:column;gap:14px;">
+          <div style="width:44px;height:44px;background:var(--or-dim);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F58634" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          </div>
+          <div style="font-size:var(--su);font-weight:700;color:var(--tx);line-height:1.1;">Gestão de Alunos</div>
+          <div style="font-size:var(--sm);color:var(--tx2);line-height:1.55;">Cadastro, perfil completo, histórico de planos e situação financeira</div>
+        </div>
+        <div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:34px 38px;display:flex;flex-direction:column;gap:14px;">
+          <div style="width:44px;height:44px;background:var(--or-dim);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F58634" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          </div>
+          <div style="font-size:var(--su);font-weight:700;color:var(--tx);line-height:1.1;">Agendamento de Aulas</div>
+          <div style="font-size:var(--sm);color:var(--tx2);line-height:1.55;">Grade coletiva, taxa de ocupação e marcação de presença pelo professor</div>
+        </div>
+        <div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:34px 38px;display:flex;flex-direction:column;gap:14px;">
+          <div style="width:44px;height:44px;background:var(--or-dim);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F58634" stroke-width="2" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+          </div>
+          <div style="font-size:var(--su);font-weight:700;color:var(--tx);line-height:1.1;">Módulo Financeiro</div>
+          <div style="font-size:var(--sm);color:var(--tx2);line-height:1.55;">Receita, inadimplência, conciliação e exportação para F360</div>
+        </div>
+        <div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:34px 38px;display:flex;flex-direction:column;gap:14px;">
+          <div style="width:44px;height:44px;background:var(--or-dim);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F58634" stroke-width="2" stroke-linecap="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line><line x1="2" y1="20" x2="22" y2="20"></line></svg>
+          </div>
+          <div style="font-size:var(--su);font-weight:700;color:var(--tx);line-height:1.1;">Relatórios Avançados</div>
+          <div style="font-size:var(--sm);color:var(--tx2);line-height:1.55;">Churn correto, renovações, cancelamentos e comparativos entre unidades</div>
+        </div>
+        <div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:34px 38px;display:flex;flex-direction:column;gap:14px;">
+          <div style="width:44px;height:44px;background:var(--or-dim);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F58634" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+          </div>
+          <div style="font-size:var(--su);font-weight:700;color:var(--tx);line-height:1.1;">Integração Kommo</div>
+          <div style="font-size:var(--sm);color:var(--tx2);line-height:1.55;">Pipeline de leads, funil e histórico de conversão via API — dados do Kommo acessíveis direto no dashboard, sem trocar de ferramenta</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ SLIDE 8 — INTEGRAÇÕES ═══════════════ -->
+  <section data-label="09 · Integrações" data-screen-label="Integrações">
+    <div style="width:100%;height:100%;background:var(--bg);display:flex;flex-direction:column;padding:var(--py) var(--px);gap:40px;overflow:hidden;justify-content:center;">
+      <div style="flex-shrink:0;">
+        <div style="font-size:var(--tt);font-weight:800;color:var(--tx);letter-spacing:-1.5px;line-height:1;">Suas integrações atuais, todas preservadas</div>
+        <div style="font-size:var(--su);color:var(--tx2);font-weight:400;margin-top:14px;">Nenhuma das suas ferramentas precisará ser abandonada</div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;">
+        <div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:32px 36px;display:flex;flex-direction:column;gap:10px;">
+          <div style="font-size:var(--h2);font-weight:800;color:var(--tx);">F360</div>
+          <div style="font-size:var(--sm);color:var(--or);font-weight:600;">Financeiro</div>
+        </div>
+        <div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:32px 36px;display:flex;flex-direction:column;gap:10px;">
+          <div style="font-size:var(--h2);font-weight:800;color:var(--tx);">Gympass</div>
+          <div style="font-size:var(--sm);color:var(--or);font-weight:600;">Agregador</div>
+        </div>
+        <div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:32px 36px;display:flex;flex-direction:column;gap:10px;">
+          <div style="font-size:var(--h2);font-weight:800;color:var(--tx);">TotalPass</div>
+          <div style="font-size:var(--sm);color:var(--or);font-weight:600;">Agregador</div>
+        </div>
+        <div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:32px 36px;display:flex;flex-direction:column;gap:10px;">
+          <div style="font-size:var(--h2);font-weight:800;color:var(--tx);">WeHelp</div>
+          <div style="font-size:var(--sm);color:var(--or);font-weight:600;">NPS</div>
+        </div>
+        <div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:32px 36px;display:flex;flex-direction:column;gap:10px;">
+          <div style="font-size:var(--h2);font-weight:800;color:var(--tx);">Rede (Itaú)</div>
+          <div style="font-size:var(--sm);color:var(--or);font-weight:600;">Pagamentos</div>
+        </div>
+        <div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:32px 36px;display:flex;flex-direction:column;gap:10px;">
+          <div style="font-size:var(--h2);font-weight:800;color:var(--tx);">Enotas</div>
+          <div style="font-size:var(--sm);color:var(--or);font-weight:600;">Fiscal</div>
+        </div>
+        <div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:32px 36px;display:flex;flex-direction:column;gap:10px;">
+          <div style="font-size:var(--h2);font-weight:800;color:var(--tx);">Kommo</div>
+          <div style="font-size:var(--sm);color:var(--or);font-weight:600;">CRM / Leads</div>
+        </div>
+        <div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:32px 36px;display:flex;flex-direction:column;gap:10px;">
+          <div style="font-size:var(--h2);font-weight:800;color:var(--tx);">myNutri</div>
+          <div style="font-size:var(--sm);color:var(--or);font-weight:600;">Nutrição</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ SLIDE 9 — CRONOGRAMA ═══════════════ -->
+  <section data-label="10 · Cronograma" data-screen-label="Cronograma">
+    <div style="width:100%;height:100%;background:var(--bg);display:flex;flex-direction:column;padding:var(--py) var(--px);gap:32px;overflow:hidden;">
+      <div style="flex-shrink:0;">
+        <div style="font-size:var(--tt);font-weight:800;color:var(--tx);letter-spacing:-1.5px;line-height:1;">Entrega em 3 fases ao longo de 12 meses</div>
+        <div style="font-size:var(--su);color:var(--tx2);font-weight:400;margin-top:14px;">Você começa a usar antes do sistema estar 100% pronto</div>
+      </div>
+      <div style="flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:22px;min-height:0;">
+        <!-- Phase 1 -->
+        <div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:36px 40px;display:flex;flex-direction:column;gap:20px;position:relative;overflow:hidden;">
+          <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--or);"></div>
+          <div>
+            <div style="font-size:var(--xs);color:var(--or);font-weight:700;text-transform:uppercase;letter-spacing:1.5px;">Fase 1</div>
+            <div style="font-size:var(--h2);font-weight:800;color:var(--tx);line-height:1.1;margin-top:6px;">Módulo de Dados</div>
+            <div style="font-size:var(--sm);color:var(--tx3);font-weight:500;margin-top:6px;">Semanas 1–10</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:12px;flex:1;">
+            <div style="display:flex;align-items:flex-start;gap:12px;"><div style="width:6px;height:6px;background:var(--or);border-radius:50%;margin-top:9px;flex-shrink:0;"></div><div style="font-size:var(--sm);color:var(--tx2);line-height:1.5;">Dashboard em tempo real por unidade</div></div>
+            <div style="display:flex;align-items:flex-start;gap:12px;"><div style="width:6px;height:6px;background:var(--or);border-radius:50%;margin-top:9px;flex-shrink:0;"></div><div style="font-size:var(--sm);color:var(--tx2);line-height:1.5;">Churn correto implementado</div></div>
+            <div style="display:flex;align-items:flex-start;gap:12px;"><div style="width:6px;height:6px;background:var(--or);border-radius:50%;margin-top:9px;flex-shrink:0;"></div><div style="font-size:var(--sm);color:var(--tx2);line-height:1.5;">Integrações WeHelp, Gympass e TotalPass</div></div>
+            <div style="display:flex;align-items:flex-start;gap:12px;"><div style="width:6px;height:6px;background:var(--or);border-radius:50%;margin-top:9px;flex-shrink:0;"></div><div style="font-size:var(--sm);color:var(--tx2);line-height:1.5;">Relatório de renovações e cancelamentos</div></div>
+            <div style="display:flex;align-items:flex-start;gap:12px;"><div style="width:6px;height:6px;background:var(--or);border-radius:50%;margin-top:9px;flex-shrink:0;"></div><div style="font-size:var(--sm);color:var(--tx2);line-height:1.5;">Visão comparativa multi-unidade</div></div>
+            <div style="display:flex;align-items:flex-start;gap:12px;"><div style="width:6px;height:6px;background:var(--or);border-radius:50%;margin-top:9px;flex-shrink:0;"></div><div style="font-size:var(--sm);color:var(--tx2);line-height:1.5;">Autenticação com 2 fatores</div></div>
+          </div>
+          <div style="background:var(--or-dim);border-radius:8px;padding:14px 18px;font-size:var(--xs);color:var(--tx2);line-height:1.55;">Roda em paralelo com o EVO. Você já resolve o problema de dados enquanto a migração acontece.</div>
+        </div>
+        <!-- Phase 2 -->
+        <div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:36px 40px;display:flex;flex-direction:column;gap:20px;position:relative;overflow:hidden;">
+          <div style="position:absolute;top:0;left:0;right:0;height:3px;background:#888;"></div>
+          <div>
+            <div style="font-size:var(--xs);color:#888;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;">Fase 2</div>
+            <div style="font-size:var(--h2);font-weight:800;color:var(--tx);line-height:1.1;margin-top:6px;">Plataforma Core</div>
+            <div style="font-size:var(--sm);color:var(--tx3);font-weight:500;margin-top:6px;">Semanas 11–28</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:12px;flex:1;">
+            <div style="display:flex;align-items:flex-start;gap:12px;"><div style="width:6px;height:6px;background:#888;border-radius:50%;margin-top:9px;flex-shrink:0;"></div><div style="font-size:var(--sm);color:var(--tx2);line-height:1.5;">Gestão completa de alunos e contratos</div></div>
+            <div style="display:flex;align-items:flex-start;gap:12px;"><div style="width:6px;height:6px;background:#888;border-radius:50%;margin-top:9px;flex-shrink:0;"></div><div style="font-size:var(--sm);color:var(--tx2);line-height:1.5;">Módulo financeiro completo</div></div>
+            <div style="display:flex;align-items:flex-start;gap:12px;"><div style="width:6px;height:6px;background:#888;border-radius:50%;margin-top:9px;flex-shrink:0;"></div><div style="font-size:var(--sm);color:var(--tx2);line-height:1.5;">Integrações Rede, F360, Enotas e Kommo</div></div>
+            <div style="display:flex;align-items:flex-start;gap:12px;"><div style="width:6px;height:6px;background:#888;border-radius:50%;margin-top:9px;flex-shrink:0;"></div><div style="font-size:var(--sm);color:var(--tx2);line-height:1.5;">Agendamento de aulas e presença</div></div>
+            <div style="display:flex;align-items:flex-start;gap:12px;"><div style="width:6px;height:6px;background:#888;border-radius:50%;margin-top:9px;flex-shrink:0;"></div><div style="font-size:var(--sm);color:var(--tx2);line-height:1.5;">App do professor</div></div>
+          </div>
+          <div style="background:rgba(255,255,255,0.04);border-radius:8px;padding:14px 18px;font-size:var(--xs);color:var(--tx2);line-height:1.55;">Sistema em uso, mas a migração ainda está em andamento. EVO e Technofit seguem ativos.</div>
+        </div>
+        <!-- Phase 3 -->
+        <div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:36px 40px;display:flex;flex-direction:column;gap:20px;position:relative;overflow:hidden;">
+          <div style="position:absolute;top:0;left:0;right:0;height:3px;background:#444;"></div>
+          <div>
+            <div style="font-size:var(--xs);color:#555;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;">Fase 3</div>
+            <div style="font-size:var(--h2);font-weight:800;color:var(--tx);line-height:1.1;margin-top:6px;">Plataforma Completa</div>
+            <div style="font-size:var(--sm);color:var(--tx3);font-weight:500;margin-top:6px;">Semanas 29–48</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:12px;flex:1;">
+            <div style="display:flex;align-items:flex-start;gap:12px;"><div style="width:6px;height:6px;background:#444;border-radius:50%;margin-top:9px;flex-shrink:0;"></div><div style="font-size:var(--sm);color:var(--tx2);line-height:1.5;">App mobile do aluno</div></div>
+            <div style="display:flex;align-items:flex-start;gap:12px;"><div style="width:6px;height:6px;background:#444;border-radius:50%;margin-top:9px;flex-shrink:0;"></div><div style="font-size:var(--sm);color:var(--tx2);line-height:1.5;">Integração myNutri</div></div>
+            <div style="display:flex;align-items:flex-start;gap:12px;"><div style="width:6px;height:6px;background:#444;border-radius:50%;margin-top:9px;flex-shrink:0;"></div><div style="font-size:var(--sm);color:var(--tx2);line-height:1.5;">Controle de personal trainer externo</div></div>
+            <div style="display:flex;align-items:flex-start;gap:12px;"><div style="width:6px;height:6px;background:#444;border-radius:50%;margin-top:9px;flex-shrink:0;"></div><div style="font-size:var(--sm);color:var(--tx2);line-height:1.5;">Relatórios avançados e exportações</div></div>
+            <div style="display:flex;align-items:flex-start;gap:12px;"><div style="width:6px;height:6px;background:#444;border-radius:50%;margin-top:9px;flex-shrink:0;"></div><div style="font-size:var(--sm);color:var(--tx2);line-height:1.5;">Preparação para módulo de IA</div></div>
+            <div style="display:flex;align-items:flex-start;gap:12px;"><div style="width:6px;height:6px;background:#F58634;border-radius:50%;margin-top:9px;flex-shrink:0;"></div><div style="font-size:var(--sm);color:var(--or);font-weight:600;line-height:1.5;">Entrega do código fonte</div></div>
+          </div>
+          <div style="background:var(--green-dim);border:1px solid rgba(34,197,94,0.2);border-radius:8px;padding:14px 18px;font-size:var(--xs);color:var(--green);line-height:1.55;">Sistema completo entregue. Agora sim: EVO e Technofit podem ser cancelados. O código é seu para sempre.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ SLIDE 10 — INVESTIMENTO ═══════════════ -->
+  <section data-label="11 · Investimento" data-screen-label="Investimento">
+    <div style="width:100%;height:100%;background:var(--bg);display:flex;align-items:stretch;overflow:hidden;">
+      <!-- Left: pricing highlight -->
+      <div style="width:520px;flex-shrink:0;padding:var(--py) 80px;display:flex;flex-direction:column;justify-content:center;gap:28px;border-right:1px solid var(--bdr);position:relative;overflow:hidden;">
+        <div style="position:absolute;bottom:-120px;left:-80px;width:560px;height:560px;background:radial-gradient(circle,rgba(245,134,52,0.09) 0%,transparent 65%);pointer-events:none;"></div>
+        <div style="font-size:var(--su);color:var(--tx2);font-weight:500;position:relative;z-index:1;">O investimento</div>
+        <div style="display:flex;flex-direction:column;gap:4px;position:relative;z-index:1;">
+          <div style="font-size:96px;font-weight:900;color:var(--or);line-height:1;letter-spacing:-3px;">18×</div>
+          <div style="font-size:64px;font-weight:900;color:var(--tx);line-height:1;letter-spacing:-2px;">R$14.000</div>
+          <div style="font-size:var(--sm);color:var(--tx2);font-weight:500;line-height:1.6;margin-top:10px;">12 meses de desenvolvimento<br>+ 6 meses de suporte grátis incluídos</div>
+        </div>
+        <div style="width:64px;height:1px;background:var(--bdr);position:relative;z-index:1;"></div>
+        <div style="display:flex;flex-direction:column;gap:6px;position:relative;z-index:1;">
+          <div style="font-size:var(--sm);color:var(--tx3);">Após o 18º mês</div>
+          <div style="font-size:var(--h2);font-weight:700;color:var(--tx);">R$3.000/mês</div>
+          <div style="font-size:var(--sm);color:var(--tx2);">de suporte contínuo</div>
+        </div>
+      </div>
+      <!-- Right: comparison -->
+      <div style="flex:1;padding:var(--py) 80px;display:flex;flex-direction:column;gap:24px;justify-content:center;">
+        <div style="font-size:var(--su);font-weight:700;color:var(--tx);">Comparativo de custo</div>
+        <div style="border-radius:var(--r);overflow:hidden;border:1px solid var(--bdr);">
+          <div style="display:grid;grid-template-columns:1.2fr 1fr 1fr;background:#191919;border-bottom:1px solid var(--bdr);">
+            <div style="padding:18px 26px;font-size:var(--xs);color:var(--tx3);font-weight:700;"></div>
+            <div style="padding:18px 26px;font-size:var(--xs);color:var(--tx3);font-weight:700;border-left:1px solid var(--bdr);">EVO (atual)</div>
+            <div style="padding:18px 26px;font-size:var(--xs);color:var(--or);font-weight:700;border-left:1px solid var(--bdr);">Plataforma Dynamo</div>
+          </div>
+          <div style="display:grid;grid-template-columns:1.2fr 1fr 1fr;background:var(--card);border-bottom:1px solid var(--bdr);">
+            <div style="padding:18px 26px;font-size:var(--sm);color:var(--tx2);">Ano 1</div>
+            <div style="padding:18px 26px;font-size:var(--sm);color:var(--tx);border-left:1px solid var(--bdr);">R$100.800</div>
+            <div style="padding:18px 26px;font-size:var(--sm);color:var(--tx);border-left:1px solid var(--bdr);">R$168.000</div>
+          </div>
+          <div style="display:grid;grid-template-columns:1.2fr 1fr 1fr;background:var(--card);border-bottom:1px solid var(--bdr);">
+            <div style="padding:18px 26px;font-size:var(--sm);color:var(--tx2);">Ano 2</div>
+            <div style="padding:18px 26px;font-size:var(--sm);color:var(--tx);border-left:1px solid var(--bdr);">R$100.800</div>
+            <div style="padding:18px 26px;font-size:var(--sm);color:var(--green);font-weight:600;border-left:1px solid var(--bdr);">R$84.000</div>
+          </div>
+          <div style="display:grid;grid-template-columns:1.2fr 1fr 1fr;background:var(--card);border-bottom:1px solid var(--bdr);">
+            <div style="padding:18px 26px;font-size:var(--sm);color:var(--tx2);">Ano 3</div>
+            <div style="padding:18px 26px;font-size:var(--sm);color:var(--tx);border-left:1px solid var(--bdr);">R$100.800</div>
+            <div style="padding:18px 26px;font-size:var(--sm);color:var(--green);font-weight:600;border-left:1px solid var(--bdr);">R$36.000</div>
+          </div>
+          <div style="display:grid;grid-template-columns:1.2fr 1fr 1fr;background:var(--card);border-bottom:1px solid var(--bdr);">
+            <div style="padding:18px 26px;font-size:var(--sm);color:var(--tx);font-weight:700;">Total 3 anos</div>
+            <div style="padding:18px 26px;font-size:var(--sm);color:#FF7070;font-weight:700;border-left:1px solid var(--bdr);">R$302.400</div>
+            <div style="padding:18px 26px;font-size:var(--sm);color:var(--green);font-weight:700;border-left:1px solid var(--bdr);">R$288.000</div>
+          </div>
+          <div style="display:grid;grid-template-columns:1.2fr 1fr 1fr;background:var(--card);border-bottom:1px solid var(--bdr);">
+            <div style="padding:18px 26px;font-size:var(--sm);color:var(--tx2);">Anos 4+ (por ano)</div>
+            <div style="padding:18px 26px;font-size:var(--sm);color:#FF7070;border-left:1px solid var(--bdr);">R$100.800/ano</div>
+            <div style="padding:18px 26px;font-size:var(--sm);color:var(--green);font-weight:600;border-left:1px solid var(--bdr);">R$36.000/ano <span style="color:var(--tx3);font-weight:400;font-size:20px;">· economia de R$64.800/ano</span></div>
+          </div>
+          <div style="display:grid;grid-template-columns:1.2fr 1fr 1fr;background:var(--card);border-bottom:1px solid var(--bdr);">
+            <div style="padding:18px 26px;font-size:var(--sm);color:var(--tx2);">Código fonte</div>
+            <div style="padding:18px 26px;font-size:var(--sm);color:#FF7070;border-left:1px solid var(--bdr);">Nunca</div>
+            <div style="padding:18px 26px;font-size:var(--sm);color:var(--green);font-weight:600;border-left:1px solid var(--bdr);">Seu para sempre</div>
+          </div>
+          <div style="display:grid;grid-template-columns:1.2fr 1fr 1fr;background:var(--card);">
+            <div style="padding:18px 26px;font-size:var(--sm);color:var(--tx2);">Migrações futuras</div>
+            <div style="padding:18px 26px;font-size:var(--sm);color:#FF7070;border-left:1px solid var(--bdr);">A cada troca de sistema</div>
+            <div style="padding:18px 26px;font-size:var(--sm);color:var(--green);font-weight:600;border-left:1px solid var(--bdr);">Nunca mais</div>
+          </div>
+        </div>
+        <div style="font-size:var(--sm);color:var(--tx2);line-height:1.65;">No 3º ano, a plataforma já custou menos que o EVO. A partir do 4º ano, a economia é de <span style="color:var(--green);font-weight:700;">R$64.800 por ano</span> — para sempre. Você é dono do sistema e nunca mais precisa migrar.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ SLIDE 11 — SEGURANÇA &amp; SUPORTE ═══════════════ -->
+  <section data-label="12 · Segurança &amp; Suporte" data-screen-label="Segurança e Suporte">
+    <div style="width:100%;height:100%;background:var(--bg);display:flex;flex-direction:column;padding:var(--py) var(--px);gap:32px;overflow:hidden;">
+      <div style="flex-shrink:0;">
+        <div style="font-size:var(--tt);font-weight:800;color:var(--tx);letter-spacing:-1.5px;line-height:1;">Suas três principais preocupações, resolvidas</div>
+        <div style="font-size:var(--su);color:var(--tx2);font-weight:400;margin-top:14px;">Sabemos o que importa na hora de trocar de sistema</div>
+      </div>
+      <div style="flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:22px;min-height:0;">
+        <!-- Security -->
+        <div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:40px 44px;display:flex;flex-direction:column;gap:20px;">
+          <div style="width:52px;height:52px;background:var(--or-dim);border-radius:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F58634" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          </div>
+          <div>
+            <div style="font-size:var(--xs);color:var(--tx3);font-weight:700;text-transform:uppercase;letter-spacing:1.5px;">Preocupação #1</div>
+            <div style="font-size:var(--h2);font-weight:800;color:var(--tx);line-height:1.1;margin-top:8px;">Segurança de Dados</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:14px;flex:1;">
+            <div style="display:flex;align-items:flex-start;gap:12px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" style="flex-shrink:0;margin-top:4px;"><polyline points="20 6 9 17 4 12"></polyline></svg><div style="font-size:var(--sm);color:var(--tx2);line-height:1.5;">Autenticação em 2 fatores para gestores</div></div>
+            <div style="display:flex;align-items:flex-start;gap:12px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" style="flex-shrink:0;margin-top:4px;"><polyline points="20 6 9 17 4 12"></polyline></svg><div style="font-size:var(--sm);color:var(--tx2);line-height:1.5;">Controle de acesso por perfil e unidade</div></div>
+            <div style="display:flex;align-items:flex-start;gap:12px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" style="flex-shrink:0;margin-top:4px;"><polyline points="20 6 9 17 4 12"></polyline></svg><div style="font-size:var(--sm);color:var(--tx2);line-height:1.5;">Logs de auditoria em alterações sensíveis</div></div>
+            <div style="display:flex;align-items:flex-start;gap:12px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" style="flex-shrink:0;margin-top:4px;"><polyline points="20 6 9 17 4 12"></polyline></svg><div style="font-size:var(--sm);color:var(--tx2);line-height:1.5;">Dados segregados por unidade</div></div>
+            <div style="display:flex;align-items:flex-start;gap:12px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" style="flex-shrink:0;margin-top:4px;"><polyline points="20 6 9 17 4 12"></polyline></svg><div style="font-size:var(--sm);color:var(--tx2);line-height:1.5;">Pagamentos processados pela Rede (Itaú) — nenhum dado sensível armazenado na plataforma</div></div>
+          </div>
+        </div>
+        <!-- Price -->
+        <div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:40px 44px;display:flex;flex-direction:column;gap:20px;">
+          <div style="width:52px;height:52px;background:var(--or-dim);border-radius:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F58634" stroke-width="2" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+          </div>
+          <div>
+            <div style="font-size:var(--xs);color:var(--tx3);font-weight:700;text-transform:uppercase;letter-spacing:1.5px;">Preocupação #2</div>
+            <div style="font-size:var(--h2);font-weight:800;color:var(--tx);line-height:1.1;margin-top:8px;">Preço Justo</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:14px;flex:1;">
+            <div style="display:flex;align-items:flex-start;gap:12px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" style="flex-shrink:0;margin-top:4px;"><polyline points="20 6 9 17 4 12"></polyline></svg><div style="font-size:var(--sm);color:var(--tx2);line-height:1.5;">R$14.000/mês — você recebe um sistema próprio, não aluga</div></div>
+            <div style="display:flex;align-items:flex-start;gap:12px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" style="flex-shrink:0;margin-top:4px;"><polyline points="20 6 9 17 4 12"></polyline></svg><div style="font-size:var(--sm);color:var(--tx2);line-height:1.5;">Sem taxa por transação recorrente</div></div>
+            <div style="display:flex;align-items:flex-start;gap:12px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" style="flex-shrink:0;margin-top:4px;"><polyline points="20 6 9 17 4 12"></polyline></svg><div style="font-size:var(--sm);color:var(--tx2);line-height:1.5;">6 meses de suporte grátis incluídos</div></div>
+            <div style="display:flex;align-items:flex-start;gap:12px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" style="flex-shrink:0;margin-top:4px;"><polyline points="20 6 9 17 4 12"></polyline></svg><div style="font-size:var(--sm);color:var(--tx2);line-height:1.5;">No 3º ano, economia de R$90.000+</div></div>
+          </div>
+        </div>
+        <!-- Support -->
+        <div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:40px 44px;display:flex;flex-direction:column;gap:20px;">
+          <div style="width:52px;height:52px;background:var(--or-dim);border-radius:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F58634" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.05 6.05l.98-.98a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          </div>
+          <div>
+            <div style="font-size:var(--xs);color:var(--tx3);font-weight:700;text-transform:uppercase;letter-spacing:1.5px;">Preocupação #3</div>
+            <div style="font-size:var(--h2);font-weight:800;color:var(--tx);line-height:1.1;margin-top:8px;">Suporte Após Go-Live</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:14px;flex:1;">
+            <div style="display:flex;align-items:flex-start;gap:12px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" style="flex-shrink:0;margin-top:4px;"><polyline points="20 6 9 17 4 12"></polyline></svg><div style="font-size:var(--sm);color:var(--tx2);line-height:1.5;">6 meses de suporte dedicado incluídos</div></div>
+            <div style="display:flex;align-items:flex-start;gap:12px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" style="flex-shrink:0;margin-top:4px;"><polyline points="20 6 9 17 4 12"></polyline></svg><div style="font-size:var(--sm);color:var(--tx2);line-height:1.5;">Canal direto com equipe de desenvolvimento</div></div>
+            <div style="display:flex;align-items:flex-start;gap:12px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" style="flex-shrink:0;margin-top:4px;"><polyline points="20 6 9 17 4 12"></polyline></svg><div style="font-size:var(--sm);color:var(--tx2);line-height:1.5;">SLA definido em contrato</div></div>
+            <div style="display:flex;align-items:flex-start;gap:12px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" style="flex-shrink:0;margin-top:4px;"><polyline points="20 6 9 17 4 12"></polyline></svg><div style="font-size:var(--sm);color:var(--tx2);line-height:1.5;">Treinamento completo das equipes</div></div>
+            <div style="display:flex;align-items:flex-start;gap:12px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" style="flex-shrink:0;margin-top:4px;"><polyline points="20 6 9 17 4 12"></polyline></svg><div style="font-size:var(--sm);color:var(--tx2);line-height:1.5;">Documentação completa do projeto — qualquer empresa ou programador pode assumir o suporte</div></div>
+            <div style="display:flex;align-items:flex-start;gap:12px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" style="flex-shrink:0;margin-top:4px;"><polyline points="20 6 9 17 4 12"></polyline></svg><div style="font-size:var(--sm);color:var(--tx2);line-height:1.5;">Se a Mutual Tecnologia não puder seguir, o sócio Vinicius Carvalho treina um novo programador ou empresa pelo valor de 3 salários mínimos</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ SLIDE 12 — PRÓXIMOS PASSOS ═══════════════ -->
+  <section data-label="13 · Próximos Passos" data-screen-label="Próximos Passos">
+    <div style="width:100%;height:100%;background:var(--bg);display:flex;align-items:stretch;overflow:hidden;">
+      <!-- Main content -->
+      <div style="flex:1;padding:var(--py) var(--px);display:flex;flex-direction:column;gap:44px;justify-content:center;">
+        <div style="font-size:var(--tt);font-weight:800;color:var(--tx);letter-spacing:-1.5px;line-height:1;">O que acontece a seguir</div>
+        <!-- Steps -->
+        <div style="display:flex;flex-direction:column;gap:28px;">
+          <div style="display:flex;align-items:flex-start;gap:36px;">
+            <div style="font-size:76px;font-weight:900;color:var(--or);line-height:1;letter-spacing:-2px;width:88px;flex-shrink:0;">01</div>
+            <div style="display:flex;flex-direction:column;gap:8px;padding-top:10px;">
+              <div style="font-size:var(--h2);font-weight:700;color:var(--tx);">Alinhamento de escopo</div>
+              <div style="font-size:var(--bd);color:var(--tx2);line-height:1.55;">Confirmamos os detalhes, tiramos dúvidas e definimos as prioridades de cada fase.</div>
+            </div>
+          </div>
+          <div style="height:1px;background:var(--bdr);margin-left:124px;"></div>
+          <div style="display:flex;align-items:flex-start;gap:36px;">
+            <div style="font-size:76px;font-weight:900;color:var(--or);line-height:1;letter-spacing:-2px;width:88px;flex-shrink:0;">02</div>
+            <div style="display:flex;flex-direction:column;gap:8px;padding-top:10px;">
+              <div style="font-size:var(--h2);font-weight:700;color:var(--tx);">Proposta formal</div>
+              <div style="font-size:var(--bd);color:var(--tx2);line-height:1.55;">Enviamos o contrato com valores, cronograma detalhado e marcos de entrega.</div>
+            </div>
+          </div>
+          <div style="height:1px;background:var(--bdr);margin-left:124px;"></div>
+          <div style="display:flex;align-items:flex-start;gap:36px;">
+            <div style="font-size:76px;font-weight:900;color:var(--or);line-height:1;letter-spacing:-2px;width:88px;flex-shrink:0;">03</div>
+            <div style="display:flex;flex-direction:column;gap:8px;padding-top:10px;">
+              <div style="font-size:var(--h2);font-weight:700;color:var(--tx);">Kickoff</div>
+              <div style="font-size:var(--bd);color:var(--tx2);line-height:1.55;">Com a assinatura, começamos em até 1 semana. Primeiras entregas em 10 semanas.</div>
+            </div>
+          </div>
+        </div>
+        <!-- CTA bar -->
+        <div style="background:var(--or);border-radius:var(--r);padding:28px 44px;display:flex;align-items:center;justify-content:center;">
+          <div style="font-size:var(--h2);font-weight:700;color:#fff;text-align:center;">Pronto para começar? Vamos agendar a próxima conversa.</div>
+        </div>
+      </div>
+      <!-- Right: logo card -->
+      <div style="width:340px;flex-shrink:0;background:var(--card);border-left:1px solid var(--bdr);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;padding:56px 48px;">
+        <img src="./uploads/dynamo-horizontal-nobg.png" style="width:220px;filter:brightness(1.05);">
+        <div style="font-size:var(--sm);color:var(--tx3);font-weight:500;letter-spacing:2px;text-transform:uppercase;">Platform</div>
+        <div style="width:100%;height:1px;background:var(--bdr);"></div>
+        <div style="display:flex;flex-direction:column;gap:10px;text-align:center;">
+          <div style="font-size:var(--xs);color:var(--tx3);">5 unidades · 140 professores</div>
+          <div style="font-size:var(--xs);color:var(--tx3);">12 meses de entrega · 3 fases</div>
+          <div style="font-size:var(--xs);color:var(--or);font-weight:700;margin-top:4px;">R$180.000 · 18 parcelas</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</x-import>
+</x-dc>
+</body>
+</html>
