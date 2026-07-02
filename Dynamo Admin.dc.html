@@ -75,6 +75,10 @@
       <div onClick="{{ onAlunos }}" style="display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:9px;cursor:pointer;background:{{ nb.alunos }};transition:background 0.15s;">
         <svg width="16" height="16" fill="none" stroke="{{ nc.alunos }}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"></path></svg>
         <span style="color:{{ nc.alunos }};font-size:13px;font-weight:600;flex:1;">Alunos</span>
+      </div>
+      <div onClick="{{ onInadimplencia }}" style="display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:9px;cursor:pointer;background:{{ nb.inad }};transition:background 0.15s;">
+        <svg width="16" height="16" fill="none" stroke="{{ nc.inad }}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+        <span style="color:{{ nc.inad }};font-size:13px;font-weight:600;flex:1;">Inadimplência</span>
         <div style="background:#E05555;border-radius:9px;padding:1px 7px;"><span style="color:#fff;font-size:10px;font-weight:800;">{{ inadCount }}</span></div>
       </div>
       <div onClick="{{ onFinanceiro }}" style="display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:9px;cursor:pointer;background:{{ nb.fin }};transition:background 0.15s;">
@@ -348,6 +352,26 @@
 
           </div>
 
+          <!-- Movimento de Hoje -->
+          <div style="display:grid;grid-template-columns:1fr;gap:14px;margin-bottom:16px;">
+            <div style="background:#1A1A1A;border:1px solid #222;border-radius:13px;padding:20px;">
+              <div style="margin-bottom:14px;">
+                <div style="color:#fff;font-size:13px;font-weight:700;margin-bottom:2px;">Movimento de Hoje</div>
+                <div style="color:#999;font-size:11px;">Check-ins por horário</div>
+              </div>
+              <div style="display:flex;gap:4px;">
+                <sc-for list="{{ todayHeat }}" as="t" hint-placeholder-count="17">
+                  <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
+                    <div style="width:100%;aspect-ratio:1;border-radius:5px;background:{{ t.bg }};display:flex;align-items:center;justify-content:center;">
+                      <span style="color:{{ t.cl }};font-size:9px;font-weight:{{ t.fw }};">{{ t.text }}</span>
+                    </div>
+                    <span style="color:#666;font-size:8px;">{{ t.hour }}</span>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+
           <!-- Meta + Aniversariantes -->
           <div style="display:grid;grid-template-columns:1fr 340px;gap:14px;margin-bottom:16px;">
             <div style="background:#1A1A1A;border:1px solid #222;border-radius:13px;padding:20px;">
@@ -432,7 +456,6 @@
             <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
               <div onClick="{{ onFTodos }}" style="padding:6px 13px;border-radius:7px;cursor:pointer;background:{{ ftBg.todos }};border:1px solid {{ ftBd.todos }};"><span style="color:{{ ftCl.todos }};font-size:12px;font-weight:700;">Todos ({{ sTotais }})</span></div>
               <div onClick="{{ onFAtivo }}" style="padding:6px 13px;border-radius:7px;cursor:pointer;background:{{ ftBg.ativo }};border:1px solid {{ ftBd.ativo }};"><span style="color:{{ ftCl.ativo }};font-size:12px;font-weight:700;">Ativos ({{ sAtivos }})</span></div>
-              <div onClick="{{ onFInadimplente }}" style="padding:6px 13px;border-radius:7px;cursor:pointer;background:{{ ftBg.inadimplente }};border:1px solid {{ ftBd.inadimplente }};"><span style="color:{{ ftCl.inadimplente }};font-size:12px;font-weight:700;">Inadimplentes ({{ sInadimplentes }})</span></div>
               <div onClick="{{ onFInativo }}" style="padding:6px 13px;border-radius:7px;cursor:pointer;background:{{ ftBg.inativo }};border:1px solid {{ ftBd.inativo }};"><span style="color:{{ ftCl.inativo }};font-size:12px;font-weight:700;">Inativos ({{ sInativos }})</span></div>
             </div>
             <div onClick="{{ onNovoAluno }}" style="padding:7px 16px;background:#F58634;border-radius:8px;cursor:pointer;display:flex;align-items:center;gap:7px;">
@@ -558,6 +581,92 @@
               </div>
             </sc-if>
           </div>
+        </div>
+      </sc-if>
+
+      <!-- ████ INADIMPLÊNCIA ████ -->
+      <sc-if value="{{ isInad }}" hint-placeholder-val="{{ false }}">
+        <div>
+          <div style="display:flex;align-items:center;gap:7px;margin-bottom:18px;">
+            <div onClick="{{ onInadLista }}" style="padding:6px 13px;border-radius:7px;cursor:pointer;background:{{ inadStBg.lista }};border:1px solid {{ inadStBd.lista }};"><span style="color:{{ inadStCl.lista }};font-size:12px;font-weight:700;">Lista</span></div>
+            <div onClick="{{ onInadPrevisibilidade }}" style="padding:6px 13px;border-radius:7px;cursor:pointer;background:{{ inadStBg.prev }};border:1px solid {{ inadStBd.prev }};"><span style="color:{{ inadStCl.prev }};font-size:12px;font-weight:700;">Previsibilidade</span></div>
+          </div>
+
+          <!-- Sub-aba: Lista -->
+          <sc-if value="{{ inadIsLista }}" hint-placeholder-val="{{ true }}">
+            <div>
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+                <div><span style="color:#fff;font-size:13px;font-weight:700;">Inadimplentes · Junho 2025</span></div>
+                <div style="display:flex;gap:7px;">
+                  <div style="padding:5px 12px;background:#F58634;border-radius:6px;cursor:pointer;"><span style="color:#fff;font-size:11px;font-weight:700;">Cobrar todos via WhatsApp</span></div>
+                </div>
+              </div>
+              <div style="background:#1A1A1A;border:1px solid #222;border-radius:13px;overflow:hidden;">
+                <div style="display:grid;grid-template-columns:2fr 1.2fr 1fr 1fr 1fr 1.4fr;padding:10px 18px;border-bottom:1px solid #1E1E1E;">
+                  <span style="color:#888;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;">Aluno</span>
+                  <span style="color:#888;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;">Plano</span>
+                  <span style="color:#888;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;">Valor</span>
+                  <span style="color:#888;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;">Dias atraso</span>
+                  <span style="color:#888;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;">Unidade</span>
+                  <span style="color:#888;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;text-align:right;">Ações</span>
+                </div>
+                <sc-for list="{{ inadList }}" as="in" hint-placeholder-count="5">
+                  <div style="display:grid;grid-template-columns:2fr 1.2fr 1fr 1fr 1fr 1.4fr;padding:11px 18px;border-bottom:1px solid #141414;align-items:center;">
+                    <div style="display:flex;align-items:center;gap:9px;">
+                      <div style="width:28px;height:28px;background:{{ in.abg }};border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="color:#fff;font-size:9px;font-weight:800;">{{ in.av }}</span></div>
+                      <span style="color:#bbb;font-size:12px;font-weight:600;">{{ in.name }}</span>
+                    </div>
+                    <span style="color:#888;font-size:11px;">{{ in.plan }}</span>
+                    <span style="color:#E05555;font-size:12px;font-weight:700;">{{ in.val }}</span>
+                    <div><div style="background:{{ in.dayBg }};border-radius:5px;padding:2px 8px;display:inline-flex;"><span style="color:{{ in.dayCl }};font-size:10px;font-weight:700;">{{ in.dias }} dias</span></div></div>
+                    <span style="color:#888;font-size:10px;">{{ in.unit }}</span>
+                    <div style="display:flex;justify-content:flex-end;gap:5px;">
+                      <div style="padding:4px 8px;background:#1B3A2A;border-radius:5px;cursor:pointer;"><span style="color:#25D366;font-size:9px;font-weight:700;">Cobrar</span></div>
+                      <div style="padding:4px 8px;background:#222;border-radius:5px;cursor:pointer;"><span style="color:#888;font-size:9px;font-weight:700;">Cancelar</span></div>
+                    </div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+
+          <!-- Sub-aba: Previsibilidade -->
+          <sc-if value="{{ inadIsPrevisibilidade }}" hint-placeholder-val="{{ false }}">
+            <div>
+              <div style="margin-bottom:14px;">
+                <div style="color:#fff;font-size:13px;font-weight:700;">Alunos em risco de inadimplência</div>
+                <div style="color:#999;font-size:11px;margin-top:2px;">Identificados pela queda na frequência de check-ins — entre em contato antes que o pagamento atrase.</div>
+              </div>
+              <div style="background:#1A1A1A;border:1px solid #222;border-radius:13px;overflow:hidden;">
+                <div style="display:grid;grid-template-columns:2fr 1fr 2.2fr 1fr 1.2fr;padding:10px 18px;border-bottom:1px solid #1E1E1E;">
+                  <span style="color:#888;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;">Aluno</span>
+                  <span style="color:#888;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;">Risco</span>
+                  <span style="color:#888;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;">Motivo</span>
+                  <span style="color:#888;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;">Unidade</span>
+                  <span style="color:#888;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;text-align:right;">Ação</span>
+                </div>
+                <sc-for list="{{ inadRiskList }}" as="r" hint-placeholder-count="7">
+                  <div style="display:grid;grid-template-columns:2fr 1fr 2.2fr 1fr 1.2fr;padding:11px 18px;border-bottom:1px solid #141414;align-items:center;">
+                    <div style="display:flex;align-items:center;gap:9px;">
+                      <div style="width:28px;height:28px;background:{{ r.abg }};border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="color:#fff;font-size:9px;font-weight:800;">{{ r.av }}</span></div>
+                      <span style="color:#bbb;font-size:12px;font-weight:600;">{{ r.name }}</span>
+                    </div>
+                    <div><div style="background:{{ r.riskBg }};border-radius:5px;padding:2px 8px;display:inline-flex;"><span style="color:{{ r.riskCl }};font-size:10px;font-weight:700;">{{ r.risk }}</span></div></div>
+                    <span style="color:#888;font-size:11px;">{{ r.motivo }}</span>
+                    <span style="color:#888;font-size:10px;">{{ r.unit }}</span>
+                    <div style="display:flex;justify-content:flex-end;">
+                      <sc-if value="{{ r.contacted }}" hint-placeholder-val="{{ false }}">
+                        <div style="padding:4px 8px;background:rgba(48,209,88,0.12);border-radius:5px;"><span style="color:#30D158;font-size:9px;font-weight:700;">✓ Contatado</span></div>
+                      </sc-if>
+                      <sc-if value="{{ !r.contacted }}" hint-placeholder-val="{{ true }}">
+                        <div onClick="{{ r.onToggle }}" style="padding:4px 8px;background:#222;border-radius:5px;cursor:pointer;"><span style="color:#888;font-size:9px;font-weight:700;">Contatar</span></div>
+                      </sc-if>
+                    </div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
         </div>
       </sc-if>
 
@@ -1021,7 +1130,7 @@
         <div onClick="{{ onRelRenovacoes }}" style="padding:6px 13px;border-radius:7px;cursor:pointer;background:{{ relStBg.ren }};border:1px solid {{ relStBd.ren }};"><span style="color:{{ relStCl.ren }};font-size:12px;font-weight:700;">Renovações</span></div>
         <div onClick="{{ onRelChurn }}" style="padding:6px 13px;border-radius:7px;cursor:pointer;background:{{ relStBg.ch }};border:1px solid {{ relStBd.ch }};"><span style="color:{{ relStCl.ch }};font-size:12px;font-weight:700;">Churn</span></div>
         <div onClick="{{ onRelCancelamentos }}" style="padding:6px 13px;border-radius:7px;cursor:pointer;background:{{ relStBg.ca }};border:1px solid {{ relStBd.ca }};"><span style="color:{{ relStCl.ca }};font-size:12px;font-weight:700;">Cancelamentos</span></div>
-        <div onClick="{{ onRelInadimplencia }}" style="padding:6px 13px;border-radius:7px;cursor:pointer;background:{{ relStBg.inad }};border:1px solid {{ relStBd.inad }};"><span style="color:{{ relStCl.inad }};font-size:12px;font-weight:700;">Inadimplência</span></div>
+        <div onClick="{{ onRelMovimento }}" style="padding:6px 13px;border-radius:7px;cursor:pointer;background:{{ relStBg.mov }};border:1px solid {{ relStBd.mov }};"><span style="color:{{ relStCl.mov }};font-size:12px;font-weight:700;">Movimento</span></div>
         <div onClick="{{ onRelComparativo }}" style="padding:6px 13px;border-radius:7px;cursor:pointer;background:{{ relStBg.co }};border:1px solid {{ relStBd.co }};"><span style="color:{{ relStCl.co }};font-size:12px;font-weight:700;">Comparativo</span></div>
         <div onClick="{{ onRelAgregadores }}" style="padding:6px 13px;border-radius:7px;cursor:pointer;background:{{ relStBg.ag }};border:1px solid {{ relStBd.ag }};"><span style="color:{{ relStCl.ag }};font-size:12px;font-weight:700;">Agregadores</span></div>
       </div>
@@ -1262,40 +1371,26 @@
         </div>
       </sc-if>
 
-      <!-- Sub-aba: Inadimplência -->
-      <sc-if value="{{ relIsInadimplencia }}" hint-placeholder-val="{{ false }}">
+      <!-- Sub-aba: Movimento -->
+      <sc-if value="{{ relIsMovimento }}" hint-placeholder-val="{{ false }}">
         <div>
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
-            <div><span style="color:#fff;font-size:13px;font-weight:700;">Inadimplentes · Junho 2025</span></div>
-            <div style="display:flex;gap:7px;">
-              <div style="padding:5px 12px;background:#F58634;border-radius:6px;cursor:pointer;"><span style="color:#fff;font-size:11px;font-weight:700;">Cobrar todos via WhatsApp</span></div>
-            </div>
+          <div style="margin-bottom:14px;">
+            <div style="color:#fff;font-size:13px;font-weight:700;">Movimento por horário e dia da semana</div>
+            <div style="color:#999;font-size:11px;margin-top:2px;">{{ heatPeakText }}</div>
           </div>
-          <div style="background:#1A1A1A;border:1px solid #222;border-radius:13px;overflow:hidden;">
-            <div style="display:grid;grid-template-columns:2fr 1.2fr 1fr 1fr 1fr 1.4fr;padding:10px 18px;border-bottom:1px solid #1E1E1E;">
-              <span style="color:#888;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;">Aluno</span>
-              <span style="color:#888;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;">Plano</span>
-              <span style="color:#888;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;">Valor</span>
-              <span style="color:#888;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;">Dias atraso</span>
-              <span style="color:#888;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;">Unidade</span>
-              <span style="color:#888;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;text-align:right;">Ações</span>
+          <div style="background:#1A1A1A;border:1px solid #222;border-radius:13px;padding:16px;">
+            <div style="display:grid;grid-template-columns:48px repeat(7,1fr);gap:4px;">
+              <sc-for list="{{ heatFlat }}" as="c" hint-placeholder-count="144">
+                <div style="min-height:26px;border-radius:5px;background:{{ c.bg }};display:flex;align-items:center;justify-content:center;">
+                  <span style="color:{{ c.cl }};font-size:10px;font-weight:{{ c.fw }};">{{ c.text }}</span>
+                </div>
+              </sc-for>
             </div>
-            <sc-for list="{{ inadList }}" as="in" hint-placeholder-count="5">
-              <div style="display:grid;grid-template-columns:2fr 1.2fr 1fr 1fr 1fr 1.4fr;padding:11px 18px;border-bottom:1px solid #141414;align-items:center;">
-                <div style="display:flex;align-items:center;gap:9px;">
-                  <div style="width:28px;height:28px;background:{{ in.abg }};border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="color:#fff;font-size:9px;font-weight:800;">{{ in.av }}</span></div>
-                  <span style="color:#bbb;font-size:12px;font-weight:600;">{{ in.name }}</span>
-                </div>
-                <span style="color:#888;font-size:11px;">{{ in.plan }}</span>
-                <span style="color:#E05555;font-size:12px;font-weight:700;">{{ in.val }}</span>
-                <div><div style="background:{{ in.dayBg }};border-radius:5px;padding:2px 8px;display:inline-flex;"><span style="color:{{ in.dayCl }};font-size:10px;font-weight:700;">{{ in.dias }} dias</span></div></div>
-                <span style="color:#888;font-size:10px;">{{ in.unit }}</span>
-                <div style="display:flex;justify-content:flex-end;gap:5px;">
-                  <div style="padding:4px 8px;background:#1B3A2A;border-radius:5px;cursor:pointer;"><span style="color:#25D366;font-size:9px;font-weight:700;">Cobrar</span></div>
-                  <div style="padding:4px 8px;background:#222;border-radius:5px;cursor:pointer;"><span style="color:#888;font-size:9px;font-weight:700;">Cancelar</span></div>
-                </div>
-              </div>
-            </sc-for>
+            <div style="display:flex;align-items:center;gap:8px;margin-top:14px;">
+              <span style="color:#888;font-size:10px;">Menos</span>
+              <div style="flex:1;height:6px;border-radius:3px;background:linear-gradient(90deg, rgba(245,134,52,0.08), rgba(245,134,52,0.9));"></div>
+              <span style="color:#888;font-size:10px;">Mais movimento</span>
+            </div>
           </div>
         </div>
       </sc-if>
@@ -2057,7 +2152,6 @@ class Component extends DCLogic {
 
     const sTotais = studentsForUnit.length.toString();
     const sAtivos = studentsForUnit.filter(s=>s.status==='ativo').length.toString();
-    const sInadimplentes = studentsForUnit.filter(s=>s.status==='inadimplente').length.toString();
     const sInativos = studentsForUnit.filter(s=>s.status==='inativo').length.toString();
 
     // ── DETAIL PANEL ──────────────────────────────────────────────────
@@ -2068,9 +2162,9 @@ class Component extends DCLogic {
 
     // ── STUDENT FILTER TABS ──────────────────────────────────────────
     const fActive = (f) => studentFilter === f;
-    const ftBg = { todos:fActive('todos')?'#F58634':'#1A1A1A', ativo:fActive('ativo')?'rgba(48,209,88,0.15)':'#1A1A1A', inadimplente:fActive('inadimplente')?'rgba(224,85,85,0.15)':'#1A1A1A', inativo:fActive('inativo')?'rgba(100,100,100,0.15)':'#1A1A1A' };
-    const ftBd = { todos:fActive('todos')?'transparent':'#242424', ativo:fActive('ativo')?'rgba(48,209,88,0.3)':'#242424', inadimplente:fActive('inadimplente')?'rgba(224,85,85,0.3)':'#242424', inativo:fActive('inativo')?'rgba(100,100,100,0.3)':'#242424' };
-    const ftCl = { todos:fActive('todos')?'#fff':'#888', ativo:fActive('ativo')?'#30D158':'#888', inadimplente:fActive('inadimplente')?'#E05555':'#888', inativo:fActive('inativo')?'#888':'#888' };
+    const ftBg = { todos:fActive('todos')?'#F58634':'#1A1A1A', ativo:fActive('ativo')?'rgba(48,209,88,0.15)':'#1A1A1A', inativo:fActive('inativo')?'rgba(100,100,100,0.15)':'#1A1A1A' };
+    const ftBd = { todos:fActive('todos')?'transparent':'#242424', ativo:fActive('ativo')?'rgba(48,209,88,0.3)':'#242424', inativo:fActive('inativo')?'rgba(100,100,100,0.3)':'#242424' };
+    const ftCl = { todos:fActive('todos')?'#fff':'#888', ativo:fActive('ativo')?'#30D158':'#888', inativo:fActive('inativo')?'#888':'#888' };
 
     // ── CHARGES ───────────────────────────────────────────────────────
     const allCharges = [
@@ -2286,9 +2380,9 @@ class Component extends DCLogic {
     // ── REL SUB-TABS ─────────────────────────────────────────────────
     const relSubTab = this.state.relSubTab || 'overview';
     const relSA = t => relSubTab===t;
-    const relStBg = { ov:relSA('overview')?'#F58634':'#1A1A1A', ren:relSA('renovacoes')?'#F58634':'#1A1A1A', ch:relSA('churn')?'#F58634':'#1A1A1A', ca:relSA('cancel')?'#F58634':'#1A1A1A', inad:relSA('inadimp')?'#F58634':'#1A1A1A', co:relSA('comp')?'#F58634':'#1A1A1A', ag:relSA('agreg')?'#F58634':'#1A1A1A' };
-    const relStBd = { ov:relSA('overview')?'transparent':'#242424', ren:relSA('renovacoes')?'transparent':'#242424', ch:relSA('churn')?'transparent':'#242424', ca:relSA('cancel')?'transparent':'#242424', inad:relSA('inadimp')?'transparent':'#242424', co:relSA('comp')?'transparent':'#242424', ag:relSA('agreg')?'transparent':'#242424' };
-    const relStCl = { ov:relSA('overview')?'#fff':'#888', ren:relSA('renovacoes')?'#fff':'#888', ch:relSA('churn')?'#fff':'#888', ca:relSA('cancel')?'#fff':'#888', inad:relSA('inadimp')?'#fff':'#888', co:relSA('comp')?'#fff':'#888', ag:relSA('agreg')?'#fff':'#888' };
+    const relStBg = { ov:relSA('overview')?'#F58634':'#1A1A1A', ren:relSA('renovacoes')?'#F58634':'#1A1A1A', ch:relSA('churn')?'#F58634':'#1A1A1A', ca:relSA('cancel')?'#F58634':'#1A1A1A', mov:relSA('mov')?'#F58634':'#1A1A1A', co:relSA('comp')?'#F58634':'#1A1A1A', ag:relSA('agreg')?'#F58634':'#1A1A1A' };
+    const relStBd = { ov:relSA('overview')?'transparent':'#242424', ren:relSA('renovacoes')?'transparent':'#242424', ch:relSA('churn')?'transparent':'#242424', ca:relSA('cancel')?'transparent':'#242424', mov:relSA('mov')?'transparent':'#242424', co:relSA('comp')?'transparent':'#242424', ag:relSA('agreg')?'transparent':'#242424' };
+    const relStCl = { ov:relSA('overview')?'#fff':'#888', ren:relSA('renovacoes')?'#fff':'#888', ch:relSA('churn')?'#fff':'#888', ca:relSA('cancel')?'#fff':'#888', mov:relSA('mov')?'#fff':'#888', co:relSA('comp')?'#fff':'#888', ag:relSA('agreg')?'#fff':'#888' };
     const renovacoesList = [
       { av:'AC', name:'Ana Clara Santos', plan:'Premium Mensal', exp:'30/06', val:'R$149,90', abg:'linear-gradient(135deg,#7C3AED,#A78BFA)', stLb:'Vence em 7d', stBg:'rgba(245,134,52,0.1)', stCl:'#F58634' },
       { av:'RP', name:'Rodrigo Pinto', plan:'Básico Mensal', exp:'02/07', val:'R$89,90', abg:'linear-gradient(135deg,#EC4899,#F9A8D4)', stLb:'Vence em 9d', stBg:'rgba(245,158,11,0.1)', stCl:'#F59E0B' },
@@ -2308,6 +2402,39 @@ class Component extends DCLogic {
       { av:'PE', name:'Patrícia Esteves', plan:'Premium Tri.', val:'R$399,90', dias:'12', unit:'Alto Passos', abg:'linear-gradient(135deg,#7C3AED,#A78BFA)', dayBg:'rgba(245,158,11,0.12)', dayCl:'#F59E0B' },
       { av:'LM', name:'Leandro Matos', plan:'Básico Mensal', val:'R$89,90', dias:'8', unit:'Quintas', abg:'linear-gradient(135deg,#059669,#34D399)', dayBg:'rgba(245,158,11,0.12)', dayCl:'#F59E0B' },
     ];
+    // ── INAD SUB-TABS ────────────────────────────────────────────────
+    const inadSubTab = this.state.inadSubTab || 'lista';
+    const inadSA = t => inadSubTab===t;
+    const inadStBg = { lista:inadSA('lista')?'#F58634':'#1A1A1A', prev:inadSA('prev')?'#F58634':'#1A1A1A' };
+    const inadStBd = { lista:inadSA('lista')?'transparent':'#242424', prev:inadSA('prev')?'transparent':'#242424' };
+    const inadStCl = { lista:inadSA('lista')?'#fff':'#888', prev:inadSA('prev')?'#fff':'#888' };
+    const inadContacted = this.state.inadContacted || {};
+    const inadRiskSource = [
+      { av:'CS', name:'Camila Souza', unit:'Centro', abg:'linear-gradient(135deg,#E05555,#F87171)', risk:'Alto', riskBg:'rgba(224,85,85,0.12)', riskCl:'#E05555', motivo:'Frequência caiu 65% nas últimas 3 semanas' },
+      { av:'BF', name:'Bruno Ferreira', unit:'Savassi', abg:'linear-gradient(135deg,#7C3AED,#A78BFA)', risk:'Alto', riskBg:'rgba(224,85,85,0.12)', riskCl:'#E05555', motivo:'Sem check-in há 14 dias' },
+      { av:'DR', name:'Débora Ramos', unit:'Lourdes', abg:'linear-gradient(135deg,#EC4899,#F9A8D4)', risk:'Médio', riskBg:'rgba(245,158,11,0.12)', riskCl:'#F59E0B', motivo:'Frequência caiu 40% no último mês' },
+      { av:'GP', name:'Gustavo Pires', unit:'Centro', abg:'linear-gradient(135deg,#3B82F6,#60A5FA)', risk:'Médio', riskBg:'rgba(245,158,11,0.12)', riskCl:'#F59E0B', motivo:'2 faltas seguidas em aulas recorrentes' },
+      { av:'IT', name:'Isabela Teixeira', unit:'Pampulha', abg:'linear-gradient(135deg,#059669,#34D399)', risk:'Médio', riskBg:'rgba(245,158,11,0.12)', riskCl:'#F59E0B', motivo:'Sem check-in há 9 dias' },
+      { av:'VN', name:'Vitor Nogueira', unit:'Estrela Sul', abg:'linear-gradient(135deg,#F59E0B,#FCD34D)', risk:'Baixo', riskBg:'rgba(234,179,8,0.12)', riskCl:'#EAB308', motivo:'Frequência 20% abaixo da média' },
+      { av:'LA', name:'Larissa Amaral', unit:'Alto Passos', abg:'linear-gradient(135deg,#D4701A,#F7A060)', risk:'Baixo', riskBg:'rgba(234,179,8,0.12)', riskCl:'#EAB308', motivo:'Frequência 15% abaixo da média' },
+    ];
+    const inadRiskList = inadRiskSource.map((r,i) => ({ ...r, contacted:!!inadContacted[i], onToggle:() => this.setState({ inadContacted:{ ...inadContacted, [i]:!inadContacted[i] } }) }));
+    // ── MOVIMENTO (HEATMAP) ──────────────────────────────────────────
+    const heatHours = ['6h','7h','8h','9h','10h','11h','12h','13h','14h','15h','16h','17h','18h','19h','20h','21h','22h'];
+    const heatBase  = [55,78,62,35,28,25,38,30,22,26,34,58,92,97,74,41,18];
+    const heatDays = ['Seg','Ter','Qua','Qui','Sex','Sáb','Dom'];
+    const heatDayMult = [1,1,1,1,1,0.62,0.32];
+    const heatCell = v => { const val = Math.round(v); const op = (0.08 + Math.min(val,100)/100*0.82).toFixed(2); return { text:val.toString(), bg:`rgba(245,134,52,${op})`, cl: val>55?'#fff':'#bbb', fw: val>55?'700':'500' }; };
+    const heatFlat = [
+      { text:'', bg:'transparent', cl:'#666', fw:'600' },
+      ...heatDays.map(d => ({ text:d, bg:'transparent', cl:'#888', fw:'700' })),
+      ...heatHours.flatMap((h,hi) => [
+        { text:h, bg:'transparent', cl:'#888', fw:'600' },
+        ...heatDayMult.map(m => heatCell(heatBase[hi]*m)),
+      ]),
+    ];
+    const todayHeat = heatHours.map((h,hi) => ({ hour:h, ...heatCell(heatBase[hi]) }));
+    const heatPeakText = 'Pico: dias de semana às 18h-19h · Mais fraco: domingo de manhã.';
     // ── FIN SUB-TABS ──────────────────────────────────────────────────
     const finSubTab = this.state.finSubTab || 'geral';
     const finSA = t => finSubTab===t;
@@ -2368,15 +2495,18 @@ class Component extends DCLogic {
 
     return {
       // Nav
-      nc:{ dash:nc('dashboard'), alunos:nc('alunos'), fin:nc('financeiro'), agenda:nc('agendamento'), treinos:nc('treinos'), func:nc('funcionarios'), rel:nc('relatorios'), leads:nc('leads'), cfg:nc('configuracoes') },
-      nb:{ dash:nb('dashboard'), alunos:nb('alunos'), fin:nb('financeiro'), agenda:nb('agendamento'), treinos:nb('treinos'), func:nb('funcionarios'), rel:nb('relatorios'), leads:nb('leads'), cfg:nb('configuracoes') },
-      pageTitle: { dashboard:'Dashboard', alunos:'Gestão de Alunos', financeiro:'Financeiro', agendamento:'Agendamento', treinos:'Gestão de Treinos', funcionarios:'Funcionários', relatorios:'Relatórios', leads:'Leads · Kommo', configuracoes:'Configurações' }[tab] || 'Dashboard',
-      isDash:tab==='dashboard', isAlunos:tab==='alunos', isFin:tab==='financeiro', isAgenda:tab==='agendamento', isTreinos:tab==='treinos',
+      nc:{ dash:nc('dashboard'), alunos:nc('alunos'), inad:nc('inadimplencia'), fin:nc('financeiro'), agenda:nc('agendamento'), treinos:nc('treinos'), func:nc('funcionarios'), rel:nc('relatorios'), leads:nc('leads'), cfg:nc('configuracoes') },
+      nb:{ dash:nb('dashboard'), alunos:nb('alunos'), inad:nb('inadimplencia'), fin:nb('financeiro'), agenda:nb('agendamento'), treinos:nb('treinos'), func:nb('funcionarios'), rel:nb('relatorios'), leads:nb('leads'), cfg:nb('configuracoes') },
+      pageTitle: { dashboard:'Dashboard', alunos:'Gestão de Alunos', inadimplencia:'Inadimplência', financeiro:'Financeiro', agendamento:'Agendamento', treinos:'Gestão de Treinos', funcionarios:'Funcionários', relatorios:'Relatórios', leads:'Leads · Kommo', configuracoes:'Configurações' }[tab] || 'Dashboard',
+      isDash:tab==='dashboard', isAlunos:tab==='alunos', isInad:tab==='inadimplencia', isFin:tab==='financeiro', isAgenda:tab==='agendamento', isTreinos:tab==='treinos',
       isFunc:tab==='funcionarios', isRel:tab==='relatorios', isCfg:tab==='configuracoes', isLeads:tab==='leads',
+      // Inad sub-tabs
+      inadStBg, inadStBd, inadStCl, inadIsLista:inadSA('lista'), inadIsPrevisibilidade:inadSA('prev'), inadRiskList,
       // Rel sub-tabs
       relStBg, relStBd, relStCl,
       relIsOverview:relSA('overview'), relIsRenovacoes:relSA('renovacoes'), relIsChurn:relSA('churn'),
-      relIsCancelamentos:relSA('cancel'), relIsInadimplencia:relSA('inadimp'), relIsComparativo:relSA('comp'), relIsAgregadores:relSA('agreg'),
+      relIsCancelamentos:relSA('cancel'), relIsMovimento:relSA('mov'), relIsComparativo:relSA('comp'), relIsAgregadores:relSA('agreg'),
+      heatFlat, todayHeat, heatPeakText,
       renovacoesList, renFBg, renFBd, renFCl, inadList,
       gympassBars, totalpassBars,
       // Fin sub-tabs
@@ -2397,7 +2527,7 @@ class Component extends DCLogic {
       // Dashboard
       upcomingClasses, alerts,
       // Students
-      filteredStudents, sTotais, sAtivos, sInadimplentes, sInativos, hasDetail, det,
+      filteredStudents, sTotais, sAtivos, sInativos, hasDetail, det,
       ftBg, ftBd, ftCl,
       // Charges
       filteredCharges, cfBg, cfBd, cfCl,
@@ -2438,6 +2568,9 @@ class Component extends DCLogic {
       // Handlers
       onDashboard:    () => this.setTab('dashboard'),
       onAlunos:       () => this.setTab('alunos'),
+      onInadimplencia:() => this.setTab('inadimplencia'),
+      onInadLista:         () => this.setState({ inadSubTab:'lista' }),
+      onInadPrevisibilidade: () => this.setState({ inadSubTab:'prev' }),
       onFinanceiro:   () => this.setTab('financeiro'),
       onAgendamento:  () => this.setTab('agendamento'),
       onTreinos:      () => this.setTab('treinos'),
@@ -2469,7 +2602,6 @@ class Component extends DCLogic {
       onSelectPampulha: () => this.setUnit('pampulha'),
       onFTodos:       () => this.setState({ studentFilter:'todos' }),
       onFAtivo:       () => this.setState({ studentFilter:'ativo' }),
-      onFInadimplente:() => this.setState({ studentFilter:'inadimplente' }),
       onFInativo:     () => this.setState({ studentFilter:'inativo' }),
       onCFTodos:      () => this.setState({ chargeFilter:'todos' }),
       onCFPago:       () => this.setState({ chargeFilter:'pago' }),
@@ -2503,7 +2635,7 @@ class Component extends DCLogic {
       onRelRenovacoes:   () => this.setState({ relSubTab:'renovacoes' }),
       onRelChurn:        () => this.setState({ relSubTab:'churn' }),
       onRelCancelamentos:() => this.setState({ relSubTab:'cancel' }),
-      onRelInadimplencia:() => this.setState({ relSubTab:'inadimp' }),
+      onRelMovimento:    () => this.setState({ relSubTab:'mov' }),
       onRelComparativo:  () => this.setState({ relSubTab:'comp' }),
       onRelAgregadores:  () => this.setState({ relSubTab:'agreg' }),
       onRenFiltro7:  () => this.setState({ renFiltro:'7' }),
